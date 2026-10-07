@@ -49,7 +49,7 @@ jobs:
           # CodeGraph CLI — installed here, the first step where npm is on PATH.
           # ~/.hermes/config.yaml (restored later) runs
           # ~/.npm-global/bin/codegraph serve --mcp, so this must land before
-          # the gateway boots. The /usr/local/bin symlink keeps the plain
+          # Hermes first runs. The /usr/local/bin symlink keeps the plain
           # `codegraph` command available in every shell.
           npm install -g @colbymchenry/codegraph
           if [ -x ~/.npm-global/bin/codegraph ]; then
@@ -96,6 +96,7 @@ jobs:
           echo "  💻 SSH: ssh runner@$TS_IP"
           echo "  🌐 Web : http://$TS_IP:8000  (Laravel)"
           echo "  🔀 9Router: http://$TS_IP:20128  (dashboard)"
+          echo "  🤖 OpenCode: http://$TS_IP:4096  (user: opencode, pass: RUNNER_PASSWORD)"
           echo "  💾 Project: /home/runner/h-dashboard"
           echo "  🌍 Exit Node: Enabled (advertise-exit-node)"
           echo "=================================================="
@@ -209,16 +210,11 @@ jobs:
             echo '⚠️ 9router did not come up — check /tmp/9router.log'
           fi
 
-      - name: 13. Install Hermes Agent & restore config + MCPs + start Telegram gateway
+      - name: 13. Install Hermes Agent & restore config + MCPs
         env:
           HERMES_API_KEY: ${{ secrets.HERMES_CUSTOM_API_KEY }}
           GH_TOKEN: ${{ secrets.MY_PAT }}
-          TELEGRAM_ALLOWED_USERS: ${{ secrets.TELEGRAM_ALLOWED_USERS }}  # shared across all instances
-          # Bot token picked dynamically: TELEGRAM_BOT_TOKEN_<WF_NAME>.
-          # Uniform scheme — rename the old bare TELEGRAM_BOT_TOKEN to TELEGRAM_BOT_TOKEN_MAITY.
-          TELEGRAM_BOT_TOKEN: ${{ secrets[format('TELEGRAM_BOT_TOKEN_{0}', env.WF_NAME)] }}
         run: |
-          echo "✅ Using Telegram bot: $WF_NAME (token: TELEGRAM_BOT_TOKEN_${WF_NAME})"
 
           # 1. Install Hermes Agent
           curl -fsSL https://hermes-agent.nousresearch.com/install.sh | bash
@@ -239,15 +235,13 @@ jobs:
           done
           echo '✅ Restored hermes state from repo (hermes/ → ~/.hermes/)'
           # 3. Write the .env with secrets pulled from GitHub Secrets.
-          #    The home channel is the same as the allowed user id (single value),
-          #    so we reuse TELEGRAM_ALLOWED_USERS for TELEGRAM_HOME_CHANNEL too.
           #    api_key in config.yaml is an env ref (${HERMES_CUSTOM_..._API_KEY}),
           #    so the actual key is supplied here — never committed to the repo.
+          #    Telegram is NOT wired up (removed at Mehdi's request): no bot
+          #    token or allowed-users are written here, and the messaging
+          #    gateway is no longer started (see the note at §7 below).
           {
             echo "HERMES_CUSTOM_127_0_0_1_20128_API_KEY=${HERMES_API_KEY}"
-            echo "TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}"
-            echo "TELEGRAM_ALLOWED_USERS=${TELEGRAM_ALLOWED_USERS}"
-            echo "TELEGRAM_HOME_CHANNEL=${TELEGRAM_ALLOWED_USERS}"
             echo "GITHUB_TOKEN=${GH_TOKEN}"
             echo "HERMES_PEER_AILYN_KEY=${HERMES_API_KEY}"
           } > ~/.hermes/.env
@@ -287,7 +281,7 @@ jobs:
           #        section 2 copies nothing for it, yet the restored
           #        config.yaml lists superpowers under plugins.enabled —
           #        Hermes looks for a plugin that is not on disk and errors.
-          #        Install it fresh from upstream, before the gateway starts.
+          #        Install it fresh from upstream, so it is on disk before first use.
           #        --enable makes it non-interactive (a plain install prompts
           #        'Enable now? [y/N]' and would hang/fail on a runner).
           #        The rm -rf first keeps this idempotent if a partial or
@@ -327,42 +321,49 @@ jobs:
             echo '✅ mcp_servers already present in config.yaml'
           fi
 
-          # 7. Start the Hermes messaging gateway (Telegram) in the background.
-          #    On GitHub runners there is no systemd, so run in foreground under nohup.
-          nohup hermes gateway run --replace > /tmp/hermes-gateway.log 2>&1 &
-          sleep 6
-          if curl -fsS http://127.0.0.1:20128 > /dev/null 2>&1; then
-            echo '✅ 9router still live; Hermes gateway launching…'
-          fi
-          echo '✅ Hermes gateway launch attempted (logs: /tmp/hermes-gateway.log)'
+          # 7. (Removed) The Hermes messaging gateway is no longer started:
+          #    it only served the Telegram connection, which was removed at
+          #    Mehdi's request. The seed warmup that sent its result to
+          #    Telegram went with it. Hermes itself stays installed above
+          #    (CLI + MCPs); access to this instance is via SSH and the
+          #    OpenCode server started in step 13b.
 
-          # 8. Seed instructions -> real execution + send result to Telegram.
-          #    `hermes send` alone NEVER executes — it only relays text.
-          #    So: (a) run a real `hermes chat -q` warmup, (b) send the RESULT.
-          #    No .hermes.md is written: AGENTS.md is the authoritative
-          #    instruction file for h-dashboard and .hermes.md is not wanted.
-          SEED_FILE="${GITHUB_WORKSPACE:-.}/hermes/seed-message.txt"
-          HD_DIR=/home/runner/h-dashboard
-          if [ -f "$SEED_FILE" ]; then
-            sleep 3
-            rm -f "$HD_DIR/.hermes.md"
-            # 8a. Real agent execution — capture output to send to Telegram.
-            SEED_RESULT=$(cd "$HD_DIR" && hermes chat -q "$(cat "$SEED_FILE")" 2>/tmp/seed-warmup.log) \
-              && echo '✅ Seed executed via hermes chat' \
-              || echo '⚠️ Seed execution failed (see /tmp/seed-warmup.log)'
-            # 8b. Send the execution result (not the raw seed) to Telegram.
-            if [ -n "$SEED_RESULT" ]; then
-              echo "$SEED_RESULT" > /tmp/seed-result.txt
-              hermes send --to telegram --file /tmp/seed-result.txt \
-                && echo '✅ Seed result sent to Telegram' \
-                || echo '⚠️ Seed result failed to send'
-            else
-              hermes send --to telegram "open1 online and ready." \
-                && echo '✅ Welcome message sent to Telegram' \
-                || echo '⚠️ Welcome message failed to send'
-            fi
+      - name: 13b. Install OpenCode, set default model & start opencode serve
+        env:
+          OPENCODE_SERVER_PASSWORD: ${{ secrets.RUNNER_PASSWORD }}
+        run: |
+          # 1. Install OpenCode (npm package opencode-ai) — same npm-global
+          #    pattern as CodeGraph/9router, plus the /usr/local/bin symlink.
+          npm install -g opencode-ai
+          if [ -f ~/.npm-global/bin/opencode ]; then
+            sudo ln -sf ~/.npm-global/bin/opencode /usr/local/bin/opencode
+            echo "✅ OpenCode installed: $(opencode --version)"
           else
-            echo '⚠️ hermes/seed-message.txt not found — skipping seed prompt'
+            echo '⚠️ opencode binary not found after installation'
+          fi
+
+          # 2. Global config: default model = the free OpenCode Zen model
+          #    mimo-v2.6-flash-free (full id: opencode/mimo-v2.6-flash-free).
+          mkdir -p ~/.config/opencode
+          cat > ~/.config/opencode/opencode.json <<'JSON'
+          {
+            "$schema": "https://opencode.ai/config.json",
+            "model": "opencode/mimo-v2.6-flash-free"
+          }
+          JSON
+          echo '✅ OpenCode default model set to opencode/mimo-v2.6-flash-free'
+
+          # 3. Start opencode serve in the background on 0.0.0.0:4096 so it
+          #    is reachable over Tailscale. HTTP Basic Auth comes from the
+          #    OPENCODE_SERVER_PASSWORD step env (= RUNNER_PASSWORD secret);
+          #    the username defaults to "opencode".
+          cd /home/runner/h-dashboard
+          nohup opencode serve --hostname 0.0.0.0 --port 4096 > /tmp/opencode.log 2>&1 &
+          sleep 6
+          if curl -fsS -u "opencode:${OPENCODE_SERVER_PASSWORD}" http://localhost:4096/global/health > /dev/null 2>&1; then
+            echo '✅ opencode serve is live on http://localhost:4096 (basic auth: opencode / RUNNER_PASSWORD)'
+          else
+            echo '⚠️ opencode serve did not come up — check /tmp/opencode.log'
           fi
 
       - name: 14. Start Laravel Development Server
@@ -375,7 +376,7 @@ jobs:
         run: |
           for i in {1..340}; do
             sleep 60
-            echo "[$i/340] Server is active (SSH + Laravel on port 8000)..."
+            echo "[$i/340] Server is active (SSH + Laravel :8000 + OpenCode :4096)..."
           done
 
       - name: 16. Sync hermes state & 9router data back to my-op1
