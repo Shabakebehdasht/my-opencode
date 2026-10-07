@@ -209,9 +209,10 @@ jobs:
           fi
 
 
-      - name: 13. Install OpenCode, restore state, set default model & start opencode serve
+      - name: 13. Install OpenCode, restore state, configure MCPs & start opencode serve
         env:
           OPENCODE_SERVER_PASSWORD: ${{ secrets.RUNNER_PASSWORD }}
+          GH_TOKEN: ${{ secrets.MY_PAT }}
         run: |
           # 1. Install OpenCode (npm package opencode-ai) — same npm-global
           #    pattern as CodeGraph/9router, plus the /usr/local/bin symlink.
@@ -221,6 +222,17 @@ jobs:
             echo "✅ OpenCode installed: $(opencode --version)"
           else
             echo '⚠️ opencode binary not found after installation'
+          fi
+
+          # 1b. Install uv/uvx standalone — the PostGIS MCP runs via
+          #     `uvx mcp-postgis`, and uvx used to arrive with Hermes.
+          curl -fsSL https://astral.sh/uv/install.sh | sh
+          export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
+          echo 'export PATH="$HOME/.local/bin:$HOME/.cargo/bin:$PATH"' >> ~/.bashrc
+          if command -v uvx >/dev/null 2>&1; then
+            echo "✅ uvx installed: $(uv --version)"
+          else
+            echo '⚠️ uvx not found after uv install — postgis MCP will not start'
           fi
 
           # 2. Restore the OpenCode backup from the repo (opencode/ dir,
@@ -238,18 +250,93 @@ jobs:
             echo '✅ Restored OpenCode data (sessions/db) from repo backup'
           fi
 
-          # 3. Default model: the free OpenCode Zen model mimo-v2.6-flash-free
-          #    (full id: opencode/mimo-v2.6-flash-free). Written only when no
-          #    config was restored, so a backed-up config is never clobbered.
-          if [ ! -f ~/.config/opencode/opencode.json ]; then
-            mkdir -p ~/.config/opencode
-            printf '{\n  "$schema": "https://opencode.ai/config.json",\n  "model": "opencode/mimo-v2.6-flash-free"\n}\n' > ~/.config/opencode/opencode.json
-            echo '✅ OpenCode default model set to opencode/mimo-v2.6-flash-free'
+          # 3. Prepare the MCP environment. OpenCode does NOT inherit gh's
+          #    login: every MCP server is a separate process that reads only
+          #    its own env vars. So the GitHub token (same MY_PAT gh uses)
+          #    and the PostGIS URL are exported here — opencode serve below
+          #    inherits them, and the config in §4 references them as
+          #    {env:...}, so NO secret lands in opencode.json (which step 16
+          #    backs up to this repo). Persisted to ~/.bashrc as well, for
+          #    shells opened later over SSH.
+          export GITHUB_PERSONAL_ACCESS_TOKEN="$GH_TOKEN"
+          echo "export GITHUB_PERSONAL_ACCESS_TOKEN=${GH_TOKEN}" >> ~/.bashrc
+          HD_ENV=/home/runner/h-dashboard/.env
+          if [ -f "$HD_ENV" ]; then
+            PG_HOST=$(grep -E '^DB_HOST=' "$HD_ENV" | cut -d= -f2-)
+            PG_PORT=$(grep -E '^DB_PORT=' "$HD_ENV" | cut -d= -f2-)
+            PG_DB=$(grep -E '^DB_DATABASE=' "$HD_ENV" | cut -d= -f2-)
+            PG_USER=$(grep -E '^DB_USERNAME=' "$HD_ENV" | cut -d= -f2-)
+            PG_PASS=$(grep -E '^DB_PASSWORD=' "$HD_ENV" | cut -d= -f2-)
+            export MCP_POSTGIS_DATABASE_URL="postgresql://${PG_USER}:${PG_PASS}@${PG_HOST}:${PG_PORT}/${PG_DB}"
+            echo "export MCP_POSTGIS_DATABASE_URL=${MCP_POSTGIS_DATABASE_URL}" >> ~/.bashrc
+            echo '✅ MCP environment prepared (GitHub token + PostGIS URL)'
           else
-            echo '✅ Restored opencode.json kept (default model comes from backup)'
+            echo '⚠️ h-dashboard/.env not found — PostGIS MCP will have no database URL'
           fi
 
-          # 4. Start opencode serve in the background on 0.0.0.0:4096 so it
+          # 3b. The laravel-boost MCP runs `php artisan boost:mcp` inside
+          #     h-dashboard; the package used to be composer-required by the
+          #     old Hermes step, so ensure it here (no-op if already there).
+          cd /home/runner/h-dashboard
+          if php artisan list 2>/dev/null | grep -q 'boost:mcp'; then
+            echo '✅ Laravel Boost present (boost:mcp available)'
+          else
+            composer require laravel/boost --no-interaction 2>&1 | tail -3 || true
+            php artisan boost:update 2>/dev/null || true
+            echo '✅ Laravel Boost installed for the laravel-boost MCP'
+          fi
+
+          # 4. Write/merge ~/.config/opencode/opencode.json. OpenCode reads
+          #    MCP servers ONLY from its own config — the three servers
+          #    Hermes used to configure in config.yaml (laravel-boost,
+          #    postgis, github) are defined here. A restored config is kept
+          #    and merged: the model is only defaulted when absent, the mcp
+          #    block is (re)written so it is always present and current.
+          python3 - <<'PYEOF2'
+          import json, os
+          path = os.path.expanduser("~/.config/opencode/opencode.json")
+          cfg = {}
+          if os.path.exists(path):
+              try:
+                  cfg = json.load(open(path))
+              except Exception:
+                  cfg = {}
+          cfg.setdefault("$schema", "https://opencode.ai/config.json")
+          cfg.setdefault("model", "opencode/mimo-v2.6-flash-free")
+          cfg["mcp"] = {
+              "laravel-boost": {
+                  "type": "local",
+                  "command": ["bash", "-c", "cd /home/runner/h-dashboard && exec php artisan boost:mcp"],
+                  "enabled": True,
+                  "timeout": 30000,
+              },
+              "postgis": {
+                  "type": "local",
+                  "command": ["uvx", "mcp-postgis"],
+                  "environment": {
+                      "MCP_POSTGIS_DATABASE_URL": "{env:MCP_POSTGIS_DATABASE_URL}",
+                      "MCP_POSTGIS_MODE": "read_only",
+                  },
+                  "enabled": True,
+                  "timeout": 60000,
+              },
+              "github": {
+                  "type": "local",
+                  "command": ["npx", "-y", "@modelcontextprotocol/server-github"],
+                  "environment": {
+                      "GITHUB_PERSONAL_ACCESS_TOKEN": "{env:GITHUB_PERSONAL_ACCESS_TOKEN}",
+                  },
+                  "enabled": True,
+                  "timeout": 120000,
+              },
+          }
+          os.makedirs(os.path.dirname(path), exist_ok=True)
+          with open(path, "w") as f:
+              json.dump(cfg, f, indent=2)
+          print("✅ opencode.json ready: default model + mcp (laravel-boost, postgis, github)")
+          PYEOF2
+
+          # 5. Start opencode serve in the background on 0.0.0.0:4096 so it
           #    is reachable over Tailscale. HTTP Basic Auth comes from the
           #    OPENCODE_SERVER_PASSWORD step env (= RUNNER_PASSWORD secret);
           #    the username defaults to "opencode".
