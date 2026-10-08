@@ -1,6 +1,0 @@
--rwxr-xr-x 2 runner runner 203671008 Oct  8 08:24 /home/runner/.npm-global/lib/node_modules/@opencode/cli/node_modules/@opencode/cli-linux-x64/bin/opencode
---- attach to a running ---
---- attach <url> ---
---- basic auth password ---
---- serve describe ---
---- pair describe ---
