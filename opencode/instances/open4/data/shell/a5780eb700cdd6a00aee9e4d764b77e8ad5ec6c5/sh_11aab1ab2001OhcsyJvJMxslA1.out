@@ -1,6 +1,0 @@
-v2.0.24 packages/opencode/src/cli/cmd/attach.ts -> 404
-v2.0.24 packages/opencode/src/cli/cmd/serve.ts -> 404
-e7a34f09bfd9134dfade5a8ddb843f7030bc9a69 packages/opencode/src/cli/cmd/attach.ts -> 404
-e7a34f09bfd9134dfade5a8ddb843f7030bc9a69 packages/opencode/src/cli/cmd/serve.ts -> 404
-dev packages/opencode/src/cli/cmd/attach.ts -> 200
-dev packages/opencode/src/cli/cmd/serve.ts -> 200

@@ -1,9 +1,0 @@
-554 /tmp/cmds.ts
-410:          Flag.withDescription("File to attach to the message"),
---- command names listed ---
-125:            name: Argument.choice("name", [
-229:            name: Argument.string("name").pipe(Argument.withDescription("Name of the MCP server")),
-230:            command: Argument.string("command").pipe(
-252:            name: Argument.string("name").pipe(Argument.withDescription("Name of the MCP server"), Argument.optional),
-482:            name: Argument.string("name").pipe(
-505:            name: Argument.string("name").pipe(
