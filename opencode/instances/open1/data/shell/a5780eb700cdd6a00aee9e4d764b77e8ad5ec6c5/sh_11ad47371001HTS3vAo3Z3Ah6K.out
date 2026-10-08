@@ -1,0 +1,51 @@
+6fbb460
+6fbb460 Merge pull request #854 from nashenas7/issue-849-users-unit-scope
+a4bc2e8 fix: unit-scope users.index list, picker, search and mutations — closes #849
+efe3ab3 Merge pull request #852 from Shabakebehdasht/fix/847-ticket-task-scope
+95449f2 Merge upstream/beta into fix/847-ticket-task-scope
+abfefc8 fix(tickets): scope the task_id link to the creator's own units (#847)
+e7551cc Merge pull request #850 from Shabakebehdasht/fix/840-map-token-abilities
+640820b Merge pull request #851 from nashenas7/issue-842-updatehardware-scope
+69488d2 fix: scope updateHardware destination n_code to accessible units — closes #842
+3820759 fix(map): scope the map-dashboard Sanctum token to gis:read (#840)
+7efadb7 Merge pull request #848 from Shabakebehdasht/fix/835-maintenance-scope
+abc13f0 Merge pull request #846 from haileen5/aylin
+2f57a7d Merge pull request #845 from haileen5/nazila
+4d62609 Merge pull request #844 from Shabakebehdasht/kylie
+65d38dd Merge pull request #843 from Shabakebehdasht/sonia
+a858332 Merge pull request #841 from Shabakebehdasht/kimya
+AGENTS.md
+Pest.php
+README.md
+app
+artisan
+boost.json
+bootstrap
+composer.json
+composer.lock
+config
+database
+docker-compose-pgsql-.yml
+docker-compose-pgsql-mysql.yml
+docs
+install-guid.md
+lang
+laravel-log-tail.bat
+node_modules
+package-lock.json
+package.json
+phpstan-baseline.neon
+phpstan.neon
+phpunit.xml
+plans
+playwright.config.ts
+public
+references
+resources
+routes
+scripts
+skills-lock.json
+storage
+tests
+vendor
+vite.config.js
