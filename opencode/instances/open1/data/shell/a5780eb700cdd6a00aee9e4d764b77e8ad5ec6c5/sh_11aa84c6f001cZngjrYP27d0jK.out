@@ -1,0 +1,47 @@
+97:          echo "  🤖 OpenCode: http://$TS_IP:4096  (user: opencode, pass: RUNNER_PASSWORD)"
+230:          # 1. Install OpenCode V2 — npm package @opencode/cli (the v1
+231:          #    package opencode-ai stays on the 1.x line forever). Same
+234:          #    both packages ship an `opencode` binary and the official
+236:          npm uninstall -g opencode-ai >/dev/null 2>&1 || true
+237:          npm install -g @opencode/cli
+238:          if [ -f ~/.npm-global/bin/opencode ]; then
+239:            sudo ln -sf ~/.npm-global/bin/opencode /usr/local/bin/opencode
+240:            echo "✅ OpenCode installed: $(opencode --version)"
+242:            echo '⚠️ opencode binary not found after installation'
+260:          # 2. Restore the OpenCode backup from the repo (opencode/ dir,
+261:          #    synced back in step 16): config -> ~/.config/opencode and
+262:          #    data (sessions, opencode.db, storage) -> ~/.local/share/opencode.
+263:          OC="${GITHUB_WORKSPACE:-.}/opencode"
+265:            mkdir -p ~/.config/opencode
+266:            cp -r "$OC/config/." ~/.config/opencode/
+270:            mkdir -p ~/.local/share/opencode
+271:            cp -r "$OC/data/." ~/.local/share/opencode/
+283:          #    is exported here — opencode serve below inherits it, and
+285:          #    {env:...}, so NO secret lands in opencode.json (which step 16
+290:          echo '✅ MCP environment prepared (GitHub token exported for opencode serve)'
+304:          # 4. Write/merge ~/.config/opencode/opencode.json. OpenCode reads
+317:          path = os.path.expanduser("~/.config/opencode/opencode.json")
+324:          cfg.setdefault("$schema", "https://opencode.ai/config.json")
+325:          cfg.setdefault("model", "opencode/mimo-v2.6-flash-free")
+373:          print("✅ opencode.json ready: default model + mcp (laravel-boost, github, codegraph, context7, codebase-memory-mcp; postgis dropped) + superpowers plugin")
+377:          #     (~/.config/opencode/skills/codebase-memory), three read-only
+379:          #     Everything lands under ~/.config/opencode, so step 16 syncs
+388:          # 5. Start opencode serve in the background on 0.0.0.0:4096 so it
+391:          #    the username defaults to "opencode".
+393:          nohup opencode serve --hostname 0.0.0.0 --port 4096 > /tmp/opencode.log 2>&1 &
+395:          if curl -fsS -u "opencode:${OPENCODE_SERVER_PASSWORD}" http://localhost:4096/api/info > /dev/null 2>&1; then
+396:            echo '✅ opencode serve is live on http://localhost:4096 (basic auth: opencode / RUNNER_PASSWORD)'
+398:            echo '⚠️ opencode serve did not come up — check /tmp/opencode.log'
+414:      - name: 16. Sync opencode state & 9router data back to my-opencode
+423:          git remote set-url origin "https://x-access-token:${GH_TOKEN}@github.com/haileen5/my-opencode.git"
+426:          #    Hermes state backup. Layout: opencode/config mirrors
+427:          #    ~/.config/opencode, opencode/data mirrors
+428:          #    ~/.local/share/opencode (sessions, opencode.db, storage);
+430:          ODEST=opencode
+432:          [ -d ~/.config/opencode ] && cp -r ~/.config/opencode/. "$ODEST/config/"
+433:          [ -d ~/.local/share/opencode ] && cp -r ~/.local/share/opencode/. "$ODEST/data/"
+456:          echo '✅ Copied OpenCode state → opencode/ for backup'
+468:          #    opencode/ backup entirely (the first op2 run lost its backup
+471:          git add -A opencode/ 9router/
+475:            git commit -m "Sync opencode state & 9router data from open1 instance"
+479:            echo '✅ OpenCode & 9router data synced to my-opencode'

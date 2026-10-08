@@ -1,0 +1,9 @@
+== packages dir on dev ==
+app, cli, client, codemode, console, containers, core, desktop, docs, effect-drizzle-sqlite, effect-sqlite-node, enterprise, function, http-recorder, httpapi-codegen, identity, llm, opencode, plugin, protocol, schema, script, sdk-next, sdk, server, session-ui, slack, stats, storybook, tui, ui, web
+
+== packages/opencode/package.json (dev) ==
+name= opencode version= 1.18.35
+== packages/cli/package.json (dev) ==
+name= @opencode-ai/cli version= 1.18.35
+== packages/cli/package.json at v2.0.24 ==
+name= @opencode/cli version= 2.0.24

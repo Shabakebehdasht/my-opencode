@@ -1,0 +1,40 @@
+== opencode attach URL ==
+DESCRIPTION
+  OpenCode command line interface
+
+USAGE
+  opencode <subcommand> [flags] [<directory>]
+
+exit=0
+
+== opencode attach URL -p wrong ==
+DESCRIPTION
+  OpenCode command line interface
+
+USAGE
+  opencode <subcommand> [flags] [<directory>]
+
+exit=0
+
+== grep attach in --help ==
+(no attach in help)
+
+== grep subcommands list ==
+SUBCOMMANDS
+  upgrade, update    Upgrade OpenCode to the latest or a specific version
+  uninstall          Uninstall OpenCode and remove all related files
+  acp                Start an Agent Client Protocol server
+  api                Make a request to the running server
+  debug              Debugging and troubleshooting tools
+  auth               manage integrations and credentials
+  mcp                Manage MCP (Model Context Protocol) servers
+  plugin             Manage plugins
+  models             List all available models
+  stats              Show shareable usage statistics
+  mini               Start the minimal interactive interface
+  run                Run OpenCode with a message
+  session            Manage sessions
+  service            Manage the background server
+  reload             Reload configuration
+  pair               Print one-time links to connect a browser or app
+  serve              Start the v2 API and web server

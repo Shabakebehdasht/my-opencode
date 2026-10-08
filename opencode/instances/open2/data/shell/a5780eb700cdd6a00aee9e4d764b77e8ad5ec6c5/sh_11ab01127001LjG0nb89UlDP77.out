@@ -1,0 +1,19 @@
+== 1. no password env ==
+Error: Server at http://open1:4096 requires a password; set OPENCODE_PASSWORD
+    at ~effect/Utils/internal (/$bunfs/root/chunk-fzgkhxtt.js:8:1540)
+    at s (/$bunfs/root/chunk-fzgkhxtt.js:24:5696)
+    at processTicksAndRejections (native:7:39)
+    at cli.server-connection.resolve (/$bunfs/root/chunk-4jk5pc2t.js:2:949)
+
+== 2. wrong password ==
+Error: Server at http://open1:4096 rejected the password
+    at ~effect/Utils/internal (/$bunfs/root/chunk-fzgkhxtt.js:8:1540)
+    at s (/$bunfs/root/chunk-fzgkhxtt.js:24:5696)
+    at processTicksAndRejections (native:7:39)
+    at cli.server-connection.resolve (/$bunfs/root/chunk-4jk5pc2t.js:2:949)
+
+== 3. correct password ==
+{"version":"2.0.24","pid":18565,"urls":["http://10.1.0.183:4096","http://100.97.250.106:4096","http://172.18.0.1:4096"],"paths":{"tmp":"/tmp/opencode"},"capabilities":{"persistentPty":true}}
+
+== 4. correct password, custom username env ==
+{"version":"2.0.24","pid":18565,"urls":["http://10.1.0.183:4096","http://100.97.250.106:4096","http://172.18.0.1:4096"],"paths":{"tmp":"/tmp/opencode"},"capabilities":{"persistentPty":true}}

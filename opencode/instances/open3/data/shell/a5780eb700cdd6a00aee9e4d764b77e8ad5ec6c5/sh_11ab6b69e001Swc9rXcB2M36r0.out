@@ -1,0 +1,21 @@
+== server-connection.ts: password refs ==
+3:import { OPENCODE_VERSION } from "../version"
+25:    const password = yield* Env.password
+28:      auth: password ? { type: "basic" as const, username: "opencode", password: Redacted.value(password) } : undefined,
+35:    if (health.version !== OPENCODE_VERSION)
+37:        `Warning: Server at ${endpoint.url} has version ${health.version}; this client is ${OPENCODE_VERSION}. Continuing anyway.\n`,
+90:        ? `Server at ${endpoint.url} requires a password; set OPENCODE_PASSWORD`
+91:        : `Server at ${endpoint.url} rejected the password`,
+
+== env.ts ==
+4:// these instead of touching process.env so the full surface stays visible,
+7:// The opencode server password: sent by clients connecting to an explicit
+10:export const password = Config.redacted("OPENCODE_PASSWORD").pipe(
+11:  Config.orElse(() => Config.redacted("OPENCODE_SERVER_PASSWORD")),
+17:    Object.entries(process.env).filter(
+19:        entry[1] !== undefined && entry[0] !== "OPENCODE_PASSWORD" && entry[0] !== "OPENCODE_SERVER_PASSWORD",
+
+== wc ==
+ 100 /tmp/sc.ts
+  24 /tmp/envts.ts
+ 124 total
