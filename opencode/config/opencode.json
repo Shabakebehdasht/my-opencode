@@ -12,19 +12,6 @@
       "enabled": true,
       "timeout": 30000
     },
-    "postgis": {
-      "type": "local",
-      "command": [
-        "uvx",
-        "mcp-postgis"
-      ],
-      "environment": {
-        "MCP_POSTGIS_DATABASE_URL": "{env:MCP_POSTGIS_DATABASE_URL}",
-        "MCP_POSTGIS_MODE": "read_only"
-      },
-      "enabled": true,
-      "timeout": 60000
-    },
     "codegraph": {
       "type": "local",
       "command": [
@@ -36,16 +23,10 @@
       "timeout": 30000
     },
     "context7": {
-      "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "@upstash/context7-mcp",
-        "--transport",
-        "stdio"
-      ],
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp",
       "enabled": true,
-      "timeout": 60000
+      "timeout": 30000
     },
     "github": {
       "type": "local",
@@ -60,5 +41,8 @@
       "enabled": true,
       "timeout": 120000
     }
-  }
+  },
+  "plugin": [
+    "superpowers@git+https://github.com/obra/superpowers.git"
+  ]
 }
