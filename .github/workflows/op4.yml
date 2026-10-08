@@ -229,6 +229,21 @@ jobs:
             echo '⚠️ opencode binary not found after installation'
           fi
 
+          # 1b. Install codebase-memory-mcp (single static binary from its
+          #     GitHub releases): the fifth MCP server, ensured in §4. Its
+          #     own OpenCode extras (skill, agents, plugin, instructions)
+          #     are installed in §4b, and its index cache
+          #     (~/.cache/codebase-memory-mcp) is restored in §2 and synced
+          #     back to the repo in step 16.
+          if ! command -v codebase-memory-mcp >/dev/null 2>&1; then
+            CBM_TMP="$(mktemp -d)"
+            curl -fsSL -o "$CBM_TMP/cbm.tar.gz" https://github.com/DeusData/codebase-memory-mcp/releases/latest/download/codebase-memory-mcp-linux-amd64.tar.gz
+            tar --no-same-owner -xzf "$CBM_TMP/cbm.tar.gz" -C "$CBM_TMP"
+            sudo install -m 0755 "$CBM_TMP/codebase-memory-mcp" /usr/local/bin/codebase-memory-mcp
+            rm -rf "$CBM_TMP"
+            echo "✅ codebase-memory-mcp installed: $(codebase-memory-mcp --version)"
+          fi
+
           # 2. Restore the OpenCode backup from the repo (opencode/ dir,
           #    synced back in step 16): config -> ~/.config/opencode and
           #    data (sessions, opencode.db, storage) -> ~/.local/share/opencode.
@@ -242,6 +257,11 @@ jobs:
             mkdir -p ~/.local/share/opencode
             cp -r "$OC/data/." ~/.local/share/opencode/
             echo '✅ Restored OpenCode data (sessions/db) from repo backup'
+          fi
+          if [ -d "$OC/cbm-cache" ]; then
+            mkdir -p ~/.cache/codebase-memory-mcp
+            cp -r "$OC/cbm-cache/." ~/.cache/codebase-memory-mcp/
+            echo '✅ Restored codebase-memory-mcp index cache from repo backup'
           fi
 
           # 3. Prepare the MCP environment. OpenCode does NOT inherit gh's
@@ -270,8 +290,9 @@ jobs:
 
           # 4. Write/merge ~/.config/opencode/opencode.json. OpenCode reads
           #    MCP servers ONLY from its own config. The merge ENSURES the
-          #    wanted servers (laravel-boost, github, codegraph, context7),
-          #    DROPS postgis for good (removed at Mehdi's request), and
+          #    wanted servers (laravel-boost, github, codegraph, context7,
+          #    codebase-memory-mcp), DROPS postgis for good (removed at
+          #    Mehdi's request), and
           #    PRESERVES any other server already in the config — servers
           #    added at runtime are backed up by step 16 and must survive
           #    restarts, so the mcp block is merged, never rewritten whole.
@@ -319,6 +340,12 @@ jobs:
                   "enabled": True,
                   "timeout": 30000,
               },
+              "codebase-memory-mcp": {
+                  "type": "local",
+                  "command": ["/usr/local/bin/codebase-memory-mcp"],
+                  "enabled": True,
+                  "timeout": 60000,
+              },
           })
           cfg["mcp"] = mcp
           sp_spec = "superpowers@git+https://github.com/obra/superpowers.git"
@@ -330,8 +357,20 @@ jobs:
           os.makedirs(os.path.dirname(path), exist_ok=True)
           with open(path, "w") as f:
               json.dump(cfg, f, indent=2)
-          print("✅ opencode.json ready: default model + mcp (laravel-boost, github, codegraph, context7; postgis dropped) + superpowers plugin")
+          print("✅ opencode.json ready: default model + mcp (laravel-boost, github, codegraph, context7, codebase-memory-mcp; postgis dropped) + superpowers plugin")
           PYEOF2
+
+          # 4b. codebase-memory-mcp's own OpenCode integration: its skill
+          #     (~/.config/opencode/skills/codebase-memory), three read-only
+          #     agents, the cbm-augment plugin and AGENTS.md instructions.
+          #     Everything lands under ~/.config/opencode, so step 16 syncs
+          #     it like the rest of the config. Its mcp_install sub-step is
+          #     create-only (0.11.0 cannot merge into an existing mcp
+          #     block), so the MCP entry itself is ensured by §4 above and
+          #     that one sub-step's error is expected and tolerated.
+          if ! codebase-memory-mcp install -y; then
+            echo '⚠️ codebase-memory-mcp install reported errors — skill/agents/plugin are still written; the MCP entry is already ensured in §4'
+          fi
 
           # 5. Start opencode serve in the background on 0.0.0.0:4096 so it
           #    is reachable over Tailscale. HTTP Basic Auth comes from the
@@ -376,9 +415,10 @@ jobs:
           #    ~/.local/share/opencode (sessions, opencode.db, storage);
           #    both are restored in step 13.
           ODEST=opencode
-          mkdir -p "$ODEST/config" "$ODEST/data"
+          mkdir -p "$ODEST/config" "$ODEST/data" "$ODEST/cbm-cache"
           [ -d ~/.config/opencode ] && cp -r ~/.config/opencode/. "$ODEST/config/"
           [ -d ~/.local/share/opencode ] && cp -r ~/.local/share/opencode/. "$ODEST/data/"
+          [ -d ~/.cache/codebase-memory-mcp ] && cp -r ~/.cache/codebase-memory-mcp/. "$ODEST/cbm-cache/"
           # Prune what must not be committed:
           #  - data/auth.json holds provider API keys in plaintext — never
           #    back credentials up to git (the free Zen model needs no key).
@@ -387,7 +427,8 @@ jobs:
           #    binaries; config/node_modules is plugin deps (reinstalled).
           for junk in "$ODEST/data/auth.json" "$ODEST/data/snapshot" \
                       "$ODEST/data/log" "$ODEST/data/bin" \
-                      "$ODEST/config/node_modules"; do
+                      "$ODEST/config/node_modules" \
+                      "$ODEST/cbm-cache/logs"; do
             if [ -e "$junk" ]; then
               echo "🧹 Excluding from backup: $junk"
               rm -rf "$junk"
