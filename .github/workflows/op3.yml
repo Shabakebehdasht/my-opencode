@@ -351,8 +351,17 @@ jobs:
                   "opencode/mimo-v2.6-flash-free",
                   "opencode/muse-spark-1.3-contributor-free",
               ]
+          # The instance number is the trailing digits of WF_NAME,
+          # whatever the prefix is (open3, mehdi3, fork12, ...): the
+          # model list is indexed by that number.
           _wf = os.environ.get("WF_NAME", "")
-          _idx = int(_wf[4:]) - 1 if _wf.startswith("open") and _wf[4:].isdigit() else 0
+          _num = ""
+          for _ch in reversed(_wf):
+              if _ch.isdigit():
+                  _num = _ch + _num
+              else:
+                  break
+          _idx = int(_num) - 1 if _num else 0
           cfg["model"] = _models[_idx % len(_models)]
           mcp = cfg.get("mcp", {})
           mcp.pop("postgis", None)
