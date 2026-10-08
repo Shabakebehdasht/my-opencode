@@ -40,9 +40,20 @@
       },
       "enabled": true,
       "timeout": 120000
+    },
+    "codebase-memory-mcp": {
+      "type": "local",
+      "command": [
+        "/usr/local/bin/codebase-memory-mcp"
+      ],
+      "enabled": true,
+      "timeout": 60000
     }
   },
   "plugin": [
+    "superpowers@git+https://github.com/obra/superpowers.git"
+  ],
+  "plugins": [
     "superpowers@git+https://github.com/obra/superpowers.git"
   ]
 }
