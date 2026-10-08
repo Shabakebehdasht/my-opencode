@@ -1,4 +1,0 @@
-packages/cli/src/acp/connection.ts
-packages/cli/src/env.ts
-packages/cli/src/server-process.ts
-packages/cli/src/services/server-connection.ts
