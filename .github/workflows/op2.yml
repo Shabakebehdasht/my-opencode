@@ -161,7 +161,20 @@ jobs:
       - name: 10. Build frontend assets
         run: |
           cd /home/runner/h-dashboard
-          npm run build
+          if ! npm run build; then
+            # npm's optional-dependencies bug (npm/cli#4828): after the
+            # `npm update` in step 9, the platform binding
+            # @rolldown/binding-linux-x64-gnu can be missing from
+            # node_modules and vite dies with "Cannot find native
+            # binding" (run 37746307765 — the identical build had passed
+            # 20 minutes earlier; the bug strikes nondeterministically).
+            # npm's own prescribed remedy is a clean reinstall without
+            # the stale lockfile; do exactly that, once, and rebuild.
+            echo '⚠️ Build failed — clean npm reinstall (stale-lock optional-deps bug), then rebuild'
+            rm -rf node_modules package-lock.json
+            npm install
+            npm run build
+          fi
           echo '✅ Frontend assets built'
 
       - name: 10b. Index h-dashboard with CodeGraph
