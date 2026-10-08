@@ -312,6 +312,11 @@ jobs:
           #    It also ensures the Superpowers plugin: V2 reads the
           #    `plugins` array; the V1 `plugin` key is mirrored with the
           #    same spec so a rollback to V1 would keep the plugin too.
+          #    oh-my-opencode-slim is ensured in the `plugins` array
+          #    ONLY: it is a dual-export plugin, and its own
+          #    v2-compatibility doc warns that a legacy `plugin`-key
+          #    entry gets invoked twice on v2 hosts. Its per-agent
+          #    free models are configured in §4c.
           python3 - <<'PYEOF2'
           import json, os
           path = os.path.expanduser("~/.config/opencode/opencode.json")
@@ -367,10 +372,15 @@ jobs:
               if sp_spec not in plist:
                   plist.append(sp_spec)
               cfg[pkey] = plist
+          slim_spec = "oh-my-opencode-slim"
+          plist = cfg.get("plugins", [])
+          if slim_spec not in plist:
+              plist.append(slim_spec)
+          cfg["plugins"] = plist
           os.makedirs(os.path.dirname(path), exist_ok=True)
           with open(path, "w") as f:
               json.dump(cfg, f, indent=2)
-          print("✅ opencode.json ready: default model + mcp (laravel-boost, github, codegraph, context7, codebase-memory-mcp; postgis dropped) + superpowers plugin")
+          print("✅ opencode.json ready: default model + mcp (laravel-boost, github, codegraph, context7, codebase-memory-mcp; postgis dropped) + superpowers & oh-my-opencode-slim plugins")
           PYEOF2
 
           # 4b. codebase-memory-mcp's own OpenCode integration: its skill
@@ -384,6 +394,48 @@ jobs:
           if ! codebase-memory-mcp install -y; then
             echo '⚠️ codebase-memory-mcp install reported errors — skill/agents/plugin are still written; the MCP entry is already ensured in §4'
           fi
+
+          # 4c. oh-my-opencode-slim: write/merge its config
+          #     (~/.config/opencode/oh-my-opencode-slim.json, synced by
+          #     step 16 like the rest of the config) with a "free" preset
+          #     that puts EVERY agent on a free OpenCode Zen model, plus
+          #     free councillors for the Council agent. The merge
+          #     preserves any other presets/settings already present, and
+          #     "preset" is only defaulted to "free" when unset, so a
+          #     preset later picked with /preset is not forced back.
+          #     The plugin itself is registered in §4 (plugins array).
+          python3 - <<'PYEOF3'
+          import json, os
+          path = os.path.expanduser("~/.config/opencode/oh-my-opencode-slim.json")
+          cfg = {}
+          if os.path.exists(path):
+              try:
+                  cfg = json.load(open(path))
+              except Exception:
+                  cfg = {}
+          free_models = {
+              "orchestrator": "opencode/mimo-v2.6-flash-free",
+              "oracle": "opencode/nemotron-3-ultra-free",
+              "explorer": "opencode/nemotron-3.5-lightning-free",
+              "fixer": "opencode/mimo-v2.6-flash-free",
+              "librarian": "opencode/ling-3.1-flash-free",
+              "designer": "opencode/muse-spark-1.3-contributor-free",
+              "council": "opencode/nemotron-3-ultra-free",
+          }
+          free_preset = cfg.setdefault("presets", {}).setdefault("free", {})
+          for agent, model in free_models.items():
+              free_preset.setdefault(agent, {})["model"] = model
+          councillors = cfg.setdefault("council", {}).setdefault("presets", {}).setdefault("default", {})
+          for cname, cmodel in (("mimo", "opencode/mimo-v2.6-flash-free"),
+                                ("nemotron", "opencode/nemotron-3-ultra-free"),
+                                ("spark", "opencode/muse-spark-1.3-contributor-free")):
+              councillors.setdefault(cname, {})["model"] = cmodel
+          cfg["council"].setdefault("default_preset", "default")
+          cfg.setdefault("preset", "free")
+          with open(path, "w") as f:
+              json.dump(cfg, f, indent=2)
+          print("✅ oh-my-opencode-slim.json ready: 'free' preset — every agent on a free OpenCode Zen model")
+          PYEOF3
 
           # 5. Start opencode serve in the background on 0.0.0.0:4096 so it
           #    is reachable over Tailscale. HTTP Basic Auth comes from the
