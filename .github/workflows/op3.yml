@@ -209,14 +209,19 @@ jobs:
           fi
 
 
-      - name: 13. Install OpenCode, restore state, configure MCPs & start opencode serve
+      - name: 13. Install OpenCode V2, restore state, configure MCPs + Superpowers plugin & start serve
         env:
           OPENCODE_SERVER_PASSWORD: ${{ secrets.RUNNER_PASSWORD }}
           GH_TOKEN: ${{ secrets.MY_PAT }}
         run: |
-          # 1. Install OpenCode (npm package opencode-ai) — same npm-global
-          #    pattern as CodeGraph/9router, plus the /usr/local/bin symlink.
-          npm install -g opencode-ai
+          # 1. Install OpenCode V2 — npm package @opencode/cli (the v1
+          #    package opencode-ai stays on the 1.x line forever). Same
+          #    npm-global pattern as CodeGraph/9router, plus the
+          #    /usr/local/bin symlink. Any v1 install is removed first:
+          #    both packages ship an `opencode` binary and the official
+          #    migration guide says not to keep them side by side.
+          npm uninstall -g opencode-ai >/dev/null 2>&1 || true
+          npm install -g @opencode/cli
           if [ -f ~/.npm-global/bin/opencode ]; then
             sudo ln -sf ~/.npm-global/bin/opencode /usr/local/bin/opencode
             echo "✅ OpenCode installed: $(opencode --version)"
@@ -270,6 +275,9 @@ jobs:
           #    PRESERVES any other server already in the config — servers
           #    added at runtime are backed up by step 16 and must survive
           #    restarts, so the mcp block is merged, never rewritten whole.
+          #    It also ensures the Superpowers plugin: V2 reads the
+          #    `plugins` array; the V1 `plugin` key is mirrored with the
+          #    same spec so a rollback to V1 would keep the plugin too.
           python3 - <<'PYEOF2'
           import json, os
           path = os.path.expanduser("~/.config/opencode/opencode.json")
@@ -313,10 +321,16 @@ jobs:
               },
           })
           cfg["mcp"] = mcp
+          sp_spec = "superpowers@git+https://github.com/obra/superpowers.git"
+          for pkey in ("plugins", "plugin"):
+              plist = cfg.get(pkey, [])
+              if sp_spec not in plist:
+                  plist.append(sp_spec)
+              cfg[pkey] = plist
           os.makedirs(os.path.dirname(path), exist_ok=True)
           with open(path, "w") as f:
               json.dump(cfg, f, indent=2)
-          print("✅ opencode.json ready: default model + mcp (laravel-boost, github, codegraph, context7; postgis dropped)")
+          print("✅ opencode.json ready: default model + mcp (laravel-boost, github, codegraph, context7; postgis dropped) + superpowers plugin")
           PYEOF2
 
           # 5. Start opencode serve in the background on 0.0.0.0:4096 so it
@@ -326,7 +340,7 @@ jobs:
           cd /home/runner/h-dashboard
           nohup opencode serve --hostname 0.0.0.0 --port 4096 > /tmp/opencode.log 2>&1 &
           sleep 6
-          if curl -fsS -u "opencode:${OPENCODE_SERVER_PASSWORD}" http://localhost:4096/global/health > /dev/null 2>&1; then
+          if curl -fsS -u "opencode:${OPENCODE_SERVER_PASSWORD}" http://localhost:4096/api/info > /dev/null 2>&1; then
             echo '✅ opencode serve is live on http://localhost:4096 (basic auth: opencode / RUNNER_PASSWORD)'
           else
             echo '⚠️ opencode serve did not come up — check /tmp/opencode.log'
