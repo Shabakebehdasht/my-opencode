@@ -339,9 +339,9 @@ jobs:
           # OPENCODE_DEFAULT_MODELS repository variable (repo
           # Settings > Secrets and variables > Actions > Variables):
           # one full model id per line. Each workflow takes its own
-          # line by number (open1 -> line 1, open2 -> line 2, ...).
+          # line by number (<prefix>1 -> line 1, <prefix>2 -> line 2, ...).
           # A shorter list wraps around instead of erroring (with
-          # 2 lines: open3 -> line 1, open4 -> line 2); an empty or
+          # 2 lines: instance 3 -> line 1, instance 4 -> line 2); an empty or
           # unset variable falls back to the built-in list below.
           # To change models, edit the variable only.
           _models = [ln.strip() for ln in os.environ.get("OPENCODE_MODELS", "").splitlines() if ln.strip()]
