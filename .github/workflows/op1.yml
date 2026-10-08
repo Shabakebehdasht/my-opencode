@@ -10,6 +10,7 @@ jobs:
     env:
       REPO_ORIGIN: https://github.com/haileen5/h-dashboard.git
       WF_NAME: open1
+      OPENCODE_MODELS: ${{ vars.OPENCODE_DEFAULT_MODELS }}
 
     steps:
       - name: 1. Checkout Repository
@@ -334,17 +335,26 @@ jobs:
               except Exception:
                   cfg = {}
           cfg.setdefault("$schema", "https://opencode.ai/config.json")
-          # The default model is PER-INSTANCE: the config dir is
-          # shared, so each workflow re-stamps its own model here,
-          # in its own step 13, before serve starts. (The value the
-          # shared file holds between runs is just whoever synced
-          # last; runtime is always correct.)
-          cfg["model"] = {
-              "open1": "opencode/space-bunny-free",
-              "open2": "opencode/fledge-alpha-free",
-              "open3": "opencode/mimo-v2.6-flash-free",
-              "open4": "opencode/muse-spark-1.3-contributor-free",
-          }.get(os.environ.get("WF_NAME", ""), "opencode/mimo-v2.6-flash-free")
+          # The default model is PER-INSTANCE and comes from the
+          # OPENCODE_DEFAULT_MODELS repository variable (repo
+          # Settings > Secrets and variables > Actions > Variables):
+          # one full model id per line. Each workflow takes its own
+          # line by number (open1 -> line 1, open2 -> line 2, ...).
+          # A shorter list wraps around instead of erroring (with
+          # 2 lines: open3 -> line 1, open4 -> line 2); an empty or
+          # unset variable falls back to the built-in list below.
+          # To change models, edit the variable only.
+          _models = [ln.strip() for ln in os.environ.get("OPENCODE_MODELS", "").splitlines() if ln.strip()]
+          if not _models:
+              _models = [
+                  "opencode/space-bunny-free",
+                  "opencode/fledge-alpha-free",
+                  "opencode/mimo-v2.6-flash-free",
+                  "opencode/muse-spark-1.3-contributor-free",
+              ]
+          _wf = os.environ.get("WF_NAME", "")
+          _idx = int(_wf[4:]) - 1 if _wf.startswith("open") and _wf[4:].isdigit() else 0
+          cfg["model"] = _models[_idx % len(_models)]
           mcp = cfg.get("mcp", {})
           mcp.pop("postgis", None)
           mcp.update({
