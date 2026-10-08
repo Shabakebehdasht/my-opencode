@@ -54,6 +54,7 @@
     "superpowers@git+https://github.com/obra/superpowers.git"
   ],
   "plugins": [
-    "superpowers@git+https://github.com/obra/superpowers.git"
+    "superpowers@git+https://github.com/obra/superpowers.git",
+    "oh-my-opencode-slim"
   ]
 }
