@@ -2,8 +2,8 @@
 open1
 
 === remotes ===
-origin	https://github.com/haileen5/h-dashboard.git (fetch)
-origin	https://github.com/haileen5/h-dashboard.git (push)
+origin	https://github.com/Shabakebehdasht/h-dashboard.git (fetch)
+origin	https://github.com/Shabakebehdasht/h-dashboard.git (push)
 
 === status ===
  M package-lock.json

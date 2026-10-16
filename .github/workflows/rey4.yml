@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 340
     env:
-      REPO_ORIGIN: https://github.com/haileen5/h-dashboard.git
+      REPO_ORIGIN: https://github.com/Shabakebehdasht/h-dashboard.git
       WF_NAME: rey4
       OPENCODE_MODELS: ${{ vars.OPENCODE_DEFAULT_MODELS }}
 
@@ -120,8 +120,8 @@ jobs:
           cd h-dashboard
 
           # Set git identity for commits
-          git config user.name "haileen5"
-          git config user.email "haileen5@users.noreply.github.com"
+          git config user.name "Shabakebehdasht"
+          git config user.email "Shabakebehdasht@users.noreply.github.com"
 
           # Fetch latest origin/beta
           git fetch origin beta
