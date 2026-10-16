@@ -1,0 +1,73 @@
+===raw DB insert without trait===
+tests/Feature/UnitsManagementTest.php:23:    DB::table('tahsils')->insert(['id' => 1, 'name' => 'Test']);
+tests/Feature/UnitsManagementTest.php:24:    DB::table('estekhdams')->insert(['id' => 1, 'name' => 'Test']);
+tests/Feature/UnitsManagementTest.php:25:    DB::table('semats')->insert(['id' => 1, 'name' => 'Test']);
+tests/Feature/UnitsManagementTest.php:26:    DB::table('radifs')->insert(['id' => 1, 'name' => 'Test']);
+tests/Feature/UnitDeletionServiceTest.php:63:        DB::table('user_units')->insert([
+tests/Feature/TicketCommentsEdgeCasesTest.php:36:        $tId = DB::table('tahsils')->insertGetId(['name' => 'T']);
+tests/Feature/TicketCommentsEdgeCasesTest.php:37:        $eId = DB::table('estekhdams')->insertGetId(['name' => 'E']);
+tests/Feature/TicketCommentsEdgeCasesTest.php:38:        $sId = DB::table('semats')->insertGetId(['name' => 'S']);
+tests/Feature/TicketCommentsEdgeCasesTest.php:39:        $rId = DB::table('radifs')->insertGetId(['name' => 'R']);
+tests/Feature/TicketCommentsEdgeCasesTest.php:67:            't_id' => DB::table('tahsils')->insertGetId(['name' => 'T2']),
+tests/Feature/TicketCommentsEdgeCasesTest.php:68:            'e_id' => DB::table('estekhdams')->insertGetId(['name' => 'E2']),
+tests/Feature/TicketCommentsEdgeCasesTest.php:69:            's_id' => DB::table('semats')->insertGetId(['name' => 'S2']),
+tests/Feature/TicketCommentsEdgeCasesTest.php:70:            'r_id' => DB::table('radifs')->insertGetId(['name' => 'R2']),
+tests/Feature/UnitModelTest.php:52:        DB::table('tahsils')->insert(['id' => 1, 'name' => 'Test']);
+tests/Feature/UnitModelTest.php:53:        DB::table('estekhdams')->insert(['id' => 1, 'name' => 'Test']);
+tests/Feature/UnitModelTest.php:54:        DB::table('semats')->insert(['id' => 1, 'name' => 'Test']);
+tests/Feature/UnitModelTest.php:55:        DB::table('radifs')->insert(['id' => 1, 'name' => 'Test']);
+tests/Feature/UnitModelTest.php:70:        DB::table('tahsils')->insert(['id' => 1, 'name' => 'Test']);
+tests/Feature/UnitModelTest.php:71:        DB::table('estekhdams')->insert(['id' => 1, 'name' => 'Test']);
+tests/Feature/UnitModelTest.php:72:        DB::table('semats')->insert(['id' => 1, 'name' => 'Test']);
+===Livewire::test assertStatus only===
+tests/Feature/TicketsMonitoringLivewireTest.php:125:        Livewire::test('tickets.monitoring')
+tests/Feature/TicketsMonitoringLivewireTest.php-126-            ->assertStatus(200)
+tests/Feature/TicketsMonitoringLivewireTest.php-127-            ->assertSee('مانیتورینگ تیکت‌ها');
+tests/Feature/TicketsMonitoringLivewireTest.php-128-    }
+--
+tests/Feature/TicketsMonitoringLivewireTest.php:135:        Livewire::test('tickets.monitoring')
+tests/Feature/TicketsMonitoringLivewireTest.php-136-            ->assertStatus(200)
+tests/Feature/TicketsMonitoringLivewireTest.php-137-            ->assertSee('مانیتورینگ تیکت‌ها');
+tests/Feature/TicketsMonitoringLivewireTest.php-138-        $this->assertDatabaseCount('tickets', 0);
+--
+tests/Feature/TicketsMonitoringLivewireTest.php-397-            ->set('dateTo', '')
+tests/Feature/TicketsMonitoringLivewireTest.php-398-            ->assertStatus(200)
+--
+tests/Feature/TicketsMonitoringLivewireTest.php:424:        $component = Livewire::test('tickets.monitoring')
+--
+tests/Feature/TicketsMonitoringLivewireTest.php:557:        Livewire::test('tickets.monitoring')
+tests/Feature/TicketsMonitoringLivewireTest.php-558-            ->assertStatus(200)
+tests/Feature/TicketsMonitoringLivewireTest.php-559-            ->assertSee('#T906-NULL')
+tests/Feature/TicketsMonitoringLivewireTest.php-560-            ->assertSee('<span class="text-sm font-bold">سیستم</span>', escape: false);
+--
+tests/Feature/TicketsMonitoringLivewireTest.php:577:        Livewire::test('tickets.monitoring')
+tests/Feature/TicketsMonitoringLivewireTest.php-578-            ->assertStatus(200)
+tests/Feature/TicketsMonitoringLivewireTest.php-579-            ->assertSee('#T906-SOFT')
+tests/Feature/TicketsMonitoringLivewireTest.php-580-            ->assertSee('<span class="text-sm font-bold">کاربر غیرفعال</span>', escape: false);
+--
+tests/Feature/TicketsMonitoringLivewireTest.php-608-            ->call('showTicket', $ticket->id)
+tests/Feature/TicketsMonitoringLivewireTest.php-609-            ->assertStatus(200)
+tests/Feature/TicketsMonitoringLivewireTest.php-610-            ->assertSee('توضیح فعالیت')
+--
+--
+===assertDatabaseHas count===
+tests/Feature/AccessServiceMemoizationTest.php:0
+tests/Feature/AccessServiceTest.php:0
+tests/Feature/AccessibilityInfrastructureTest.php:0
+tests/Feature/ActivityLogDetailScopeTest.php:0
+tests/Feature/ActivityLogModelTest.php:0
+tests/Feature/ActivityLogPageLivewireTest.php:0
+tests/Feature/ActivityLogPageTest.php:0
+tests/Feature/ApiRateLimitTest.php:0
+tests/Feature/AppKeyGuardWiringTest.php:0
+tests/Feature/AppKeyLeakGuardTest.php:0
+tests/Feature/AuthTest.php:0
+tests/Feature/BoundaryModelTest.php:0
+tests/Feature/CacheInvalidationTest.php:0
+tests/Feature/CompletedAtIndexTest.php:0
+tests/Feature/CycleGuardDeadlineTest.php:0
+tests/Feature/DailySeriesBetweenRangeTest.php:0
+tests/Feature/DashboardPageTest.php:0
+tests/Feature/DashboardPriorityBucketsTest.php:0
+tests/Feature/DashboardTicketChartTest.php:0
+tests/Feature/ExampleTest.php:0

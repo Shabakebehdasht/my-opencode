@@ -1,0 +1,49 @@
+resources/views/livewire/tools/tools.blade.php:6:use App\Jobs\ArchiveActivityLogsJob;
+resources/views/livewire/tools/tools.blade.php:17:    public int $archiveDays = 30;
+resources/views/livewire/tools/tools.blade.php:31:                // Issue #929: archived tickets stay `completed`, so they are
+resources/views/livewire/tools/tools.blade.php:32:                // excluded here by `whereNull('archived_at')`, not by status.
+resources/views/livewire/tools/tools.blade.php:35:                    ->whereNull('archived_at')
+resources/views/livewire/tools/tools.blade.php:51:    public function archiveTickets(): void
+resources/views/livewire/tools/tools.blade.php:60:            'archiveDays' => 'required|integer|min:7|max:365',
+resources/views/livewire/tools/tools.blade.php:62:        // Issue #929: archiving stamps `archived_at` and keeps
+resources/views/livewire/tools/tools.blade.php:66:        // idempotent via `whereNull('archived_at')`.
+resources/views/livewire/tools/tools.blade.php:69:            ->whereNull('archived_at')
+resources/views/livewire/tools/tools.blade.php:70:            ->where('completed_at', '<', now()->subDays($this->archiveDays))
+resources/views/livewire/tools/tools.blade.php:71:            ->update(['archived_at' => now()]);
+resources/views/livewire/tools/tools.blade.php:79:        // Issue #892 — see archiveTickets(). A revoked holder must not be able
+resources/views/livewire/tools/tools.blade.php:100:        ArchiveActivityLogsJob::dispatch($this->activityDays, $accessibleIds);
+resources/views/livewire/tools/tools.blade.php:108:        // Issue #892 — see archiveTickets(). A revoked holder must not be able
+---
+---helpers size---
+6
+---import size fns---
+app/Imports/HardwareImport.php:37:    public function __construct()
+app/Imports/HardwareImport.php:42:    public function setCompareKey(string $key): void
+app/Imports/HardwareImport.php:47:    public function setAccessibleUnitIds(array $ids): void
+app/Imports/HardwareImport.php:52:    public function setSelectedActions(array $actions): void
+app/Imports/HardwareImport.php:57:    public function collection(Collection $rows): void
+app/Imports/HardwareImport.php:82:    private function loadExistingRecords(): void
+app/Imports/HardwareImport.php:111:    private function loadExistingPersons(): void
+app/Imports/HardwareImport.php:126:    private function applySelectedAction($row, int $rowNumber): void
+app/Imports/HardwareImport.php:142:    private function buildPreview($row, int $rowNumber): void
+app/Imports/HardwareImport.php:234:    private function findExistingRecord(array $data): ?array
+app/Imports/HardwareImport.php:254:    private function mapRowToData(array $row): array
+app/Imports/HardwareImport.php:279:    private function processRow(array $row, int $rowNumber, string $action = 'auto', bool $isConfirmation = false): void
+app/Imports/HardwareImport.php:355:    private function detectChanges(Hardware $existing, array $newData): array
+app/Imports/HardwareImport.php:392:    private function normalizeForComparison($value): ?string
+app/Imports/HardwareImport.php:425:    private function parseBoolean($value): ?bool
+app/Imports/HardwareImport.php:466:    private function parseDate($value): ?string
+app/Imports/HardwareImport.php:471:    private function clean($value): ?string
+app/Imports/HardwareImport.php:495:    public function getImportResults(): array
+app/Imports/HardwareImport.php:500:    public function getCsvSettings(): array
+app/Imports/PersonImport.php:47:    public function __construct()
+app/Imports/PersonImport.php:52:    public function setCompareKey(string $key): void
+app/Imports/PersonImport.php:57:    public function setAccessibleUnitIds(array $ids): void
+app/Imports/PersonImport.php:62:    public function setSelectedActions(array $actions): void
+app/Imports/PersonImport.php:67:    public function collection(Collection $rows): void
+app/Imports/PersonImport.php:94:    private function loadExistingRecords(): void
+app/Imports/PersonImport.php:121:    private function loadReferenceData(): void
+app/Imports/PersonImport.php:153:    private function applySelectedAction($row, int $rowNumber): void
+app/Imports/PersonImport.php:169:    private function buildPreview($row, int $rowNumber): void
+app/Imports/PersonImport.php:285:    private function findExistingRecord(array $data): ?array
+app/Imports/PersonImport.php:302:    private function mapRowToData(array $row): array

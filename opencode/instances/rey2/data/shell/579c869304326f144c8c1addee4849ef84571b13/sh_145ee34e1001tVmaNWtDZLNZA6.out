@@ -1,0 +1,18 @@
+.env.e2e.example
+.env.example
+.env.example.mysql
+.env.example.pgsql
+.env.testing
+---
+-rw-r--r-- 1 runner runner 2869 Oct 16 18:05 .env
+-rw-r--r-- 1 runner runner 3492 Oct 16 18:05 .env-example-github
+-rw-r--r-- 1 runner runner 1529 Oct 16 18:05 .env.e2e.example
+-rw-r--r-- 1 runner runner 2184 Oct 16 18:05 .env.example
+-rw-r--r-- 1 runner runner 1942 Oct 16 18:05 .env.example.mysql
+-rw-r--r-- 1 runner runner 2869 Oct 16 18:05 .env.example.pgsql
+-rw-r--r-- 1 runner runner 1438 Oct 16 18:05 .env.testing
+---
+6:APP_KEY=
+---
+routes/api.php:237
+routes/web.php:221

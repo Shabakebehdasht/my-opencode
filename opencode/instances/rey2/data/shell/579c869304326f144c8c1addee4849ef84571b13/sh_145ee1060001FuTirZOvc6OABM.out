@@ -1,0 +1,41 @@
+ls: cannot access 'pint.json': No such file or directory
+ls: cannot access '.nvmrc': No such file or directory
+-rw-r--r-- 1 runner runner    254 Oct 16 18:05 .editorconfig
+-rw-r--r-- 1 runner runner   2184 Oct 16 18:05 .env.example
+-rw-r--r-- 1 runner runner   1942 Oct 16 18:05 .env.example.mysql
+-rw-r--r-- 1 runner runner   2869 Oct 16 18:05 .env.example.pgsql
+-rw-r--r-- 1 runner runner 481285 Oct 16 18:05 composer.lock
+-rw-r--r-- 1 runner runner  87776 Oct 16 18:06 package-lock.json
+-rw-r--r-- 1 runner runner    299 Oct 16 18:05 phpstan.neon
+
+.githooks/:
+total 16
+drwxr-xr-x  2 runner runner 4096 Oct 16 18:05 .
+drwxr-xr-x 24 runner runner 4096 Oct 16 18:06 ..
+-rwxr-xr-x  1 runner runner  989 Oct 16 18:05 pre-commit
+-rwxr-xr-x  1 runner runner 1979 Oct 16 18:05 pre-push
+
+scripts/:
+total 84
+drwxr-xr-x  2 runner runner 4096 Oct 16 18:05 .
+drwxr-xr-x 24 runner runner 4096 Oct 16 18:06 ..
+-rw-r--r--  1 runner runner 4495 Oct 16 18:05 boost_tool.php
+-rw-r--r--  1 runner runner 1610 Oct 16 18:05 build-env-e2e.sh
+-rwxr-xr-x  1 runner runner 6728 Oct 16 18:05 check-app-key-leak.php
+-rw-r--r--  1 runner runner 5238 Oct 16 18:05 ci-validate-e2e-job.sh
+-rw-r--r--  1 runner runner 4281 Oct 16 18:05 coverage-report.sh
+-rwxr-xr-x  1 runner runner 2614 Oct 16 18:05 e2e-test.sh
+-rwxr-xr-x  1 runner runner 4299 Oct 16 18:05 ensure-test-app-key.php
+-rwxr-xr-x  1 runner runner 7832 Oct 16 18:05 find-dead-test-files.php
+-rwxr-xr-x  1 runner runner 1372 Oct 16 18:05 install-hooks.sh
+-rwxr-xr-x  1 runner runner  386 Oct 16 18:05 pre-commit
+-rwxr-xr-x  1 runner runner 2201 Oct 16 18:05 sync-beta.sh
+-rwxr-xr-x  1 runner runner 4397 Oct 16 18:05 verify.sh
+---
+ M composer.lock
+---
+30985fb3 chore: track composer.lock and stop ignoring it via *.lock
+6df80bdc chore: remove plans folder and untrack lock files
+70e35c2e docs: update test baseline to 884 passed, add infection for mutation testing
+3fa8bb03 build(composer): move laravel/boost to require and bump to ^2.7
+029b382f chore: refresh composer.lock and package-lock.json (dependency bumps)

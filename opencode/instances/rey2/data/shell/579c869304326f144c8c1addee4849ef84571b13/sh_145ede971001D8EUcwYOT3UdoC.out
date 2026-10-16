@@ -1,0 +1,42 @@
+===Jobs tests===
+tests/Feature/RolePermissionMutatorAuthorizationTest.php
+tests/Feature/ToolsLivewireTest.php
+tests/Feature/Jobs/JobsTest.php
+===ticket archive tests===
+tests/Feature/ToolsLivewireTest.php
+===notification send===
+tests/Feature/DashboardTodoNotificationTest.php
+tests/Feature/Jobs/SendNotificationJobTest.php
+tests/Feature/NotificationServiceTest.php
+===unit scoping fail-closed===
+tests/Feature/UnitsManagementTest.php
+tests/Feature/TicketsMonitoringLivewireTest.php
+tests/Feature/HardwareGisCacheTest.php
+tests/Feature/UnitModelTest.php
+tests/Feature/DashboardPageTest.php
+tests/Feature/HrApiTest.php
+tests/Feature/UnitTreeServiceTest.php
+tests/Feature/ActivityLogDetailScopeTest.php
+tests/Feature/TodoApiTest.php
+tests/Feature/ToolsLivewireTest.php
+tests/Feature/HardwareIndexLivewireTest.php
+tests/Feature/PersonApiTest.php
+tests/Feature/GisApiTest.php
+tests/Feature/UnitsEmptyScopeTest.php
+tests/Feature/ApiAbilityTest.php
+tests/Feature/ReportsPersonsLivewireTest.php
+tests/Feature/PersonsExportTest.php
+tests/Feature/TicketApiTest.php
+tests/Feature/ReportsMapNoBoundaryLivewireTest.php
+tests/Feature/HardwareScopeTest.php
+===auth===
+tests/Feature/AuthTest.php
+tests/Feature/AuthTest.php
+tests/Feature/ChangePasswordTest.php
+tests/Feature/RolePermissionMutatorAuthorizationTest.php
+
+tests/Feature/Auth:
+LoginLivewireTest.php
+
+tests/Feature/Auth:
+LoginLivewireTest.php

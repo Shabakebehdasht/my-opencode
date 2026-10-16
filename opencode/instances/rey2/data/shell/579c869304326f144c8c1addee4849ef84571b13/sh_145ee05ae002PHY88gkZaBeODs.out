@@ -1,0 +1,51 @@
+===dead/unused probes===
+13:    public function __construct()
+19:    public function getInterfaceTraffic($itemId, $duration = 3600) // <-- پارامتر جدید
+58:    public function getItemIdByKey($key)
+74:    protected function request($method, $params = [])
+109:    public function testApiConnection(): array
+122:    public function getLatestValues(array $itemIds): array
+---
+app/Providers/AppServiceProvider.php
+app/Jobs/SyncZabbixJob.php
+app/Console/Commands/SyncZabbix.php
+app/Services/Zabbix/ServiceZabbixClient.php
+app/Services/ZabbixService.php
+tests/Unit/ZabbixAdapterTest.php
+tests/Unit/ZabbixServiceTest.php
+tests/Feature/MultiLatestValueApiTest.php
+tests/Feature/SyncZabbixCommandTest.php
+tests/Feature/SyncZabbixObservabilityTest.php
+===inconsistent fetch===
+app/Http/Controllers/Api/MultiLatestValueController.php:6:use App\Services\Zabbix\ZabbixClient;
+app/Http/Controllers/Api/MultiLatestValueController.php:15:    public function index(Request $request, ZabbixClient $zabbix): JsonResponse
+app/Http/Controllers/Api/TrafficController.php:6:use App\Services\Zabbix\ZabbixClient;
+app/Http/Controllers/Api/TrafficController.php:15:    public function index(Request $request, ZabbixClient $zabbix)
+===utils===
+app/Support/:
+ActorLabel.php
+ExcelCell.php
+HardwareAuditChange.php
+Testing
+VendorRouteGuard.php
+===commented code===
+25:    #[Url]
+27:    #[Url]
+35:    #[Url]
+37:    #[Url]
+39:    #[Url]
+===persian dup===
+11:     * `foldSeparatorsSql()` builds the matching `regexp_replace` chain from it.
+43:    public static function normalizeForSearch(string $text): string
+61:     * Second half of the single source of truth: `normalizeForSearch()` applies
+62:     * it in PHP, `foldSeparatorsSql()` emits the matching `translate()` call, so
+87:     * SQL that folds a text column to the same shape `normalizeForSearch()`
+102:     * are folded too: `normalizeForSearch()` turns Persian (۰-۹) and
+121:    public static function foldSeparatorsSql(string $column): string
+141:        // Same digit map normalizeForSearch() applies to the term, in a single
+151:     * Normalized, wildcard-escaped term to compare against `foldSeparatorsSql()`.
+155:        return self::escapeLikeWildcards(self::normalizeForSearch($text));
+  166 app/Traits/PersianNormalizer.php
+  230 app/Services/UnitTreeService.php
+  498 app/Traits/HardwareIndexHelpers.php
+  894 total

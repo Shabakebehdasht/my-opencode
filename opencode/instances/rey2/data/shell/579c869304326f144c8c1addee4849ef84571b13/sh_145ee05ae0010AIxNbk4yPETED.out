@@ -1,0 +1,32 @@
+===ticket archive impl===
+app/Models/ActivityLogArchive.php:22: * @property Carbon|null $archived_at
+app/Models/ActivityLogArchive.php:32:     * `archived_at`. There is no `created_at` / `updated_at` column, so Eloquent
+app/Models/ActivityLogArchive.php:49:        'archived_at',
+app/Models/ActivityLogArchive.php:57:        'archived_at' => 'datetime',
+app/Models/Ticket.php:29: * @property Carbon|null $archived_at
+app/Models/Ticket.php:74:        'archived_at',
+app/Models/Ticket.php:82:        'archived_at' => 'datetime',
+app/Console/Commands/ArchiveOldRecords.php:110:            'archived_at' => now(),
+===exports===
+app/Http/Controllers/Api/HardwareExportController.php
+app/Http/Controllers/Api/PersonsExportController.php
+app/Http/Controllers/Api/UnitsExportController.php
+
+app/Exports/:
+Concerns
+HardwareAuditsExport.php
+HardwareExport.php
+PersonsExport.php
+UnitsExport.php
+===export scope===
+app/Http/Controllers/Api/HardwareExportController.php:24:        $accessibleIds = $request->accessibleIds();
+app/Http/Controllers/Api/HardwareExportController.php:28:        if (empty($accessibleIds)) {
+app/Http/Controllers/Api/HardwareExportController.php:31:            $query->whereHas('person', fn ($q) => $q->whereIn('u_id', $accessibleIds));
+app/Http/Controllers/Api/PersonsExportController.php:24:        $accessibleIds = $request->accessibleIds();
+app/Http/Controllers/Api/PersonsExportController.php:31:            ->when($accessibleIds === [], fn ($q) => $q->whereRaw('1 = 0'))
+app/Http/Controllers/Api/PersonsExportController.php:32:            ->when($accessibleIds !== [], fn ($q) => $q->whereIn('u_id', $accessibleIds));
+app/Http/Controllers/Api/PersonsExportController.php:106:     * The #494 list filters. They narrow the accessible scope, never widen it:
+app/Http/Controllers/Api/PersonsExportController.php:107:     * a unit id outside accessibleUnitIds() simply matches no row.
+app/Http/Controllers/Api/UnitsExportController.php:20:        $accessibleIds = $request->accessibleIds();
+app/Http/Controllers/Api/UnitsExportController.php:28:            ->when($accessibleIds === [], fn ($query) => $query->whereRaw('1 = 0'))
+app/Http/Controllers/Api/UnitsExportController.php:29:            ->when($accessibleIds !== [], fn ($query) => $query->whereIn('id', $accessibleIds))
