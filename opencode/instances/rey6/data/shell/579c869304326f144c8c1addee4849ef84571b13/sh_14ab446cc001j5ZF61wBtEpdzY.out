@@ -1,0 +1,36 @@
+=== all css/plugin references under resources/views ===
+resources/views/components/layouts/app.blade.php:12:    <link rel="stylesheet" href="{{ asset('css/leaflet/leaflet.css') }}" />
+resources/views/components/layouts/app.blade.php:13:    <link rel="stylesheet" href="{{ asset('css/leaflet/leaflet.draw.css') }}" />
+resources/views/components/layouts/app.blade.php:14:    <link rel="stylesheet" href="{{ asset('css/leaflet/leaflet-routing-machine.css') }}" />
+
+=== plugin usage ===
+resources/views/components/layouts/app.blade.php:13:    <link rel="stylesheet" href="{{ asset('css/leaflet/leaflet.draw.css') }}" />
+resources/views/components/layouts/app.blade.php:14:    <link rel="stylesheet" href="{{ asset('css/leaflet/leaflet-routing-machine.css') }}" />
+resources/views/components/layouts/app.blade.php:18:    {{-- Issue #984: leaflet.draw, leaflet-routing-machine and FullCalendar are
+resources/views/components/layouts/app.blade.php:22:           maps/route + maps/route2 -> leaflet-routing-machine
+resources/views/components/layouts/app.blade.php:23:           units/map                -> leaflet.draw
+resources/views/livewire/maps/route2.blade.php:80:         `L.Routing` exists by the time `onReady()` calls `initRouting()`. --}}
+resources/views/livewire/maps/route2.blade.php:81:    <script src="{{ asset('js/leaflet/leaflet-routing-machine.min.js') }}"></script>
+resources/views/livewire/maps/route2.blade.php:115:        if (typeof L.Routing === 'undefined' || typeof L.Routing.control !== 'function') {
+resources/views/livewire/maps/route2.blade.php:116:            console.error('L.Routing not available. Make sure leaflet-routing-machine.js is loaded.');
+resources/views/livewire/maps/route2.blade.php:120:        routingControl = L.Routing.control({
+resources/views/livewire/maps/route2.blade.php:122:            router: L.Routing.osrmv1({
+resources/views/livewire/maps/route.blade.php:52:         DOMContentLoaded) evaluates the `@script` block below, so `L.Routing` is
+resources/views/livewire/maps/route.blade.php:54:    <script src="{{ asset('js/leaflet/leaflet-routing-machine.min.js') }}"></script>
+resources/views/livewire/maps/route.blade.php:66:            var routingControl = L.Routing.control({
+resources/views/livewire/maps/route.blade.php:71:                router: L.Routing.osrmv1({
+resources/views/livewire/units/map.blade.php:213:         evaluates the `@script` block below — `L.Control.Draw` is therefore
+resources/views/livewire/units/map.blade.php:215:    <script src="{{ asset('js/leaflet/leaflet.draw.js') }}"></script>
+resources/views/livewire/units/map.blade.php:292:        var drawControl = new L.Control.Draw({
+
+=== @stack lines in layouts ===
+resources/views/components/layouts/app.blade.php:21:         them. Each page now pushes the library it needs into `@stack('scripts')`:
+resources/views/components/layouts/app.blade.php:406:@stack('scripts')
+
+=== any @stack('styles') anywhere ===
+NONE
+
+=== auth layout leaflet ===
+9:    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+=== maps/map.blade.php plugin refs ===

@@ -1,0 +1,17 @@
+FILE: vendor/livewire/livewire/src/Features/SupportPageComponents/SupportPageComponents.php
+35:            $this->layoutConfig->slotOrSection = $section;
+48:        View::macro('slot', function ($slot): static {
+51:            $this->layoutConfig->slotOrSection = $slot;
+60:            $this->layoutConfig->slotOrSection = 'content';
+71:            $this->layoutConfig->slotOrSection = 'slot';
+90:        $slots = [];
+94:        $handler = once(function ($target, $view, $data) use (&$layoutConfig, &$slots) {
+109:                // Gather up any slots and sections declared in the component template and store them
+160:    static function renderContentsIntoLayout($content, $layoutConfig)
+168:                        @slot($layout->slotOrSection)
+170:                        @endslot
+173:                        // Manually forward slots defined in the Livewire template into the layout component...
+174:                        foreach ($layout->viewContext->slots[-1] ?? [] as $name => $slot) {
+175:                            $__env->slot($name, attributes: $slot->attributes->getAttributes());
+176:                            echo $slot->toHtml();
+191:                    @section($layout->slotOrSection)

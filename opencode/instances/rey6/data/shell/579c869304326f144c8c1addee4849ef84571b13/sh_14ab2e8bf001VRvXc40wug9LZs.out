@@ -1,0 +1,13 @@
+origin	https://github.com/Shabakebehdasht/h-dashboard.git (fetch)
+origin	https://github.com/Shabakebehdasht/h-dashboard.git (push)
+---BRANCH---
+rey6
+---STATUS---
+ M composer.lock
+ M package-lock.json
+---LOG---
+11f356df Merge pull request #1109 from Shabakebehdasht/fix/1068-request-correlation-id
+72d89c07 Merge pull request #1108 from Shabakebehdasht/fix/1071-api-logout
+f888528c Merge pull request #1107 from Shabakebehdasht/fix/1030-admin-password-reset-revoke-tokens
+8db7bd15 Merge pull request #1105 from Shabakebehdasht/fix/1002-notification-write-ability
+06127998 Merge pull request #1104 from Shabakebehdasht/fix/1027-tracker-docs

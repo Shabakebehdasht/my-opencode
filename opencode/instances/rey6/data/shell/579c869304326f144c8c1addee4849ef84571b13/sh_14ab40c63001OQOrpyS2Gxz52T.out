@@ -1,0 +1,22 @@
+=== gh auth ===
+github.com
+  ✓ Logged in to github.com account Shabakebehdasht (GH_TOKEN)
+  - Active account: true
+  - Git operations protocol: https
+  - Token: ghp_************************************
+  - Token scopes: 'audit_log', 'notifications', 'project', 'read:network_configurations', 'read:org', 'read:packages', 'read:user', 'repo', 'workflow', 'write:discussion'
+
+  ✓ Logged in to github.com account Shabakebehdasht (/home/runner/.config/gh/hosts.yml)
+  - Active account: false
+  - Git operations protocol: https
+  - Token: ghp_************************************
+  - Token scopes: 'audit_log', 'notifications', 'project', 'read:network_configurations', 'read:org', 'read:packages', 'read:user', 'repo', 'workflow', 'write:discussion'
+=== git config user ===
+Shabakebehdasht
+Shabakebehdasht@users.noreply.github.com
+=== rey6 vs canonical beta ===
+11f356df7341c8681da6e7d257dd8621964ed3f6
+=== drift check (in-scope files since 096cb5a8) ===
+66f0a5ad fix(#1023): single-pass boundary GeoJSON projection on map screens
+=== ensure 096cb5a8 exists ===
+commit

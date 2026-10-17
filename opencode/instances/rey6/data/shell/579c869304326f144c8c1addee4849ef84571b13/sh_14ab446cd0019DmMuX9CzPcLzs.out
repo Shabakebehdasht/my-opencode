@@ -1,0 +1,30 @@
+=== units/map @push block ===
+197:@assets
+207:@endassets
+209:@push('scripts')
+213:         evaluates the `@script` block below — `L.Control.Draw` is therefore
+215:    <script src="{{ asset('js/leaflet/leaflet.draw.js') }}"></script>
+216:@endpush
+292:        var drawControl = new L.Control.Draw({
+
+=== route @push ===
+48:@push('scripts')
+52:         DOMContentLoaded) evaluates the `@script` block below, so `L.Routing` is
+54:    <script src="{{ asset('js/leaflet/leaflet-routing-machine.min.js') }}"></script>
+55:@endpush
+66:            var routingControl = L.Routing.control({
+71:                router: L.Routing.osrmv1({
+
+=== route2 @push ===
+76:@push('scripts')
+80:         `L.Routing` exists by the time `onReady()` calls `initRouting()`. --}}
+81:    <script src="{{ asset('js/leaflet/leaflet-routing-machine.min.js') }}"></script>
+82:@endpush
+115:        if (typeof L.Routing === 'undefined' || typeof L.Routing.control !== 'function') {
+116:            console.error('L.Routing not available. Make sure leaflet-routing-machine.js is loaded.');
+120:        routingControl = L.Routing.control({
+122:            router: L.Routing.osrmv1({
+
+=== app.blade @stack scripts line ===
+21:         them. Each page now pushes the library it needs into `@stack('scripts')`:
+406:@stack('scripts')
