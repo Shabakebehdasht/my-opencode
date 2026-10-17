@@ -1,0 +1,6 @@
+(end public)
+Note: Using configuration file /home/runner/h-dashboard/phpstan.neon.
+
+ [OK] No errors                                                                 
+
+PHPSTAN_EXIT=0

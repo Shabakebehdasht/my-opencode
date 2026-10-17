@@ -1,0 +1,6 @@
+096cb5a83bf86452d40dab85a1772ec51f13d39e
+error: cannot rebase: You have unstaged changes.
+error: Please commit or stash them.
+d23d2689 perf(#1017): drop the unused treemap, treegraph and exporting Highcharts modules from two pages
+096cb5a8 Merge pull request #997 from nashenas6/fix/996-sidebar-route-match
+92b26334 Merge pull request #995 from abharhit/nahal

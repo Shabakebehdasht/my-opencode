@@ -1,0 +1,30 @@
+    100▕     $response->assertDontSee('js/chart/exporting.js');
+    101▕ });
+    102▕
+
+  [31m────────────────────────────────────────────────────────────────────────────[39m  
+  [41;1m FAILED [49;22m [1mTests\Feature\ReportsPagesTest[22m [90m>[39m advanced reports page does not s…   
+[39;1m  Expected: [39;22m[31m<!DOCTYPE html>\n[39m[39;1m
+  [39;22m[31m<html lang="fa" dir="rtl">[39m[31m\n[39m[39;1m
+  [39;22m[31m\n[39m[39;1m
+  [39;22m[90m... (1342 more lines)[39m[39;1m
+
+  Not to contain: [39;22m[32mjs/chart/treemap.js[39m
+
+  at [32mtests/Feature/ReportsPagesTest.php[39m:[32m113[39m
+    109▕ 
+    110▕ test('advanced reports page does not ship the unused treemap, treegraph and exporting modules', function () {
+    111▕     $response = $this->actingAs($this->user)->get('/reports/tickets');
+    112▕ 
+  ➜ 113▕     $response->assertDontSee('js/chart/treemap.js');
+    114▕     $response->assertDontSee('js/chart/treegraph.js');
+    115▕     $response->assertDontSee('js/chart/exporting.js');
+    116▕ });
+    117▕
+
+
+  [90mTests:[39m    [31;1m2 failed[39;22m[90m,[39m[39m [39m[32;1m11 passed[39;22m[90m (31 assertions)[39m
+  [90mDuration:[39m [39m5.66s[39m
+  [90mRandom Order Seed:[39m [39m1792230205[39m
+
+Script php scripts/ensure-test-app-key.php && php artisan config:clear && php artisan route:clear && XDEBUG_MODE=off php artisan test handling the test event returned with error code 1

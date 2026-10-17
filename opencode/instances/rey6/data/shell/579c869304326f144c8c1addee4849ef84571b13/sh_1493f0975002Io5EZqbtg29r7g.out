@@ -1,0 +1,26 @@
+ .env.testing                                       |   2 +-
+ composer.lock                                      | 294 +++++++++++----------
+ package-lock.json                                  | 202 +++++++-------
+ resources/views/livewire/dashboard.blade.php       |   3 -
+ .../views/livewire/reports/advanced.blade.php      |   3 -
+ tests/Feature/DashboardPageTest.php                |  17 ++
+ tests/Feature/ReportsPagesTest.php                 |  15 ++
+ 7 files changed, 282 insertions(+), 254 deletions(-)
+=== assets blocks ===
+    @assets
+    <script src="{{ asset('js/chart/highcharts.js') }}"></script>
+    <script src="{{ asset('js/chart/accessibility.js') }}"></script>
+    @endassets
+@assets
+<script src="{{ asset('js/chart/highcharts.js') }}"></script>
+<script src="{{ asset('js/chart/accessibility.js') }}"></script>
+@endassets
+=== public untouched? ===
+(end)
+ M .env.testing
+ M composer.lock
+ M package-lock.json
+ M resources/views/livewire/dashboard.blade.php
+ M resources/views/livewire/reports/advanced.blade.php
+ M tests/Feature/DashboardPageTest.php
+ M tests/Feature/ReportsPagesTest.php
