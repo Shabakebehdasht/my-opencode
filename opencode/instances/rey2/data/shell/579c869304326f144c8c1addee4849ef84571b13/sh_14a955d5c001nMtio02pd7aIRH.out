@@ -1,0 +1,198 @@
+ .github/skills/pest-testing/SKILL.md               |   2 +-
+ .github/workflows/test.yml                         |  57 +++
+ .scratch/.gitkeep                                  |   0
+ .scratch/README.md                                 |   5 +
+ AGENTS.md                                          |   2 +-
+ app/Console/Commands/GenerateDailyReports.php      |  37 +-
+ app/Http/Controllers/Api/HardwareController.php    |  52 +--
+ .../Controllers/Api/HardwareExportController.php   |  83 +----
+ app/Http/Controllers/Api/OrgChartController.php    |  40 +-
+ app/Http/Controllers/Api/TicketController.php      |   7 +
+ app/Http/Middleware/RequestId.php                  |  37 ++
+ app/Imports/HardwareImport.php                     |   7 +-
+ app/Models/Boundary.php                            |   4 -
+ app/Models/Hardware.php                            | 156 +++-----
+ app/Models/HardwareAudit.php                       |   9 +
+ app/Models/User.php                                |   4 +-
+ app/Services/HardwareBulkAuditWriter.php           |  57 +++
+ app/Support/HardwareFilters.php                    | 228 ++++++++++++
+ app/Support/JalaliDateRange.php                    |  63 ++++
+ app/Traits/HardwareIndexHelpers.php                |  41 ++-
+ bootstrap/app.php                                  |  19 +-
+ docs/agents/api-auth.md                            |   2 +-
+ docs/agents/e2e.md                                 |  10 +-
+ docs/agents/features.md                            |   8 +-
+ docs/agents/issue-tracker.md                       |  44 ++-
+ docs/agents/testing.md                             |   1 +
+ docs/agents/triage-labels.md                       |  53 ++-
+ package-lock.json                                  | 408 ++++++++++++++++++++-
+ package.json                                       |   6 +-
+ phpstan-baseline.neon                              | 360 ++++--------------
+ playwright.config.ts                               |  14 +-
+ references/api-endpoints.md                        |  29 +-
+ .../views/livewire/activity-log/index.blade.php    |  22 +-
+ resources/views/livewire/dashboard.blade.php       |   3 -
+ resources/views/livewire/hardware/index.blade.php  | 140 +++----
+ .../views/livewire/hardware/trash-modal.blade.php  |  14 +-
+ resources/views/livewire/hr/dashboard.blade.php    |  15 +-
+ resources/views/livewire/maps/unit.blade.php       |  59 ++-
+ resources/views/livewire/profile/index.blade.php   |   2 +-
+ .../views/livewire/reports/advanced.blade.php      |  58 ++-
+ resources/views/livewire/reports/todos.blade.php   |  51 ++-
+ resources/views/livewire/reports/units.blade.php   |  22 +-
+ .../livewire/tickets/\342\232\241inbox.blade.php"  |  26 +-
+ .../tickets/\342\232\241monitoring.blade.php"      |  19 +-
+ resources/views/livewire/unit/tree.blade.php       |  44 ++-
+ resources/views/livewire/units/map.blade.php       |  17 +-
+ resources/views/livewire/users/index.blade.php     |  36 +-
+ routes/api.php                                     |  35 +-
+ scripts/coverage-report.sh                         |  69 ++++
+ scripts/find-hand-rolled-lookup-seeding.php        |  99 +++++
+ scripts/verify.sh                                  |  13 +
+ tests/Feature/AccessServiceTest.php                |  11 +-
+ tests/Feature/ActivityLogPageLivewireTest.php      |  26 +-
+ tests/Feature/ActivityLogPageTest.php              |   9 +-
+ tests/Feature/ApiAbilityTest.php                   |  65 ++++
+ tests/Feature/ApiLoginTest.php                     |   4 +-
+ tests/Feature/ApiLogoutTest.php                    | 119 ++++++
+ tests/Feature/AuthTest.php                         |   9 +-
+ tests/Feature/BoundaryModelTest.php                |  29 +-
+ tests/Feature/CoverageReportComponentTableTest.php | 369 +++++++++++++++++++
+ tests/Feature/DashboardPageTest.php                |  26 +-
+ tests/Feature/DashboardTodoNotificationTest.php    |   9 +-
+ tests/Feature/ExampleTest.php                      |  10 -
+ tests/Feature/GenerateDailyReportsCommandTest.php  | 275 ++++++++++++++
+ tests/Feature/HardwareApiTest.php                  | 105 ++++++
+ tests/Feature/HardwareAuditDetailTest.php          |  11 +-
+ tests/Feature/HardwareAuditLivewireTest.php        |  15 +-
+ tests/Feature/HardwareAuditObserverRequestTest.php |  11 +-
+ tests/Feature/HardwareAuditObserverTest.php        |  11 +-
+ .../Feature/HardwareAuditRollbackAllowlistTest.php |  11 +-
+ tests/Feature/HardwareAuditTest.php                |  11 +-
+ tests/Feature/HardwareBulkAuditSuppressionTest.php |  69 +++-
+ tests/Feature/HardwareBulkDeleteAuditTest.php      | 250 +++++++++++++
+ tests/Feature/HardwareExportNormalizationTest.php  |  27 +-
+ tests/Feature/HardwareFilterParityTest.php         | 210 +++++++++++
+ tests/Feature/HardwareIndexLivewireTest.php        |  16 +-
+ tests/Feature/HardwareRestoreScopeTest.php         |  23 +-
+ tests/Feature/HardwareRestoreSequenceTest.php      |  15 +-
+ tests/Feature/HardwareScopeTest.php                |  99 ++---
+ tests/Feature/HardwareTrashModalLivewireTest.php   | 135 ++++++-
+ tests/Feature/HelpSystemTest.php                   |  12 +-
+ tests/Feature/HrApiTest.php                        | 127 +++++++
+ tests/Feature/HrLivewireTest.php                   | 129 ++++++-
+ tests/Feature/HrOrgChartCoverageTest.php           |   9 +-
+ tests/Feature/InteractsWithTestSetupTest.php       |  40 ++
+ tests/Feature/ItLivewireTest.php                   |   9 +-
+ tests/Feature/ItPagesTest.php                      |   9 +-
+ tests/Feature/Kargozini/PersonLivewireTest.php     |  11 +-
+ tests/Feature/LookupSimpleModelsTest.php           |  17 +-
+ tests/Feature/MaintenanceLivewireTest.php          |  15 +-
+ tests/Feature/MapsUnitLivewireTest.php             | 123 +++++++
+ tests/Feature/NormalizePersianTextCommandTest.php  |  17 +-
+ tests/Feature/OtherModelsTest.php                  |   8 +-
+ tests/Feature/PagesRenderTest.php                  |  17 +-
+ tests/Feature/PermissionsPageTest.php              |   9 +-
+ tests/Feature/PersonModelTest.php                  |   8 +-
+ tests/Feature/PlaywrightEnvLoadingTest.php         |  40 ++
+ tests/Feature/ProfileTest.php                      |  20 +-
+ tests/Feature/ReportsChartPayloadTest.php          |  81 ++++
+ tests/Feature/ReportsPagesTest.php                 |  24 +-
+ tests/Feature/RequestIdMiddlewareTest.php          | 106 ++++++
+ tests/Feature/RolesPageTest.php                    |   9 +-
+ tests/Feature/SearchTest.php                       |   9 +-
+ tests/Feature/SelectContextTest.php                |   9 +-
+ tests/Feature/SettingsTest.php                     |   9 +-
+ tests/Feature/TicketApiTest.php                    |  69 ++++
+ .../Feature/TicketCommentApiComprehensiveTest.php  |  27 +-
+ tests/Feature/TicketCommentPolicyTest.php          |   9 +-
+ tests/Feature/TicketCommentTest.php                |  19 +-
+ tests/Feature/TicketCommentsEdgeCasesTest.php      |  19 +-
+ tests/Feature/TicketCommentsLivewireTest.php       |  11 +-
+ tests/Feature/TicketCommentsRefreshTest.php        |  11 +-
+ tests/Feature/TicketModelTest.php                  |   7 +-
+ tests/Feature/TicketsInboxLivewireTest.php         |  65 +++-
+ tests/Feature/TicketsMonitoringLivewireTest.php    |  17 +
+ tests/Feature/TicketsPagesTest.php                 |   9 +-
+ tests/Feature/TodoLivewireTest.php                 |   9 +-
+ tests/Feature/ToolsPageTest.php                    |   9 +-
+ tests/Feature/UnitModelTest.php                    |  12 +-
+ tests/Feature/UnitTreeLivewireTest.php             | 135 +++++++
+ tests/Feature/UnitTreePickerPartialTest.php        |   8 +-
+ tests/Feature/UnitsManagementTest.php              |   9 +-
+ tests/Feature/UnitsMapLivewireTest.php             |  18 +-
+ tests/Feature/UserModelTest.php                    |   8 +-
+ tests/Feature/UsersDirectoryLivewireTest.php       | 253 +++++++++++++
+ tests/Feature/UsersManagementTest.php              | 119 +++++-
+ tests/Feature/UsersPageTest.php                    |   8 +-
+ tests/Feature/ValidateUnitContextTest.php          |   9 +-
+ tests/Unit/ExampleTest.php                         |   5 -
+ tests/Unit/HardwareImportNormalizationTest.php     |  58 +++
+ tests/Unit/JalaliDateRangeTest.php                 | 110 ++++++
+ tests/e2e/auth/password-change.spec.ts             |   3 +-
+ tests/e2e/rbac/roles.spec.ts                       |  11 +-
+ tests/e2e/reports/single-request.spec.ts           |  61 +++
+ tests/e2e/settings/settings.spec.ts                |   2 +-
+ tsconfig.json                                      |  25 ++
+ 136 files changed, 5327 insertions(+), 1244 deletions(-)
+=== todos conflict diff ===
+diff --git a/resources/views/livewire/reports/todos.blade.php b/resources/views/livewire/reports/todos.blade.php
+index d5657537..5452fe83 100644
+--- a/resources/views/livewire/reports/todos.blade.php
++++ b/resources/views/livewire/reports/todos.blade.php
+@@ -3,6 +3,7 @@
+ use App\Models\Todo;
+ use App\Services\AccessService;
+ use App\Services\DailySeries;
++use App\Support\JalaliDateRange;
+ use Carbon\Carbon;
+ use Livewire\Component;
+ use Livewire\WithPagination;
+@@ -48,20 +49,6 @@ public function updated(string $property): void
+         }
+     }
+ 
+-    private function parseJalaliDate(?string $date, bool $endOfDay = false): ?Carbon
+-    {
+-        if (empty($date)) {
+-            return null;
+-        }
+-        try {
+-            $carbon = Jalalian::fromFormat('Y/m/d', $date)->toCarbon();
+-
+-            return $endOfDay ? $carbon->endOfDay() : $carbon->startOfDay();
+-        } catch (\Throwable) {
+-            return null;
+-        }
+-    }
+-
+     /**
+      * The chosen from..to range as Carbon bounds, or null when either end is
+      * missing/invalid — in which case the daily series has no window to fill.
+@@ -70,14 +57,7 @@ private function parseJalaliDate(?string $date, bool $endOfDay = false): ?Carbon
+      */
+     private function dateRange(): ?array
+     {
+-        $from = $this->parseJalaliDate($this->dateFrom);
+-        $to = $this->parseJalaliDate($this->dateTo, endOfDay: true);
+-
+-        if (! $from || ! $to || $from->gt($to)) {
+-            return null;
+-        }
+-
+-        return [$from, $to];
++        return JalaliDateRange::range($this->dateFrom, $this->dateTo);
+     }
+ 
+     public function chartPayload(): array
+@@ -94,10 +74,10 @@ public function chartPayload(): array
+             })
+             ->when($this->selectedUnitId, fn ($q) => $q->where('unit_id', $this->selectedUnitId));
+ 
+-        if ($from = $this->parseJalaliDate($this->dateFrom)) {
++        if ($from = JalaliDateRange::parse($this->dateFrom)) {
+             $query->where('start_at', '>=', $from);
+         }
+-        if ($to = $this->parseJalaliDate($this->dateTo, endOfDay: true)) {
++        if ($to = JalaliDateRange::parse($this->dateTo, endOfDay: true)) {
+             $query->where('end_at', '<=', $to);

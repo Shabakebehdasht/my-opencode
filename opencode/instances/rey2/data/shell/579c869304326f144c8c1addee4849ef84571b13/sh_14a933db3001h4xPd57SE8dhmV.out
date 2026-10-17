@@ -1,0 +1,44 @@
+AGENTS.md
+Pest.php
+README.md
+app
+artisan
+boost.json
+bootstrap
+composer.json
+composer.lock
+config
+database
+docker-compose-pgsql-.yml
+docker-compose-pgsql-mysql.yml
+docs
+install-guid.md
+lang
+laravel-log-tail.bat
+package-lock.json
+package.json
+phpstan-baseline.neon
+phpstan.neon
+phpunit.xml
+plans
+playwright.config.ts
+public
+references
+resources
+routes
+scripts
+skills-lock.json
+storage
+tests
+tsconfig.json
+vite.config.js
+---env files:
+-rw-r--r-- 1 runner runner 3492 Oct 17 15:54 .env-example-github
+-rw-r--r-- 1 runner runner 1529 Oct 17 15:54 .env.e2e.example
+-rw-r--r-- 1 runner runner 2184 Oct 17 15:54 .env.example
+-rw-r--r-- 1 runner runner 1942 Oct 17 15:54 .env.example.mysql
+-rw-r--r-- 1 runner runner 2869 Oct 17 15:54 .env.example.pgsql
+-rw-r--r-- 1 runner runner 1438 Oct 17 15:54 .env.testing
+---main repo env:
+/home/runner/h-dashboard/vendor/bin/phpstan
+1

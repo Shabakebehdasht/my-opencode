@@ -1,0 +1,7 @@
+M  phpstan-baseline.neon
+M  resources/views/livewire/reports/persons.blade.php
+UU resources/views/livewire/reports/todos.blade.php
+M  resources/views/livewire/reports/units.blade.php
+A  tests/Feature/ReportsPaginationTest.php
+---
+resources/views/livewire/reports/todos.blade.php

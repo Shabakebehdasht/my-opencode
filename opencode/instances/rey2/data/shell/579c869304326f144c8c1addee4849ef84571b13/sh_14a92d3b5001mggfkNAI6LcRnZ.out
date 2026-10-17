@@ -1,0 +1,13 @@
+6:use App\Support\JalaliDateRange;
+7:use Carbon\Carbon;
+10:use Morilog\Jalali\Jalalian;
+58:    private function dateRange(): ?array
+60:        return JalaliDateRange::range($this->dateFrom, $this->dateTo);
+77:        if ($from = JalaliDateRange::parse($this->dateFrom)) {
+80:        if ($to = JalaliDateRange::parse($this->dateTo, endOfDay: true)) {
+101:        $range = $this->dateRange();
+152:            'itemsPaginator' => $itemsPage,
+301:        @if ($chart['itemsPaginator']->hasPages())
+306:                {{ $chart['itemsPaginator']->links() }}
+=== php-lint ===
+No syntax errors detected in resources/views/livewire/reports/todos.blade.php
