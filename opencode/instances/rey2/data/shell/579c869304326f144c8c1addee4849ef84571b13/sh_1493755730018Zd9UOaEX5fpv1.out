@@ -1,0 +1,14 @@
+  [41;1m FAILED [49;22m [1mTests\Feature\UsersDirectoryLivewireTest[22m [90m>[39m cold session first ren…   
+[39;1m  cold-session render ran 6 persons queries for a 20-row page
+Failed asserting that 6 is equal to 3 or is less than 3.[39;22m
+
+  at [32mtests/Feature/UsersDirectoryLivewireTest.php[39m:[32m208[39m
+    204▕         $f = $this->directoryFixtures(19);
+    205▕ 
+    206▕         $counts = $this->renderAndCount($f['actor']);
+    207▕ 
+  ➜ 208▕         expect($counts['persons'])->toBeLessThanOrEqual(3,
+    209▕             "cold-session render ran {$counts['persons']} persons queries for a 20-row page");
+  [41;1m FAILED [49;22m [1mTests\Feature\UsersDirectoryLivewireTest[22m [90m>[39m persons units and perm…   
+[39;1m  queries against permissions grew with the row count (N+1) — 7 -> 6
+Failed asserting that 6 is identical to 7.[39;22m

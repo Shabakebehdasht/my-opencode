@@ -1,0 +1,23 @@
+Code Style (Pint): pass
+Coverage Report (Blade-aware, informational): pass
+E2E Tests (Playwright): pass
+Mutation Testing: pass
+PHP 8.6 Preview (non-blocking): pass
+PHPStan Static Analysis: pass
+Tests & Coverage: pass
+---
+Code Style (Pint): pass
+Coverage Report (Blade-aware, informational): pass
+E2E Tests (Playwright): pass
+Mutation Testing: pass
+PHP 8.6 Preview (non-blocking): pass
+PHPStan Static Analysis: pass
+Tests & Coverage: pass
+---
+Code Style (Pint): pass
+Coverage Report (Blade-aware, informational): pass
+Tests & Coverage: pass
+E2E Tests (Playwright): pending
+Mutation Testing: pending
+PHP 8.6 Preview (non-blocking): pass
+PHPStan Static Analysis: pass

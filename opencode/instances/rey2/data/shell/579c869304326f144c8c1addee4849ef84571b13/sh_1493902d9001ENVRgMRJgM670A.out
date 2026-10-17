@@ -1,0 +1,4 @@
+  [90mDuration:[39m [39m506.90s[39m
+  [90mRandom Order Seed:[39m [39m1792229836[39m
+
+Script php scripts/ensure-test-app-key.php && php artisan config:clear && php artisan route:clear && XDEBUG_MODE=off php artisan test handling the test event returned with error code 1

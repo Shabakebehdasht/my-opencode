@@ -1,0 +1,36 @@
+    /** Count per-table selects issued while the directory renders (perPage=20). @return array<string, int> */
+    private function renderAndCount(User $actor): array
+    {
+        /** @var array<string, int> $counts */
+        $counts = array_fill_keys(array_keys(self::TABLE_PATTERNS), 0);
+
+        DB::listen(function ($query) use (&$counts) {
+            $sql = $query->sql;
+
+            if (str_starts_with($sql, 'BEGIN') || str_starts_with($sql, 'COMMIT') || str_starts_with($sql, 'ROLLBACK')) {
+                return;
+            }
+
+            foreach (self::TABLE_PATTERNS as $table => $pattern) {
+                if (preg_match($pattern, $sql) === 1) {
+                    $counts[$table]++;
+                }
+            }
+        });
+
+        Livewire::actingAs($actor)
+            ->test('users.index')
+            ->set('perPage', 20)
+            ->assertOk();
+
+        if (env('PEST_DEBUG')) {
+            fwrite(STDERR, 'COUNTS='.json_encode($counts)."\n");
+        }
+
+        return $counts;
+    }
+
+    public function test_directory_renders_names_and_unit_names_populated(): void
+    {
+        $f = $this->directoryFixtures();
+
