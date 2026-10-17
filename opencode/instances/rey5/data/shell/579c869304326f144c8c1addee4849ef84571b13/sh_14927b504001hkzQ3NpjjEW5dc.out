@@ -1,0 +1,25 @@
+  2026-10-17 09:18:52 / ............................................ ~ 0.06ms
+  2026-10-17 09:18:52 /dashboard ................................... ~ 0.02ms
+  2026-10-17 09:18:52 /js/chart/treemap.js ......................... ~ 0.04ms
+  2026-10-17 09:18:52 /js/chart/treegraph.js ....................... ~ 0.79ms
+  2026-10-17 09:18:52 /js/chart/exporting.js ....................... ~ 0.92ms
+  2026-10-17 09:18:52 /js/chart/accessibility.js ................... ~ 1.05ms
+  2026-10-17 09:18:52 /js/chart/highcharts.js ...................... ~ 1.19ms
+  2026-10-17 09:18:52 /build/assets/app-CJg5tVTd.css ............... ~ 0.02ms
+  2026-10-17 09:18:52 /hr/org-chart ................................ ~ 0.01ms
+  2026-10-17 09:18:53 /css/leaflet/leaflet.css ..................... ~ 0.09ms
+  2026-10-17 09:18:53 /css/leaflet/leaflet.draw.css ................ ~ 0.21ms
+  2026-10-17 09:18:53 /css/leaflet/leaflet-routing-machine.css ..... ~ 0.29ms
+  2026-10-17 09:18:53 /build/assets/app-BvRlpoey.js ................ ~ 0.33ms
+  2026-10-17 09:18:53 /build/assets/app-CJg5tVTd.css ............... ~ 0.43ms
+  2026-10-17 09:18:53 /css/other/jalalidatepicker.min.css .......... ~ 0.48ms
+  2026-10-17 09:18:53 /js/leaflet/leaflet.js ....................... ~ 0.02ms
+  2026-10-17 09:18:53 /js/other/jalalidatepicker.min.js ............ ~ 0.21ms
+  2026-10-17 09:18:53 /fonts/Vazirmatn-Regular.woff2 ............... ~ 0.02ms
+  2026-10-17 09:18:53 /livewire-dba3f765/update .................... ~ 0.02ms
+  2026-10-17 09:18:53 /livewire-dba3f765/update .................... ~ 0.83ms
+  ✓  8 [chromium] › tests/e2e/hr/org-chart.spec.ts:83:3 › hr org chart › collapse all hides the nested nodes, expand all restores them (3.8s)
+
+  8 passed (25.9s)
+[e2e] Server stopped
+[e2e] .env restored

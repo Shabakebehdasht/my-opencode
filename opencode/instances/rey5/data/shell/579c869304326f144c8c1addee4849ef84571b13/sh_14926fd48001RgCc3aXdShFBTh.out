@@ -1,0 +1,8 @@
+ M composer.lock
+ M package-lock.json
+ M resources/views/livewire/unit/tree.blade.php
+ M tests/Feature/UnitTreeLivewireTest.php
+--- branch ---
+fix/1013-unit-tree-expandall-batch
+--- beta sha ---
+096cb5a83bf86452d40dab85a1772ec51f13d39e

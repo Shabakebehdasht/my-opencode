@@ -1,0 +1,8 @@
+=== CHECKS SETTLED ===
+Code Style (Pint)	pass	2m57s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39020577844/job/117361396866	
+Coverage Report (Blade-aware, informational)	pass	4m36s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39020577844/job/117361396846	
+E2E Tests (Playwright)	pass	19m47s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39020577844/job/117361396872	
+Mutation Testing	pass	27m5s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39020577844/job/117361396697	
+PHP 8.6 Preview (non-blocking)	pass	4m32s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39020577844/job/117361396803	
+PHPStan Static Analysis	pass	30s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39020577844/job/117361396908	
+Tests & Coverage	pass	4m36s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39020577844/job/117361396851	

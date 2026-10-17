@@ -1,0 +1,4 @@
+ M composer.lock
+ M package-lock.json
+--- .env APP_KEY check ---
+1
