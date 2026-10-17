@@ -1,4 +1,0 @@
-{"head":"\u003e Follow-up of audit discussion #998 (`improve 2026-10-16`, planned at `096cb5a8`). Status tracking lives in THIS issue — reply with TODO/IN PROGRESS/DONE/BLOCKED.\n\n# Plan 001: Null-guard user/assignee/unit in TicketResource\n\n\u003e **Executor instructions**: Follow this plan step by step. Run every\n\u003e ve","title":"[improve] Null-guard nullable relations in TicketResource"}
-===
- M composer.lock
- M package-lock.json
