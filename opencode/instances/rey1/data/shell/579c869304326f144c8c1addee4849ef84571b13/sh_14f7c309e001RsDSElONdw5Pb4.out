@@ -1,0 +1,9 @@
+Tests & Coverage	fail	6m32s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39136897949/job/117703432195	
+Code Style (Pint)	pass	1m42s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39136897949/job/117703432127	
+Coverage Report (Blade-aware, informational)	pass	10s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39136897949/job/117704871925	
+PHPStan Static Analysis	pass	26s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39136897949/job/117703431963	
+Typecheck (Playwright specs, informational)	pass	13s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39136897949/job/117703432208	
+E2E Tests (Playwright)	pending	0	https://github.com/asgarimehdi/h-dashboard/actions/runs/39136897949/job/117703432166	
+Mutation Testing	pending	0	https://github.com/asgarimehdi/h-dashboard/actions/runs/39136897949/job/117703432157	
+PHP 8.6 Preview (non-blocking)	pass	4m57s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39136897949/job/117703432140	
+=== watch output tail ===
