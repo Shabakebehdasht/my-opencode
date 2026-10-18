@@ -1,0 +1,23 @@
+=== COMMENT 2 (gate) ===
+## گیت فاز ۳ — آمادهٔ اجرا ✅
+
+مبنا: کامنت «جمع‌بندی کارشناس» (فاز ۲) + تصمیم مهدی در ۲۰۲۶-۱۰-۱۸: «طبق پیشنهاد».
+
+**تصمیم تصویب‌شده:** گزینهٔ **الف** — مسیر استاندارد Laravel: ثبت `AuthenticateSession` در گروه web + فراخوانی `logoutOtherDevices` پیش از تغییر رمز. افزودن آن یک فایل خارج از اسکوپ اولیه صریحاً مجاز است؛ گزینه‌های ب (حذف از session store — امروز driver جدول ندارد) و ج (پلن خام placebo) رد شدند.
+
+**مرجع اجرا:** ترتیب مرجع: (۱) کامنت «جمع‌بندی کارشناس»، (۲) این کامنت گیت — در تعارض، کامنت‌ها بر متن خام ایشو حاکم‌اند و متن خام فقط سابقهٔ کشف است.
+**شرایط تحویل:** برنچ از beta، ‏PR به beta با `Closes #1004`، اسکوپ سختِ پلن (بدون package-lock bump و فایل scratch؛ ‏AGENTS.md فقط اگر پلن خواسته و حتماً بدون ZWNJ)، تست‌های پلن + ‏CI سبز (Tests & Coverage + Pint + PHPStan). ابهام یا تعارض با beta = توقف و کامنت روی همین ایشو.
+
+=== COMMENT 1 tail (last 1600 chars) ===
+ession store (حذف رکوردهای نشست با `user_id`): امروز ممکن نیست، چون driver تسک `redis`/`file` است و جدول sessions وجود ندارد؛ نیازمند تغییر driver است — رد می‌کنم.
+- ج) همان پلن بدون تغییر middleware (فراخوانی `logoutOtherDevices` بعد از تغییر رمز): هم placebo است هم مستعد 500؛ رد می‌کنم.
+
+پیشنهاد من: **الف**. تنها گزینه‌ای است که مستقل از driver کار می‌کند، از primitive رسمی Laravel استفاده می‌کند و شرط Done («کوکی نشست دزدیده‌شده رد شود، نشست جاری بماند») را واقعاً برآورده می‌کند. تنها بهایی که می‌دهد یک فایل خارج از scope فعلی و یک ریسک سراسری کنترل‌شده است که با تست‌های بند ۳ و ۴ مهار می‌شود.
+
+## ۶) طرح اجرایی پیشنهادی (خلاصه)
+1. `bootstrap/app.php:71-74` — افزودن `Illuminate\Session\Middleware\AuthenticateSession::class` به `$middleware->web(append: [...])` با کامنت کوتاه چرایی (این middleware زیربنای logoutOtherDevices است).
+2. `changepassword.blade.php` — **قبل از** خط 38 (`$user->password = Hash::make(...)`): `Auth::logoutOtherDevices($this->currentPassword);` سپس ادامهٔ جریان فعلی (ذخیرهٔ رمز، `tokens()->delete()`). (اگر بازچینش رفتار recaller را تغییر داد، در پیام commit ذکر شود.)
+3. افزودن تست‌های بند ۴ به `tests/Feature/ChangePasswordTest.php`.
+4. اجرا: `php artisan config:clear && php artisan route:clear && XDEBUG_MODE=off php artisan test tests/Feature/ChangePasswordTest.php` سپس `composer test`، `vendor/bin/pint --test`، و در پایان `bash scripts/e2e-test.sh`.
+5. یادداشت maintenance: هر مسیر آیندهٔ تغییر/بازنشانی رمز (از جمله `users/index.blade.php:293` که موضوع #1030 است) باید همین invalidation را اعمال کند و متن UX باید بگوید «دستگاه‌های دیگر خارج می‌شوند».
+

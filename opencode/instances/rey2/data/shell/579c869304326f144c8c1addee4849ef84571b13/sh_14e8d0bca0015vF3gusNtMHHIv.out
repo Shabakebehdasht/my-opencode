@@ -1,0 +1,5 @@
+[fix/1004-logout-other-devices a41b1031] fix(#1004): invalidate other web sessions on password change
+ 3 files changed, 131 insertions(+)
+a41b1031 fix(#1004): invalidate other web sessions on password change
+ M composer.lock
+ M package-lock.json

@@ -1,0 +1,15 @@
+Merge pull request #1118 from asgarimehdi/dependabot/github_actions/beta/actions/upload-artifact-7
+Merge pull request #1117 from asgarimehdi/dependabot/github_actions/beta/actions/download-artifact-8
+Merge pull request #1119 from asgarimehdi/docs/agents-drift-fix
+docs: fix drift in docs/agents against current beta (audit 2026-10-18)
+chore(deps): bump actions/upload-artifact from 4 to 7
+chore(deps): bump actions/download-artifact from 4 to 8
+Merge pull request #1116 from asgarimehdi/docs/domain-md-rewrite
+docs: rewrite docs/agents/domain.md to describe where decisions actually live
+Merge pull request #1115 from haileen5/nazila
+refactor(#1055): extract the inbox single-ticket flow into a trait
+refactor(#1055): route the inbox mutation gates through authorizeMutation()
+Merge pull request #1090 from Shabakebehdasht/fix/1028-scope-bind-n-code
+Merge pull request #1106 from Shabakebehdasht/fix/1011-coverage-report-artifact
+test(users): pin the null-unit person case and fix the rule comment
+fix(users): scope-bind the account-to-person n_code to the actor's units

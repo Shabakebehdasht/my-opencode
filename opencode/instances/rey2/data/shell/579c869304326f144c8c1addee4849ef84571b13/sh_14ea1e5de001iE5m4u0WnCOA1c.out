@@ -1,0 +1,10 @@
+--- tree (should be only pre-existing locks) ---
+ M composer.lock
+ M package-lock.json
+--- branch sync ---
+a41b10315a9342b50703fff6f6d605fbc4ea4feb
+a41b10315a9342b50703fff6f6d605fbc4ea4feb
+--- PR summary ---
+{"baseRefName":"beta","headRefName":"fix/1004-logout-other-devices","labels":[],"mergeStateStatus":"BLOCKED","mergeable":"MERGEABLE","reviewRequests":[],"state":"OPEN"}
+--- issue state ---
+{"labels":[{"id":"LA_kwDOOLHV788AAAACtRezVA","name":"security","description":"Security issues","color":"E4E669"},{"id":"LA_kwDOOLHV788AAAACtRe0qA","name":"P1","description":"High priority","color":"B60205"},{"id":"LA_kwDOOLHV788AAAAC7SknNw","name":"ready","description":"آماده اجرا","color":"41e636"}],"state":"OPEN"}

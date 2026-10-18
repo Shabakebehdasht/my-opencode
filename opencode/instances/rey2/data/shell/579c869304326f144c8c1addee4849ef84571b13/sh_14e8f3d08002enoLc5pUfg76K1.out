@@ -1,0 +1,1 @@
+{"additions":131,"changedFiles":3,"deletions":0,"files":[{"path":"bootstrap/app.php","additions":9,"deletions":0,"changeType":"MODIFIED"},{"path":"resources/views/livewire/auth/changepassword.blade.php","additions":6,"deletions":0,"changeType":"MODIFIED"},{"path":"tests/Feature/ChangePasswordTest.php","additions":116,"deletions":0,"changeType":"MODIFIED"}]}

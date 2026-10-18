@@ -1,0 +1,11 @@
+ M .env.testing
+ M bootstrap/app.php
+ M composer.lock
+ M package-lock.json
+ M resources/views/livewire/auth/changepassword.blade.php
+ M tests/Feature/ChangePasswordTest.php
+---BRANCH---
+fix/1004-logout-other-devices
+---REMOTES---
+origin	https://github.com/Shabakebehdasht/h-dashboard.git (fetch)
+origin	https://github.com/Shabakebehdasht/h-dashboard.git (push)

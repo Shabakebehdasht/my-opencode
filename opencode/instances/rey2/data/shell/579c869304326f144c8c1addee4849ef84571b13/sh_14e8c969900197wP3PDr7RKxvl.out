@@ -1,0 +1,8 @@
+ .env.testing                                       |   2 +-
+ bootstrap/app.php                                  |   9 +
+ composer.lock                                      | 316 +++++++++++----------
+ package-lock.json                                  | 202 ++++++-------
+ .../views/livewire/auth/changepassword.blade.php   |   6 +
+ tests/Feature/ChangePasswordTest.php               | 116 ++++++++
+ 6 files changed, 392 insertions(+), 259 deletions(-)
+---STAGED---
