@@ -1,0 +1,7 @@
+Switched to a new branch 'fix/1003-e2e-secure-cookie'
+M	composer.lock
+M	package-lock.json
+branch 'fix/1003-e2e-secure-cookie' set up to track 'origin/beta'.
+579e73c6 Merge pull request #1116 from asgarimehdi/docs/domain-md-rewrite
+ M composer.lock
+ M package-lock.json

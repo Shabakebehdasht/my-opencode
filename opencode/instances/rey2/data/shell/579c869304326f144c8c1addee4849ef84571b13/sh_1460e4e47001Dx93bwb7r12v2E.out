@@ -1,0 +1,6 @@
+=== test add-label on #1009 ===
+failed to update https://github.com/asgarimehdi/h-dashboard/issues/1009: GraphQL: Shabakebehdasht does not have the correct permissions to execute `AddLabelsToLabelable` (addLabelsToLabelable)
+failed to update 1 issue
+
+=== verify ===
+
