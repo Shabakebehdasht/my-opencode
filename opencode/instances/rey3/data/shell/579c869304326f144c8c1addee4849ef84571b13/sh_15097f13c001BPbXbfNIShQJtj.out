@@ -1,0 +1,30 @@
+
+  [39;41;1m FAIL [39;49;22m[39m Tests\Feature\UsersManagementTest[39m
+  [31;1m⨯[39;22m[90m [39m[90m#1030: editing a user without a password keeps their tokens alive[39m[90m   [39m [90m1.28s[39m  
+  [31;1m⨯[39;22m[90m [39m[90mnon-admin with manage_users cannot assign roles without manage_role[39m[90m…[39m [90m0.37s[39m  
+  [31;1m⨯[39;22m[90m [39m[90mcreate user persists data and assigns roles[39m[90m                         [39m [90m0.13s[39m  
+  [31;1m⨯[39;22m[90m [39m[90mchange password updates password correctly[39m[90m                          [39m [90m0.35s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#849: the direct editing_user_id path cannot take over a foreign us[39m[90m…[39m [90m0.60s[39m  
+  [31;1m⨯[39;22m[90m [39m[90musers management pages are protected by RBAC[39m[90m                        [39m [90m0.12s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#849: user table, unit picker and person search are unit-scoped[39m[90m     [39m [90m0.83s[39m  
+  [31;1m⨯[39;22m[90m [39m[90madmin can still create update delete normally[39m[90m                       [39m [90m0.13s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#1040: users.index snapshot carries no unit lists[39m[90m                   [39m [90m0.59s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#849: in-scope users can still be edited, assigned and deleted[39m[90m      [39m [90m0.86s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#1030: both password-change paths revoke all of an account's tokens[39m[90m [39m [90m0.37s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#1028: the n_code exists rule itself constrains u_id to the accessi[39m[90m…[39m [90m0.60s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#1028: an empty scope refuses even an in-scope person n_code[39m[90m        [39m [90m0.60s[39m  
+  [31;1m⨯[39;22m[90m [39m[90musers search folds persian digits in stored person name[39m[90m             [39m [90m0.13s[39m  
+  [31;1m⨯[39;22m[90m [39m[90mnon-admin with manage_users cannot edit admin user[39m[90m                  [39m [90m0.37s[39m  
+  [31;1m⨯[39;22m[90m [39m[90musers index renders and filters results[39m[90m                             [39m [90m0.14s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#849: an empty scope renders nobody, not everybody[39m[90m                  [39m [90m0.60s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#849: createUser requires at least one role, like updateUser[39m[90m        [39m [90m0.60s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#849: delete and restore are refused for a foreign user[39m[90m             [39m [90m0.60s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#849: edit() refuses a foreign user[39m[90m                                 [39m [90m0.59s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#849: createUser refuses units outside the actor scope[39m[90m              [39m [90m0.60s[39m  
+  [31;1m⨯[39;22m[90m [39m[90mmanage_users holder cannot delete themselves[39m[90m                        [39m [90m0.14s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#1030: admin password reset revokes the target user's tokens[39m[90m        [39m [90m0.37s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#1030: admin password reset revokes every token, including map-dash[39m[90m…[39m [90m0.37s[39m  
+  [31;1m⨯[39;22m[90m [39m[90musers search folds arabic alef in stored person name[39m[90m                [39m [90m0.13s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#1028: createUser refuses a person with no unit (u_id null)[39m[90m         [39m [90m0.60s[39m  
+  [31;1m⨯[39;22m[90m [39m[90musers search folds zwj in stored person name[39m[90m                        [39m [90m0.13s[39m  
+  [31;1m⨯[39;22m[90m [39m[90mroles and permissions pages render and allow modifications[39m[90m          [39m [90m0.12s[39m  

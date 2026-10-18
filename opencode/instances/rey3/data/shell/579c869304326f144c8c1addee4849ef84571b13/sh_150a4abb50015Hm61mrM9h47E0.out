@@ -1,0 +1,5 @@
+[improve/1040-livewire-computed-lists fa9d802c] #1040: Livewire public props no longer carry full model/id lists
+ 7 files changed, 457 insertions(+), 98 deletions(-)
+fa9d802c #1040: Livewire public props no longer carry full model/id lists
+ M composer.lock
+ M package-lock.json

@@ -1,0 +1,20 @@
+ M .env.testing
+ M composer.lock
+ M package-lock.json
+ M phpstan-baseline.neon
+ M "resources/views/livewire/tickets/\342\232\241inbox.blade.php"
+ M resources/views/livewire/units/index.blade.php
+ M resources/views/livewire/users/index.blade.php
+ M tests/Feature/TicketsInboxLivewireTest.php
+ M tests/Feature/UnitsIndexLivewireTest.php
+ M tests/Feature/UsersManagementTest.php
+ .env.testing | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+diff --git a/.env.testing b/.env.testing
+index fce15564..0aeada6a 100644
+--- a/.env.testing
++++ b/.env.testing
+@@ -1,6 +1,6 @@
+ APP_NAME=h-dashboard
+ APP_ENV=local
+-APP_KEY=

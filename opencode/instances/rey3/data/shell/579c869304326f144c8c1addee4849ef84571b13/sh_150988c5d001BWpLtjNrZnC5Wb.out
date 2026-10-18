@@ -1,0 +1,21 @@
+
+  [39;41;1m FAIL [39;49;22m[39m Tests\Feature\UsersManagementTest[39m
+  [31;1m⨯[39;22m[90m [39m[90m#1028: the n_code exists rule itself constrains u_id to the accessi[39m[90m…[39m [90m1.50s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#1028: an empty scope refuses even an in-scope person n_code[39m[90m        [39m [90m0.60s[39m  
+  [31;1m⨯[39;22m[90m [39m[90mnon-admin with manage_users cannot assign roles without manage_role[39m[90m…[39m [90m0.37s[39m  
+  [31;1m⨯[39;22m[90m [39m[90musers search folds arabic alef in stored person name[39m[90m                [39m [90m0.14s[39m  
+  [31;1m⨯[39;22m[90m [39m[90mnon-admin with manage_users cannot edit admin user[39m[90m                  [39m [90m0.37s[39m  
+  [31;1m⨯[39;22m[90m [39m[90musers search folds persian digits in stored person name[39m[90m             [39m [90m0.13s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#1030: admin password reset revokes every token, including map-dash[39m[90m…[39m [90m0.37s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#849: the direct editing_user_id path cannot take over a foreign us[39m[90m…[39m [90m0.60s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#849: selectPerson refuses an out-of-scope person[39m[90m                   [39m [90m0.60s[39m  
+  [31;1m⨯[39;22m[90m [39m[90madmin can still create update delete normally[39m[90m                       [39m [90m0.13s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#849: in-scope users can still be edited, assigned and deleted[39m[90m      [39m [90m0.83s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#849: createUser requires at least one role, like updateUser[39m[90m        [39m [90m0.60s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#849: edit() refuses a foreign user[39m[90m                                 [39m [90m0.59s[39m  
+  [31;1m⨯[39;22m[90m [39m[90musers search folds zwj in stored person name[39m[90m                        [39m [90m0.13s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#1028: createUser refuses a foreign unit person with no account yet[39m[90m [39m [90m0.60s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#849: an empty scope renders nobody, not everybody[39m[90m                  [39m [90m0.60s[39m  
+  [31;1m⨯[39;22m[90m [39m[90musers management pages are protected by RBAC[39m[90m                        [39m [90m0.13s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#1028: createUser refuses a person with no unit (u_id null)[39m[90m         [39m [90m0.59s[39m  
+  [31;1m⨯[39;22m[90m [39m[90m#1028: updateUser cannot re-bind an in-scope user to an out-of-scop[39m[90m…[39m [90m0.84s[39m  

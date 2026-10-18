@@ -1,0 +1,8 @@
+Saved working directory and index state On improve/1040-livewire-computed-lists: pre-existing dirty lock files
+ M phpstan-baseline.neon
+ M "resources/views/livewire/tickets/\342\232\241inbox.blade.php"
+ M resources/views/livewire/units/index.blade.php
+ M resources/views/livewire/users/index.blade.php
+ M tests/Feature/TicketsInboxLivewireTest.php
+ M tests/Feature/UnitsIndexLivewireTest.php
+ M tests/Feature/UsersManagementTest.php
