@@ -1,0 +1,30 @@
+  [32;1m✓[39;22m[90m [39m[90mend of day returns the last second of the day[39m[90m                       [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90mrange returns null when an end is missing or invalid[39m[90m                [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90mrange returns null when the range is inverted[39m[90m                       [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90mthe first day of a jalali year[39m[90m                                      [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90mempty and null input return null without throwing[39m[90m                   [39m [90m0.01s[39m  
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Unit\PersianNormalizerExtraTest[39m
+  [32;1m✓[39;22m[90m [39m[90mpersian normalizer handles additional mixed characters[39m[90m              [39m [90m0.02s[39m  
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Unit\HardwareUpdatedEventTest[39m
+  [32;1m✓[39;22m[90m [39m[90mHardwareUpdated stores hardware and action[39m[90m                          [39m [90m0.04s[39m  
+  [32;1m✓[39;22m[90m [39m[90mHardwareUpdated dispatches successfully[39m[90m                             [39m [90m0.04s[39m  
+  [32;1m✓[39;22m[90m [39m[90mHardwareUpdated supports all action types[39m[90m                           [39m [90m0.04s[39m  
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Unit\ZabbixServiceTest[39m
+  [32;1m✓[39;22m[90m [39m[90mget interface traffic calculates rate correctly[39m[90m                     [39m [90m0.02s[39m  
+  [32;1m✓[39;22m[90m [39m[90mrequest sends correct auth header[39m[90m                                   [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90mtest api connection returns version[39m[90m                                 [39m [90m0.02s[39m  
+  [32;1m✓[39;22m[90m [39m[90mrequest throws exception on zabbix error[39m[90m                            [39m [90m0.02s[39m  
+  [32;1m✓[39;22m[90m [39m[90mtest api connection throws on http error[39m[90m                            [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90mtest api connection throws on invalid response[39m[90m                      [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90mget latest values fills nulls for missing ids[39m[90m                       [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90mget interface traffic returns empty on single sample[39m[90m                [39m [90m0.01s[39m  
+
+  [90mTests:[39m    [33;1m2 risky[39;22m[90m,[39m[39m [39m[32;1m2481 passed[39;22m[90m (7716 assertions)[39m
+  [90mDuration:[39m [39m578.87s[39m
+  [90mRandom Order Seed:[39m [39m1792318200[39m
+
+
+✅ verify passed — this matches CI's test job. Coverage is still CI-only.

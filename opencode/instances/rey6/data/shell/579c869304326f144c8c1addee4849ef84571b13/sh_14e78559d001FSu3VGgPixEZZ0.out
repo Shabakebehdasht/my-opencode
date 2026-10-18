@@ -1,0 +1,25 @@
+  [32;1m✓[39;22m[90m [39m[90mbulk forward toast reports processed not selected count[39m[90m             [39m [90m0.38s[39m  
+  [32;1m✓[39;22m[90m [39m[90msearch folds arabic variants in subject[39m[90m                             [39m [90m0.25s[39m  
+  [32;1m✓[39;22m[90m [39m[90mreceived scope filters by accessible units[39m[90m                          [39m [90m0.19s[39m  
+  [32;1m✓[39;22m[90m [39m[90mupdated status filter resets page[39m[90m                                   [39m [90m0.24s[39m  
+  [32;1m✓[39;22m[90m [39m[90mbulk actions[39m[90m                                                        [39m [90m1.28s[39m  
+  [32;1m✓[39;22m[90m [39m[90mforward records target unit in activity[39m[90m                             [39m [90m0.45s[39m  
+  [32;1m✓[39;22m[90m [39m[90msubmit action completes todo when all tickets done[39m[90m                  [39m [90m0.36s[39m  
+  [32;1m✓[39;22m[90m [39m[90mdestination viewer sees the ticket but not the creators task[39m[90m        [39m [90m0.26s[39m  
+  [32;1m✓[39;22m[90m [39m[90mforward ignores client supplied target unit name[39m[90m                    [39m [90m0.47s[39m  
+  [32;1m✓[39;22m[90m [39m[90msubmit action forward with target unit[39m[90m                              [39m [90m0.46s[39m  
+  [32;1m✓[39;22m[90m [39m[90msubmit action forward without permission is forbidden[39m[90m               [39m [90m0.35s[39m  
+  [32;1m✓[39;22m[90m [39m[90mset tab resets page[39m[90m                                                 [39m [90m0.22s[39m  
+  [32;1m✓[39;22m[90m [39m[90mfile uploads[39m[90m                                                        [39m [90m0.41s[39m  
+  [32;1m✓[39;22m[90m [39m[90mupdated date filters resets state[39m[90m                                   [39m [90m0.30s[39m  
+  [32;1m✓[39;22m[90m [39m[90msearch[39m[90m                                                              [39m [90m0.39s[39m  
+  [32;1m✓[39;22m[90m [39m[90mauthorized loads 200[39m[90m                                                [39m [90m0.17s[39m  
+  [32;1m✓[39;22m[90m [39m[90mclose all modals[39m[90m                                                    [39m [90m0.39s[39m  
+  [32;1m✓[39;22m[90m [39m[90mforward notifies target unit like submit action does[39m[90m                [39m [90m0.46s[39m  
+  [32;1m✓[39;22m[90m [39m[90mforward to unit that cannot receive tickets is rejected[39m[90m             [39m [90m0.39s[39m  
+  [32;1m✓[39;22m[90m [39m[90mticket of a soft deleted creator renders the inactive user label[39m[90m    [39m [90m0.19s[39m  
+
+  [90mTests:[39m    [32;1m66 passed[39;22m[90m (220 assertions)[39m
+  [90mDuration:[39m [39m22.64s[39m
+  [90mRandom Order Seed:[39m [39m1792317872[39m
+

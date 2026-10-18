@@ -1,0 +1,9 @@
+Switched to a new branch 'fix/1029-accept-ticket-authorize'
+M	composer.lock
+M	package-lock.json
+---
+fix/1029-accept-ticket-authorize
+580dea8e Merge pull request #1118 from asgarimehdi/dependabot/github_actions/beta/actions/upload-artifact-7
+--- lock files status:
+ M composer.lock
+ M package-lock.json

@@ -1,0 +1,249 @@
+diff --git a/app/Traits/TicketsInboxFlow.php b/app/Traits/TicketsInboxFlow.php
+index 2b980832..58eebb71 100644
+--- a/app/Traits/TicketsInboxFlow.php
++++ b/app/Traits/TicketsInboxFlow.php
+@@ -63,20 +63,21 @@ trait TicketsInboxFlow
+     public bool $showModal = false;
+ 
+     /**
+-     * The permission a ticket mutation needs (#1055, step 3).
++     * The permission the ticket mutations that move or close a ticket need
++     * (#1055, step 3).
+      *
+      * Four call sites wrote `$this->authorize('manage_unit_tickets')` inline,
+-     * so the gate could be forgotten by the next method that mutates a ticket
+-     * — exactly what happened to `acceptTicket()`. One named helper makes the
+-     * shared gate explicit and greppable; the bulk `complete` branch in the
+-     * component routes through it too.
++     * so the gate could be forgotten by the next method that mutates a ticket.
++     * One named helper makes the shared gate explicit and greppable; the bulk
++     * `complete` branch in the component routes through it too.
+      *
+-     * `acceptTicket()` is deliberately NOT routed through it: #818's review
+-     * (correction 1) kept accepting a ticket open to the route gate, because
+-     * the `expert` role (create_ticket + view_assigned_tickets) is meant to
+-     * accept tickets in its own unit, and `TicketWorkflow` pins that
++     * `acceptTicket()` deliberately does NOT route through it (#1029): accepting
++     * does not move the ticket out of its unit — it only hands it to its current
++     * assignee — so it carries `create_ticket`, exactly like the API
++     * (`POST /tickets/{ticket}/accept`, routes/api.php:153-154). The `expert`
++     * role holds `create_ticket` but no `manage_unit_tickets`, and is meant to
++     * accept tickets referred to it
+      * (`test_accept_ticket_still_allowed_for_expert_without_manage_unit_tickets`).
+-     * Whether it should carry its own gate is issue #1029, not this refactor.
+      */
+     private function authorizeMutation(): void
+     {
+@@ -266,6 +267,13 @@ protected function resolveTargetUnitName(): string
+ 
+     public function acceptTicket($ticketId): void
+     {
++        // Issue #1029: accepting is a `create_ticket` mutation, mirroring the
++        // API (`POST /tickets/{ticket}/accept`, routes/api.php:153-154) — not
++        // `manage_unit_tickets`, which the `expert` role deliberately lacks.
++        // The /inbox route only requires `view_assigned_tickets`, so the
++        // component authorizes the write itself, before any query or change.
++        $this->authorize('create_ticket');
++
+         $accessibleIds = app(AccessService::class)->accessibleUnitIds();
+ 
+         $ticket = Ticket::whereIn('unit_id', $accessibleIds)->find($ticketId);
+@@ -274,6 +282,19 @@ public function acceptTicket($ticketId): void
+             return;
+         }
+ 
++        // Issue #1029 / #529: only the ticket's current assignee may accept it,
++        // exactly like Api\TicketController::accept(). Without this any member
++        // of the unit could accept — and thereby seize — a ticket referred to a
++        // teammate.
++        if ($ticket->current_assignee_id !== auth()->id()) {
++            $this->dispatch('swal', [
++                'title' => 'فقط کارشناس ارجاع‌شده می‌تواند این تیکت را بپذیرد.',
++                'icon' => 'error',
++            ]);
++
++            return;
++        }
++
+         // Capture old status BEFORE any changes (Plan 003: dynamic, not hardcoded)
+         $oldStatus = $ticket->status;
+ 
+diff --git a/tests/Feature/TicketsInboxLivewireTest.php b/tests/Feature/TicketsInboxLivewireTest.php
+index b7a7090c..453c79fc 100644
+--- a/tests/Feature/TicketsInboxLivewireTest.php
++++ b/tests/Feature/TicketsInboxLivewireTest.php
+@@ -16,11 +16,14 @@
+ use Illuminate\Support\Facades\Storage;
+ use Livewire\Livewire;
+ use Morilog\Jalali\Jalalian;
++use Spatie\Permission\PermissionRegistrar;
++use Tests\Support\Concerns\InteractsWithApiTokens;
+ use Tests\Support\Concerns\InteractsWithTestSetup;
+ use Tests\TestCase;
+ 
+ class TicketsInboxLivewireTest extends TestCase
+ {
++    use InteractsWithApiTokens;
+     use InteractsWithTestSetup;
+     use RefreshDatabase;
+ 
+@@ -459,10 +462,12 @@ public function test_destination_viewer_sees_the_ticket_but_not_the_creators_tas
+ 
+     public function test_accept_ticket(): void
+     {
+-        ['user' => $user] = $this->createUserWithUnit(['view_assigned_tickets']);
++        // Issue #1029: accept now needs create_ticket (like the API) and the
++        // caller must be the ticket's current assignee (#529).
++        ['user' => $user] = $this->createUserWithUnit(['view_assigned_tickets', 'create_ticket']);
+         $this->actingAs($user);
+ 
+-        $ticket = $this->createTicket(['status' => 'created']);
++        $ticket = $this->createTicket(['status' => 'created', 'current_assignee_id' => $user->id]);
+ 
+         Livewire::test('tickets.inbox')
+             ->call('acceptTicket', $ticket->id)
+@@ -480,10 +485,10 @@ public function test_accept_ticket(): void
+ 
+     public function test_accept_ticket_already_accepted_warning(): void
+     {
+-        ['user' => $user] = $this->createUserWithUnit(['view_assigned_tickets']);
++        ['user' => $user] = $this->createUserWithUnit(['view_assigned_tickets', 'create_ticket']);
+         $this->actingAs($user);
+ 
+-        $ticket = $this->createTicket(['status' => 'accepted']);
++        $ticket = $this->createTicket(['status' => 'accepted', 'current_assignee_id' => $user->id]);
+ 
+         Livewire::test('tickets.inbox')
+             ->call('acceptTicket', $ticket->id)
+@@ -497,15 +502,106 @@ public function test_accept_ticket_already_accepted_warning(): void
+ 
+     public function test_accept_ticket_out_of_scope_404(): void
+     {
+-        ['user' => $user] = $this->createUserWithUnit(['view_assigned_tickets']);
++        ['user' => $user] = $this->createUserWithUnit(['view_assigned_tickets', 'create_ticket']);
+         $this->actingAs($user);
+ 
+         $otherUnit = Unit::create(['name' => 'واحد دیگر']);
+-        $other = $this->createTicket(['unit' => $otherUnit, 'status' => 'created']);
++        $other = $this->createTicket(['unit' => $otherUnit, 'status' => 'created', 'current_assignee_id' => $user->id]);
+ 
+         Livewire::test('tickets.inbox')
+             ->call('acceptTicket', $other->id)
+             ->assertSet('showModal', false);
++
++        $other->refresh();
++        $this->assertSame('created', $other->status);
++    }
++
++    public function test_accept_ticket_without_create_ticket_is_forbidden(): void
++    {
++        // Issue #1029: accept is a create_ticket mutation, mirroring the API
++        // (routes/api.php:153-154). The /inbox route only requires
++        // view_assigned_tickets, so a read-only inbox member must be stopped
++        // inside the component.
++        ['user' => $user] = $this->createUserWithUnit(['view_assigned_tickets']);
++        $this->actingAs($user);
++
++        $ticket = $this->createTicket(['status' => 'created', 'current_assignee_id' => $user->id]);
++
++        Livewire::test('tickets.inbox')
++            ->call('acceptTicket', $ticket->id)
++            ->assertForbidden();
++
++        $ticket->refresh();
++        $this->assertSame('created', $ticket->status);
++        $this->assertSame($user->id, $ticket->current_assignee_id);
++        $this->assertNull($ticket->accepted_at);
++        $this->assertDatabaseMissing('task_activities', [
++            'ticket_id' => $ticket->id,
++            'action' => 'accepted',
++        ]);
++    }
++
++    public function test_accept_ticket_referred_to_another_expert_is_rejected(): void
++    {
++        // Issue #1029 / #529: two experts in one unit must not be able to seize
++        // each other's tickets. Before the fix, any unit member could accept a
++        // ticket referred to a teammate and overwrite current_assignee_id.
++        ['user' => $expert, 'unit' => $unit] = $this->createUserWithUnit(['view_assigned_tickets', 'create_ticket']);
++
++        $teammate = $this->createUserOnUnit($unit);
++        $teammate->givePermissionTo(['view_assigned_tickets', 'create_ticket']);
++        app()[PermissionRegistrar::class]->forgetCachedPermissions();
++
++        $ticket = $this->createTicket([
++            'unit' => $unit,
++            'status' => 'forwarded',
++            'current_assignee_id' => $teammate->id,
++        ]);
++
++        $this->actingAs($expert);
++
++        Livewire::test('tickets.inbox')
++            ->call('acceptTicket', $ticket->id)
++            ->assertDispatched('swal', function ($name, $params) {
++                return ($params[0]['title'] ?? '') === 'فقط کارشناس ارجاع‌شده می‌تواند این تیکت را بپذیرد.';
++            });
++
++        $ticket->refresh();
++        $this->assertSame('forwarded', $ticket->status);
++        $this->assertSame($teammate->id, $ticket->current_assignee_id);
++        $this->assertDatabaseMissing('task_activities', [
++            'ticket_id' => $ticket->id,
++            'action' => 'accepted',
++        ]);
++    }
++
++    public function test_accept_non_assignee_is_rejected_on_web_and_api(): void
++    {
++        // Issue #1029: web and API must reach the same verdict for a
++        // non-assignee so the two surfaces cannot drift apart again.
++        ['user' => $assignee, 'unit' => $unit] = $this->createUserWithUnit(['view_assigned_tickets', 'create_ticket']);
++
++        $outsider = $this->createUserOnUnit($unit);
++        $outsider->givePermissionTo(['view_assigned_tickets', 'create_ticket']);
++        app()[PermissionRegistrar::class]->forgetCachedPermissions();
++
++        $ticket = $this->createTicket([
++            'unit' => $unit,
++            'status' => 'forwarded',
++            'current_assignee_id' => $assignee->id,
++        ]);
++
++        $token = $this->createApiToken($outsider, ['tickets:read', 'tickets:write']);
++        $this->apiPost("/api/tickets/{$ticket->id}/accept", [], $token)
++            ->assertStatus(403)
++            ->assertJson(['message' => 'Only the assigned user can accept this ticket.']);
++
++        $this->actingAs($outsider);
++        Livewire::test('tickets.inbox')->call('acceptTicket', $ticket->id);
++
++        $ticket->refresh();
++        $this->assertSame('forwarded', $ticket->status);
++        $this->assertSame($assignee->id, $ticket->current_assignee_id);
+     }
+ 
+     // =====================================================================
+@@ -856,10 +952,13 @@ public function test_submit_action_target_unit_id_is_validated(): void
+ 
+     public function test_accept_ticket_still_allowed_for_expert_without_manage_unit_tickets(): void
+     {
++        // #1029: the expert role holds create_ticket (not manage_unit_tickets)
++        // and may accept a ticket referred to it — the gate must stay
++        // create_ticket, or the role loses accept entirely.
+         ['user' => $user] = $this->createUserWithUnit(['create_ticket', 'view_assigned_tickets']);
+         $this->actingAs($user);
+ 
+-        $ticket = $this->createTicket(['status' => 'created']);
++        $ticket = $this->createTicket(['status' => 'forwarded', 'current_assignee_id' => $user->id]);
+ 
+         Livewire::test('tickets.inbox')
+             ->call('acceptTicket', $ticket->id)
+@@ -867,6 +966,7 @@ public function test_accept_ticket_still_allowed_for_expert_without_manage_unit_
+ 
+         $ticket->refresh();
+         $this->assertSame('accepted', $ticket->status);
++        $this->assertSame($user->id, $ticket->current_assignee_id);
+     }
+ 
+     public function test_forward_notifies_target_unit_like_submit_action_does(): void
