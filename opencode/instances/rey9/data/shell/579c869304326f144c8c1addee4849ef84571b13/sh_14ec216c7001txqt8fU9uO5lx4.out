@@ -1,0 +1,12 @@
+=== composer.json php + platform ===
+12:        "php": "^8.4.1",
+=== config block ===
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true,
+            "infection/extension-installer": true
+        }

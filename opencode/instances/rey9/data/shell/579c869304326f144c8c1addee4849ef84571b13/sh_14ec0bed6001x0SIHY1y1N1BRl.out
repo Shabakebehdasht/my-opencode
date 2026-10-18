@@ -1,0 +1,105 @@
+diff --git a/.github/workflows/test.yml b/.github/workflows/test.yml
+index 1da848ab..9625e4c8 100644
+--- a/.github/workflows/test.yml
++++ b/.github/workflows/test.yml
+@@ -633,10 +633,12 @@ jobs:
+           restore-keys: composer-
+ 
+       - name: Install dependencies
+-        # The lock predates PHP 8.6: nette/schema (via league/commonmark) caps
+-        # php at 8.5, so a plain install cannot even resolve on 8.6. The preview
+-        # installs the locked packages anyway — surfacing real 8.6 behaviour is
+-        # the job's whole point. This flag exists ONLY in this job.
++        # The lock predates PHP 8.6: three packages cap php at 8.5 — nette/schema
++        # and nette/utils (both on the production path, via league/commonmark) plus
++        # brianium/paratest (dev) — so a plain install cannot even resolve on 8.6,
++        # with or without dev dependencies. The preview installs the locked packages
++        # anyway — surfacing real 8.6 behaviour is the job's whole point. This flag
++        # exists ONLY in this job; it carries production weight, not just tooling.
+         run: composer install --prefer-dist --no-interaction --no-progress --ignore-platform-req=php
+ 
+       - name: Setup Node
+diff --git a/AGENTS.md b/AGENTS.md
+index f6c783c2..e86ecc30 100644
+--- a/AGENTS.md
++++ b/AGENTS.md
+@@ -17,6 +17,7 @@ ## Project Overview
+ ### Tech Stack
+ 
+ - **Framework:** Laravel 13.x on PHP ^8.4 (CI runs 8.5; Symfony 8.1 requires ≥8.4)
++- **PHP 8.6 preview:** blocked by three locked packages that cap `require.php` at 8.5 — `nette/schema` and `nette/utils` (production path, via league/commonmark) and `brianium/paratest` (dev); the `test-php86` job installs with `--ignore-platform-req=php`.
+ - **Frontend:** Livewire 4 — **single-file (anonymous-class) components**: the PHP class lives inline at the top of its Blade view under `resources/views/livewire/<feature>/<name>.blade.php` as `return new class extends Component { ... };` (no separate file under `app/Livewire/`). Alpine.js, MaryUI (DaisyUI), Tailwind CSS 4
+ - **Database:** PostgreSQL 16 (Docker, `postgis/postgis:16-3.4`) with PostGIS for spatial/GIS data
+ - **Cache/Session/Queue:** Redis (Docker, `redis:latest`, password-protected via `REDIS_PASSWORD`)
+diff --git a/tests/Unit/PhpConstraintTest.php b/tests/Unit/PhpConstraintTest.php
+new file mode 100644
+index 00000000..8f9ef9b6
+--- /dev/null
++++ b/tests/Unit/PhpConstraintTest.php
+@@ -0,0 +1,66 @@
++<?php
++
++use Composer\Semver\Semver;
++use Tests\TestCase;
++
++uses(TestCase::class);
++
++/*
++ * Issue #1062. Three locked packages cap `require.php` below 8.6:
++ *   - nette/schema  `8.1 - 8.5` (production, via league/commonmark)
++ *   - nette/utils   `8.2 - 8.5` (production, via league/commonmark)
++ *   - brianium/paratest              (dev)
++ * so the `test-php86` preview job can only install with
++ * `--ignore-platform-req=php` — a flag that therefore carries production
++ * weight, not just tooling.
++ *
++ * `dragonmantank/cron-expression` is NOT one of them: its
++ * `^8.2|^8.3|^8.4|^8.5` still admits 8.6, because `^8.5` means
++ * `>=8.5.0 <9.0.0`.
++ *
++ * This is the monitoring the issue asked for. When upstream widens a range
++ * (GA 8.6 is 2026-11-19), the set stops matching and this fails — pointing
++ * back at AGENTS.md and the workflow comment to update, instead of leaving a
++ * human reminder to rot.
++ */
++
++/**
++ * @return array<string, string> package name => 'production'|'dev', for every
++ *                               locked package whose `require.php` excludes 8.6
++ */
++function php86BlockingPackages(string $lockPath): array
++{
++    $lock = json_decode((string) file_get_contents($lockPath), true, 512, JSON_THROW_ON_ERROR);
++
++    $blocking = [];
++
++    foreach (['packages' => 'production', 'packages-dev' => 'dev'] as $section => $context) {
++        foreach ($lock[$section] as $package) {
++            $constraint = $package['require']['php'] ?? null;
++
++            if ($constraint !== null && ! Semver::satisfies('8.6.0', $constraint)) {
++                $blocking[$package['name']] = $context;
++            }
++        }
++    }
++
++    ksort($blocking);
++
++    return $blocking;
++}
++
++test('exactly three locked packages block PHP 8.6', function () {
++    expect(php86BlockingPackages(base_path('composer.lock')))->toBe([
++        'brianium/paratest' => 'dev',
++        'nette/schema' => 'production',
++        'nette/utils' => 'production',
++    ]);
++});
++
++test('AGENTS.md names every package that blocks PHP 8.6', function () {
++    $agents = (string) file_get_contents(base_path('AGENTS.md'));
++
++    foreach (array_keys(php86BlockingPackages(base_path('composer.lock'))) as $package) {
++        expect($agents)->toContain($package);
++    }
++});

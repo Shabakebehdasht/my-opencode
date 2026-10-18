@@ -1,0 +1,83 @@
+=== tests/Pest.php ===
+<?php
+
+use Tests\TestCase;
+
+/*
+|--------------------------------------------------------------------------
+| Test Case
+|--------------------------------------------------------------------------
+|
+| The closure you provide to your test functions is always bound to a specific PHPUnit test
+| case class. By default, that class is "PHPUnit\Framework\TestCase". Of course, you may
+| need to change it using the "pest()" function to bind different classes or traits.
+|
+| NOTE: Each Pest-style test file in tests/Feature/ binds its own TestCase
+| (and RefreshDatabase where needed) explicitly. Class-based tests extend
+| Tests\TestCase directly. NO global TestCase/RefreshDatabase binding here —
+| a global `use(RefreshDatabase)` in this file combined with a file-level
+| `uses(RefreshDatabase::class)` merged into the SAME trait list (TestRepository
+| appends, never dedupes), causing double transaction hooks and a flaky
+| `permissions table does not exist` race under random test order.
+|
+*/
+
+/*
+|--------------------------------------------------------------------------
+| Expectations
+|--------------------------------------------------------------------------
+*/
+
+expect()->extend('toBeOne', function () {
+    return $this->toBe(1);
+});
+
+/*
+|--------------------------------------------------------------------------
+| Functions
+|--------------------------------------------------------------------------
+*/
+
+function something()
+{
+    // ..
+}
+=== phpunit.xml Unit testsuite ===
+10:        <testsuite name="Unit">
+11:            <directory>tests/Unit</directory>
+12-        </testsuite>
+13-        <testsuite name="Feature">
+14-            <directory>tests/Feature</directory>
+15-        </testsuite>
+16-    </testsuites>
+17:    <!-- No <coverage> block: PHPUnit 12 treats a configured report as a
+18-         coverage request on every run and silently aborts (exit 1, zero tests)
+19-         when no driver is installed. CI passes coverage flags explicitly. -->
+20-    <source>
+21-        <include>
+22-            <directory suffix=".php">app</directory>
+23-        </include>
+=== composer/semver in lock ===
+composer/pcre             3.4.0
+composer/semver           3.5.1
+composer/xdebug-handler   3.0.5
+=== composer.json composer/semver ===
+not a direct require
+=== phpstan.neon ===
+includes:
+    - phpstan-baseline.neon
+
+parameters:
+    level: 6
+    paths:
+        - app
+        - config
+        - database
+        - routes
+        - resources/views/livewire
+    excludePaths:
+        - vendor
+        - node_modules (?)
+        - storage
+        - bootstrap/cache
+        - tests

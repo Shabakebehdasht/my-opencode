@@ -1,0 +1,44 @@
+=== .env.testing diff ===
+diff --git a/.env.testing b/.env.testing
+index 6bd3399c..53e89523 100644
+--- a/.env.testing
++++ b/.env.testing
+@@ -1,6 +1,6 @@
+ APP_NAME=h-dashboard
+ APP_ENV=local
+-APP_KEY=
++APP_KEY=base64:G2KHObrZlhdct4WZOqe8yIyXRSIZrMPhAFx2Y6nRKv8=
+ APP_DEBUG=false
+ APP_URL=http://coder1.boxd.sh
+ TILE_SERVER_IP=tile.openstreetmap.org
+=== composer.lock diff (first 30) ===
+diff --git a/composer.lock b/composer.lock
+index 2758ca92..f8053edd 100644
+--- a/composer.lock
++++ b/composer.lock
+@@ -1225,16 +1225,16 @@
+         },
+         {
+             "name": "guzzlehttp/psr7",
+-            "version": "3.1.0",
++            "version": "3.2.0",
+             "source": {
+                 "type": "git",
+                 "url": "https://github.com/guzzle/psr7.git",
+-                "reference": "a3059ba1a84c9139c4ae03cf0f45bea276c97c74"
++                "reference": "cdc139396207a5eba10c242d241fb014cb098390"
+             },
+             "dist": {
+                 "type": "zip",
+-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/a3059ba1a84c9139c4ae03cf0f45bea276c97c74",
+-                "reference": "a3059ba1a84c9139c4ae03cf0f45bea276c97c74",
++                "url": "https://api.github.com/repos/guzzle/psr7/zipball/cdc139396207a5eba10c242d241fb014cb098390",
++                "reference": "cdc139396207a5eba10c242d241fb014cb098390",
+                 "shasum": ""
+             },
+             "require": {
+@@ -1324,7 +1324,7 @@
+             ],
+             "support": {
+                 "issues": "https://github.com/guzzle/psr7/issues",
+-                "source": "https://github.com/guzzle/psr7/tree/3.1.0"

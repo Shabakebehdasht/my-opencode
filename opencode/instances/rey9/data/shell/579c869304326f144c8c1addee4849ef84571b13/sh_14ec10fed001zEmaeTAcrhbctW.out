@@ -1,0 +1,3 @@
+[FAIL(good, caught)] new package cap '~8.4.0' -> got {"acme\/newblocker0":"production","brianium\/paratest":"dev","nette\/schema":"production","nette\/utils":"production"}
+[FAIL(good, caught)] new package cap '>=8.4 <8.6' -> got {"acme\/newblocker1":"production","brianium\/paratest":"dev","nette\/schema":"production","nette\/utils":"production"}
+[FAIL(good, caught)] new package cap '8.4.*' -> got {"acme\/newblocker2":"production","brianium\/paratest":"dev","nette\/schema":"production","nette\/utils":"production"}

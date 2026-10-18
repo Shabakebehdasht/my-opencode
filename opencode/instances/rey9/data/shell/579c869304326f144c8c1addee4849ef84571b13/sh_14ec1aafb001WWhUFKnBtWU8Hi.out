@@ -1,0 +1,45 @@
+parent of ed0be86b: 580dea8eea451a4a66c732a7f63aa9a1ac61d7a4
+base given:        580dea8e
+branch: fix/1062-php-constraint-watch
+=== ensure-test-app-key script ===
+73:            "php scripts/ensure-test-app-key.php && php artisan config:clear && php artisan route:clear && XDEBUG_MODE=off php artisan test"
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+/**
+ * Issue #953 — give a fresh clone a `.env.testing` key, and never rotate one.
+ *
+ * `.env.testing` is git-tracked, so blanking its `APP_KEY` (#953) also removes
+ * the key a local `composer test` needs. `LoadEnvironmentVariables` swaps the
+ * env file to `.env.testing` whenever `APP_ENV=testing` and dotenv's repository
+ * is immutable, so a blank key there wins over a perfectly good `.env` key and
+ * every test that resolves the encrypter dies with
+ * `MissingAppKeyException`. CI never notices: each of its jobs runs
+ * `key:generate --env=testing` before the suite, which is precisely why the
+ * committed key sat unnoticed for eight months.
+ *
+ * So the key comes back — but only when there is none, and only in the working
+ * tree:
+ *
+ *   - **Conditional.** An unconditional `key:generate` on every run rotates the
+ *     tracked file each time, leaving it permanently dirty and a fresh real key
+ *     one `git add` away from a commit. That is the same defect this issue
+ *     removes, recreated by the fix.
+ *   - **Working tree only.** The generated key is never staged, and
+ *     `scripts/check-app-key-leak.php` reads the git INDEX, so a clone running
+ *     the suite all day still reports no leak.
+ *
+ * Usage:  php scripts/ensure-test-app-key.php [path]
+ * Exit:   0 = `.env.testing` exists and now has a key (or already had one),
+ *         2 = no `.env.testing` — a misconfigured clone, not something to fix
+ *             here by inventing a file that also carries DB settings.
+ */
+$root = $argv[1] ?? dirname(__DIR__);
+$file = $root.'/.env.testing';
+
+if (! is_file($file) || ! is_readable($file)) {
+    fwrite(STDERR, "No .env.testing in {$root}.\n");
+    fwrite(STDERR, "Copy .env.example to .env.testing and set its DB_* values, then try again.\n");
+

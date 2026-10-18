@@ -1,0 +1,5 @@
+BLOCK nette/schema                   production  8.1 - 8.5
+BLOCK nette/utils                    production  8.2 - 8.5
+BLOCK brianium/paratest              dev         ~8.3.0 || ~8.4.0 || ~8.5.0
+--- cron-expression constraint ---
+'^8.2|^8.3|^8.4|^8.5'

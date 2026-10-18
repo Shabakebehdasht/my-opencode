@@ -1,0 +1,7 @@
+lock/json-changed-exit:0
+---all files in commit---
+ed0be86b docs(#1062): name the three PHP 8.5 blockers and pin them in a test
+ .github/workflows/test.yml       | 10 +++---
+ AGENTS.md                        |  1 +
+ tests/Unit/PhpConstraintTest.php | 66 ++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 73 insertions(+), 4 deletions(-)

@@ -1,0 +1,16 @@
+Generated a per-clone APP_KEY in .env.testing (value not shown).
+
+   INFO  Configuration cache cleared successfully.  
+
+
+   INFO  Route cache cleared successfully.  
+
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Unit\PhpConstraintTest[39m
+  [32;1m✓[39;22m[90m [39m[90mAGENTS.md names every package that blocks PHP 8.6[39m[90m                   [39m [90m0.14s[39m  
+  [32;1m✓[39;22m[90m [39m[90mexactly three locked packages block PHP 8.6[39m[90m                         [39m [90m0.02s[39m  
+
+  [90mTests:[39m    [32;1m2 passed[39;22m[90m (4 assertions)[39m
+  [90mDuration:[39m [39m0.22s[39m
+  [90mRandom Order Seed:[39m [39m1792322646[39m
+

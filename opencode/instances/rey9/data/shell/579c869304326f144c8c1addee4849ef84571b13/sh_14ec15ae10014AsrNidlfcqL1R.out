@@ -1,0 +1,13 @@
+=== HEAD ===
+ed0be86b05ceb72278ec6f8272ec1238695378b4
+=== mtimes (now: 1792322657) ===
+1792322645 .env.testing
+1792319633 composer.lock
+1792317289 package-lock.json
+1792317252 composer.json
+1792319549 .git/HEAD
+=== composer.lock diff stat ===
+ .env.testing      |   2 +-
+ composer.lock     | 316 +++++++++++++++++++++++++++---------------------------
+ package-lock.json | 202 +++++++++++++++++-----------------
+ 3 files changed, 261 insertions(+), 259 deletions(-)

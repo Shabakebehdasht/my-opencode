@@ -1,0 +1,21 @@
+test.yml parses OK
+=== tests/Unit listing ===
+AppBrandTest.php
+CacheInvalidationServiceTest.php
+HardwareAuditChangeTest.php
+HardwareImportNormalizationTest.php
+HardwareUpdatedEventTest.php
+JalaliDateRangeTest.php
+NormalizerHelper.php
+PersianNormalizerExtraTest.php
+PersianNormalizerTest.php
+PhpConstraintTest.php
+TestDatabaseResolverTest.php
+TestDatabaseShellEnvironmentTest.php
+VendorRouteGuardTest.php
+ZabbixAdapterTest.php
+ZabbixServiceTest.php
+=== working-tree composer.lock ven:<old>->new count ===
+50
+=== package-lock working diff (pkg names touched) ===
+204

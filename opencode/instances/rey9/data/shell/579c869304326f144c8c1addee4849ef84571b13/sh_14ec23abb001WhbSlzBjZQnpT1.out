@@ -1,0 +1,6 @@
+31:function php86BlockingPackages(string $lockPath): array
+41:            if ($constraint !== null && ! Semver::satisfies('8.6.0', $constraint)) {
+52:test('exactly three locked packages block PHP 8.6', function () {
+53:    expect(php86BlockingPackages(base_path('composer.lock')))->toBe([
+60:test('AGENTS.md names every package that blocks PHP 8.6', function () {
+64:        expect($agents)->toContain($package);
