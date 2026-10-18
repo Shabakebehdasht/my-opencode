@@ -1,6 +1,0 @@
--rw-r--r-- 1 runner runner 2920 Oct 18 09:54 .env
--rw-r--r-- 1 runner runner 1489 Oct 18 10:05 .env.testing
----testfiles---
-AuthenticateSession.php.bak
-full-suite.log
-progress.md

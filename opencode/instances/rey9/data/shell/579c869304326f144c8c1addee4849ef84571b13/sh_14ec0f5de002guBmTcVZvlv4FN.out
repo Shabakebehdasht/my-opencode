@@ -1,4 +1,0 @@
-^8.2|^8.3|^8.4|^8.5              satisfies 8.6.0: YES
-~8.3.0 || ~8.4.0 || ~8.5.0       satisfies 8.6.0: no
-8.1 - 8.5                        satisfies 8.6.0: no
-8.2 - 8.5                        satisfies 8.6.0: no

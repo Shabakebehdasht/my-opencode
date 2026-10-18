@@ -1,5 +1,0 @@
-state: OPEN
-labels: ['security', 'P1', 'ready']
----AUTHOR: nashenas6 len 8146
-   > 5. نکتهٔ اجرایی مهم: `phpunit.xml:33` درایور نشست را روی `array` force کرده. این درایور در یک تست واحد با یک نمونهٔ app به‌احتمال بالا وضعیت را بین دو درخواست نگه می‌دارد (session manager در container
----AUTHOR: kimya30 len 840

@@ -1,9 +1,0 @@
-number: 1123
-title: fix(#1004): invalidate other web sessions on password change
-state: OPEN draft: False
-base: beta
-head: Shabakebehdasht:fix/1004-logout-other-devices
-labels: []
-url: https://github.com/asgarimehdi/h-dashboard/pull/1123
-body has Closes #1004: True
-body mentions Option A: True

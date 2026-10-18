@@ -1,8 +1,0 @@
-tests/Feature/UnitTreeServiceTest.php:104:    $this->assertQueryCount(0, function (): void {
-tests/Feature/ReportsPersonsLivewireTest.php:222:    // Separate methods: assertNoNPlusOne registers a global DB listener that
-tests/Feature/ReportsPersonsLivewireTest.php:238:        $this->assertNoNPlusOne(fn () => Livewire::test('reports.persons'), 20);
-tests/Feature/ReportsPersonsLivewireTest.php:250:        $this->assertNoNPlusOne(fn () => Livewire::test('reports.persons'), 20);
-tests/Feature/PersonsExportTest.php:785:        $this->assertNoNPlusOne(fn () => $this->rowsFromRoute(), 10);
-tests/Feature/CacheInvalidationTest.php:37:    $this->assertNoNPlusOne(function () use ($user) {
-tests/Feature/UnitTreeLivewireTest.php:93:        $this->assertNoNPlusOne(function (): void {
-tests/Feature/UnitTreeLivewireTest.php:115:        $this->assertNoNPlusOne(function (): void {

@@ -1,5 +1,0 @@
-restored. status now:
- M composer.lock
- M package-lock.json
---- confirm .env.testing matches HEAD ---
-.env.testing clean

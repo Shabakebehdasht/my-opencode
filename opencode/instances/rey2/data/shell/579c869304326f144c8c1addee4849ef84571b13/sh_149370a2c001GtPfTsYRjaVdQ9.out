@@ -1,9 +1,0 @@
-COUNTS={"persons":6,"units":7,"permissions":7} TOTAL=23 SAMPLES=["select * from \"permissions\"","select \"roles\".*, \"role_has_permissions\".\"permission_id\" as \"pivot_permission_id\", \"role_h","select \"permissions\".*, \"model_has_permissions\".\"model_id\" as \"pivot_model_id\", \"model_has","select \"id\", \"name\", \"label\" from \"roles\""]
-COUNTS={"persons":6,"units":7,"permissions":6} TOTAL=19 SAMPLES=["select * from \"permissions\"","select \"roles\".*, \"role_has_permissions\".\"permission_id\" as \"pivot_permission_id\", \"role_h","select \"id\", \"name\", \"label\" from \"roles\"","select \"id\", \"name\", \"label\" from \"permissions\""]
-COUNTS={"persons":6,"units":7,"permissions":7} TOTAL=23 SAMPLES=["select * from \"permissions\"","select \"roles\".*, \"role_has_permissions\".\"permission_id\" as \"pivot_permission_id\", \"role_h","select \"permissions\".*, \"model_has_permissions\".\"model_id\" as \"pivot_model_id\", \"model_has","select \"id\", \"name\", \"label\" from \"roles\""]
-  [32;1m✓[39;22m[90m [39m[90mdirectory renders names and unit names populated[39m[90m                    [39m [90m1.38s[39m  
-  [31;1m⨯[39;22m[90m [39m[90mpersons units and permissions queries do not scale with row count[39m[90m   [39m [90m5.72s[39m  
-  [31;1m⨯[39;22m[90m [39m[90mcold session first render stays per row free[39m[90m                        [39m [90m5.36s[39m  
-  [32;1m✓[39;22m[90m [39m[90mscope still limits the directory to accessible units[39m[90m                [39m [90m0.91s[39m  
-  [32;1m✓[39;22m[90m [39m[90mempty scope renders nobody but not unfiltered[39m[90m                       [39m [90m0.91s[39m  
-  [90mTests:[39m    [31;1m2 failed[39;22m[90m,[39m[39m [39m[32;1m3 passed[39;22m[90m (15 assertions)[39m

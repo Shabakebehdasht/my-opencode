@@ -1,7 +1,0 @@
-=== commit files ===
-a59553e7 fix(#1013): batch unit-tree expandAll per level via childrenOfMany
- resources/views/livewire/unit/tree.blade.php |  44 ++++++---
- tests/Feature/UnitTreeLivewireTest.php       | 135 +++++++++++++++++++++++++++
- 2 files changed, 167 insertions(+), 12 deletions(-)
-=== PR 1092 ===
-{"baseRefName":"beta","closes":true,"headRefName":"fix/1013-unit-tree-expandall-batch","title":"fix(#1013): batch unit-tree expandAll per level via childrenOfMany","url":"https://github.com/asgarimehdi/h-dashboard/pull/1092"}

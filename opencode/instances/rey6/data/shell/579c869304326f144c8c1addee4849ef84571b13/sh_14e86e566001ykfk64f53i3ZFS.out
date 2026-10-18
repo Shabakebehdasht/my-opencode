@@ -1,2 +1,0 @@
-  POST            api/tickets/{ticket}/accept .... Api\TicketController@accept
-  GET|HEAD        tickets/inbox tickets.inbox › Livewire\Mechanisms › LivewirePageController

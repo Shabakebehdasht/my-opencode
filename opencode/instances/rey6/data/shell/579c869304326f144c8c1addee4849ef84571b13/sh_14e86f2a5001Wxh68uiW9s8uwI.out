@@ -1,4 +1,0 @@
-POST api/tickets/{ticket}/accept
-  middleware: api, Illuminate\Auth\Middleware\Authenticate:sanctum, Illuminate\Routing\Middleware\ThrottleRequests:api-user, Laravel\Sanctum\Http\Middleware\CheckAbilities:tickets:write, Spatie\Permission\Middleware\PermissionMiddleware:create_ticket
-GET|HEAD tickets/inbox
-  middleware: web, Illuminate\Auth\Middleware\Authenticate, App\Http\Middleware\ValidateUnitContext, Spatie\Permission\Middleware\RoleOrPermissionMiddleware:view_assigned_tickets

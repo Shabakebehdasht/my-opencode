@@ -1,11 +1,0 @@
-Rebasing (1/1)Auto-merging phpstan-baseline.neon
-Auto-merging resources/views/livewire/reports/todos.blade.php
-CONFLICT (content): Merge conflict in resources/views/livewire/reports/todos.blade.php
-Auto-merging resources/views/livewire/reports/units.blade.php
-error: could not apply fe75722c... perf: paginate the persons, todos and units report tables
-hint: Resolve all conflicts manually, mark them as resolved with
-hint: "git add/rm <conflicted_files>", then run "git rebase --continue".
-hint: You can instead skip this commit: run "git rebase --skip".
-hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
-hint: Disable this message with "git config set advice.mergeConflict false"
-Could not apply fe75722c... # perf: paginate the persons, todos and units report tables

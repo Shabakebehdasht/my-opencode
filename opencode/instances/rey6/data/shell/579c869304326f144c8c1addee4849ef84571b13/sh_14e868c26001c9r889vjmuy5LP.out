@@ -1,6 +1,0 @@
-M  app/Traits/TicketsInboxFlow.php
- M composer.lock
- M package-lock.json
-M  tests/Feature/TicketsInboxLivewireTest.php
-03d53845 fix(#1029): gate web acceptTicket on create_ticket and the ticket's assignee
-580dea8e Merge pull request #1118 from asgarimehdi/dependabot/github_actions/beta/actions/upload-artifact-7

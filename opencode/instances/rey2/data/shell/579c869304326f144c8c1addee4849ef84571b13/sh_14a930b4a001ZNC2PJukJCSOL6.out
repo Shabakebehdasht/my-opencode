@@ -1,7 +1,0 @@
-No syntax errors detected in resources/views/livewire/reports/persons.blade.php
-No syntax errors detected in resources/views/livewire/reports/units.blade.php
- 5 files changed, 504 insertions(+), 19 deletions(-)
- create mode 100644 tests/Feature/ReportsPaginationTest.php
-Successfully rebased and updated refs/heads/fix/1024-paginate-report-pages.
-1aed3d4e perf: paginate the persons, todos and units report tables
-11f356df Merge pull request #1109 from Shabakebehdasht/fix/1068-request-correlation-id

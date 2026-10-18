@@ -1,9 +1,0 @@
-=== PR #1125 state ===
-{"base":"beta","head":"fix/1062-php-constraint-watch","labels":[],"mergeable":"MERGEABLE","number":1125,"reviewRequests":[],"state":"OPEN","url":"https://github.com/asgarimehdi/h-dashboard/pull/1125"}
-=== issue #1062 state ===
-{"number":1062,"state":"OPEN","title":"Three locked packages cap PHP at 8.5 — nette/schema is on the production path"}
-=== AGENTS.md size/ZWNJ check (committed) ===
-172
-16763
-0
-0

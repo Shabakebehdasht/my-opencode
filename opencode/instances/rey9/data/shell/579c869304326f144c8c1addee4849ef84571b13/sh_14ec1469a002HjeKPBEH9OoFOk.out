@@ -1,4 +1,0 @@
-composer/semver is in: packages (3.5.1)
---- who requires composer/semver ---
-laravel/roster                 (^3.0)
-maatwebsite/excel              (^3.4)

@@ -1,6 +1,0 @@
-=== git status ===
- M .env.testing
- M composer.lock
- M package-lock.json
-=== is .env.testing tracked? ===
-.env.testing

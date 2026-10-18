@@ -1,7 +1,0 @@
-10:use Illuminate\Database\Events\QueryExecuted;
-202:     * @var array{has_run: bool, handler: (callable(\Illuminate\Database\Connection, class-string<\Illuminate\Database\Events\QueryExecuted>): mixed)}[]
-920:        $this->event(new QueryExecuted($query, $bindings, $time, $this, $readWriteType));
-946:     * @param  (callable(\Illuminate\Database\Connection, \Illuminate\Database\Events\QueryExecuted): mixed)  $handler
-1127:     * @param  \Closure(\Illuminate\Database\Events\QueryExecuted)  $callback
-1130:    public function listen(Closure $callback)
-1132:        $this->events?->listen(Events\QueryExecuted::class, $callback);

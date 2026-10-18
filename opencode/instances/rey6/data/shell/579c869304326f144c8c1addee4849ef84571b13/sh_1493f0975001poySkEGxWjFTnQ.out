@@ -1,8 +1,0 @@
-=== resources/app/routes only ===
-(clean)
-=== which public/js files match ===
-public/js/chart/accessibility.js
-public/js/chart/treegraph.js
-public/js/chart/treemap.js
-public/js/chart/exporting.js
-public/js/chart/highcharts.js
