@@ -1,0 +1,40 @@
+  [32;1m✓[39;22m[90m [39m[90mAGENTS.md names every package that blocks PHP 8.6[39m[90m                   [39m [90m0.02s[39m  
+  [32;1m✓[39;22m[90m [39m[90mexactly three locked packages block PHP 8.6[39m[90m                         [39m [90m0.01s[39m  
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Unit\ZabbixServiceTest[39m
+  [32;1m✓[39;22m[90m [39m[90mget interface traffic calculates rate correctly[39m[90m                     [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90mtest api connection returns version[39m[90m                                 [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90mtest api connection throws on invalid response[39m[90m                      [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90mrequest throws exception on zabbix error[39m[90m                            [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90mget interface traffic returns empty on single sample[39m[90m                [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90mrequest sends correct auth header[39m[90m                                   [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90mget latest values fills nulls for missing ids[39m[90m                       [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90mtest api connection throws on http error[39m[90m                            [39m [90m0.02s[39m  
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Unit\PersianNormalizerExtraTest[39m
+  [32;1m✓[39;22m[90m [39m[90mpersian normalizer handles additional mixed characters[39m[90m              [39m [90m0.01s[39m  
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Unit\ZabbixAdapterTest[39m
+  [32;1m✓[39;22m[90m [39m[90msuccess wraps the payload[39m[90m                                           [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90mtimeout is classified as timeout[39m[90m                                    [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90mconnection refused is classified as connection[39m[90m                      [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90mhttp error status is classified as connection[39m[90m                       [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90minvalid json is classified as invalid response[39m[90m                      [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90munexpected errors fall back to error[39m[90m                                [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90ma stub client satisfies the interface contract[39m[90m                      [39m [90m0.01s[39m  
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Unit\HardwareUpdatedEventTest[39m
+  [32;1m✓[39;22m[90m [39m[90mHardwareUpdated dispatches successfully[39m[90m                             [39m [90m0.04s[39m  
+  [32;1m✓[39;22m[90m [39m[90mHardwareUpdated supports all action types[39m[90m                           [39m [90m0.04s[39m  
+  [32;1m✓[39;22m[90m [39m[90mHardwareUpdated stores hardware and action[39m[90m                          [39m [90m0.03s[39m  
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Unit\VendorRouteGuardTest[39m
+  [32;1m✓[39;22m[90m [39m[90ma request to the stripped uri no longer reaches the vendor closure[39m[90m  [39m [90m0.02s[39m  
+  [32;1m✓[39;22m[90m [39m[90mit strips the named route from a compiled (cached) route collection[39m[90m [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90mit leaves a collection alone when the named route is absent[39m[90m         [39m [90m0.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90mit strips the named route from an uncached route collection[39m[90m         [39m [90m0.01s[39m  
+
+  [90mTests:[39m    [33;1m2 risky[39;22m[90m,[39m[39m [39m[32;1m2548 passed[39;22m[90m (8032 assertions)[39m
+  [90mDuration:[39m [39m440.97s[39m
+  [90mRandom Order Seed:[39m [39m1792488405[39m
+

@@ -1,0 +1,25 @@
+
+   PASS  Tests\Unit\ZabbixAdapterTest
+  ✓ success wraps the payload                                            0.01s  
+  ✓ timeout is classified as timeout                                     0.01s  
+  ✓ connection refused is classified as connection                       0.01s  
+  ✓ http error status is classified as connection                        0.01s  
+  ✓ invalid json is classified as invalid response                       0.01s  
+  ✓ unexpected errors fall back to error                                 0.01s  
+  ✓ a stub client satisfies the interface contract                       0.01s  
+
+   PASS  Tests\Unit\HardwareUpdatedEventTest
+  ✓ HardwareUpdated dispatches successfully                              0.04s  
+  ✓ HardwareUpdated supports all action types                            0.04s  
+  ✓ HardwareUpdated stores hardware and action                           0.03s  
+
+   PASS  Tests\Unit\VendorRouteGuardTest
+  ✓ a request to the stripped uri no longer reaches the vendor closure   0.02s  
+  ✓ it strips the named route from a compiled (cached) route collection  0.01s  
+  ✓ it leaves a collection alone when the named route is absent          0.01s  
+  ✓ it strips the named route from an uncached route collection          0.01s  
+
+  Tests:    2 risky, 2548 passed (8032 assertions)
+  Duration: 440.97s
+  Random Order Seed: 1792488405
+

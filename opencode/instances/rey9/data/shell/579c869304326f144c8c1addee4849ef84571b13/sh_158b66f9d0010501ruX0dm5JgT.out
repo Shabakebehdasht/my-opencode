@@ -1,0 +1,9 @@
+Tests & Coverage	pending	0	https://github.com/asgarimehdi/h-dashboard/actions/runs/39403364167/job/118563271628	
+Typecheck (Playwright specs, informational)	pass	14s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39403364167/job/118563271771	
+E2E Tests (Playwright)	pending	0	https://github.com/asgarimehdi/h-dashboard/actions/runs/39403364167/job/118563271631	
+PHPStan Static Analysis	pass	27s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39403364167/job/118563271426	
+Code Style (Pint)	pending	0	https://github.com/asgarimehdi/h-dashboard/actions/runs/39403364167/job/118563271194	
+PHP 8.6 Preview (non-blocking)	pending	0	https://github.com/asgarimehdi/h-dashboard/actions/runs/39403364167/job/118563271751	
+Mutation Testing	skipping	0	https://github.com/asgarimehdi/h-dashboard/actions/runs/39403364167/job/118563273032	
+--- status ---
+{"checks":[{"conclusion":"","name":"Code Style (Pint)","status":"IN_PROGRESS"},{"conclusion":"","name":"Tests \u0026 Coverage","status":"IN_PROGRESS"},{"conclusion":"SUCCESS","name":"Typecheck (Playwright specs, informational)","status":"COMPLETED"},{"conclusion":"","name":"E2E Tests (Playwright)","status":"IN_PROGRESS"},{"conclusion":"SKIPPED","name":"Mutation Testing","status":"COMPLETED"},{"conclusion":"SUCCESS","name":"PHPStan Static Analysis","status":"COMPLETED"},{"conclusion":"","name":"PHP 8.6 Preview (non-blocking)","status":"IN_PROGRESS"}],"mergeStateStatus":"BLOCKED","mergeable":"MERGEABLE"}

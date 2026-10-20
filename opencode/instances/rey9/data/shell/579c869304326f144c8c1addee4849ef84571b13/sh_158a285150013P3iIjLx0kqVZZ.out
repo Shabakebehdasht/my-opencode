@@ -1,0 +1,11 @@
+Vazirmatn-Bold-_OhAJEdh.woff2                        raw=   51020  gzip(9)=   51078
+Vazirmatn-Regular-CtGL0YI-.woff2                     raw=   50684  gzip(9)=   50737
+app-DtqXUPrx.css                                     raw=  351508  gzip(9)=   44016
+app-En4f3KAm.js                                      raw=    1172  gzip(9)=     681
+--- unhashed public assets ---
+public/js/leaflet/leaflet.js                         raw=  147392  gzip(9)=   42266
+public/css/app.css                                   raw=    1963  gzip(9)=     917
+public/fonts/Vazirmatn-Regular.woff2                 raw=   50684  gzip(9)=   50728
+--- git rev ---
+86720e90
+86720e905eb9a770315d65249ecf00de66067b2c Merge pull request #1161 from asgarimehdi/docs/move-disease-map-spec-to-discussions

@@ -1,0 +1,8 @@
+ M .env.testing
+ M composer.lock
+M  install-guid.md
+ M package-lock.json
+A  tests/Feature/InstallGuideNginxConfigTest.php
+--- staged files only ---
+install-guid.md
+tests/Feature/InstallGuideNginxConfigTest.php

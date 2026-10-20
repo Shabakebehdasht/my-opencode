@@ -1,0 +1,42 @@
+commit 40f99e17a50661fae1a85dae05a58e4cee3e4673
+Author: Shabakebehdasht <Shabakebehdasht@users.noreply.github.com>
+Date:   Tue Oct 20 09:27:16 2026 +0000
+
+    perf: gzip and cache headers in the install guide's nginx block (#1181)
+    
+    `install-guid.md` §8 is the only copy of the nginx site this project ships —
+    there is no `deploy/nginx/` directory in the repository — so it is the config
+    every operator pastes into `/etc/nginx/sites-available/`. It carried neither
+    compression nor cache headers.
+    
+    Three changes, all inside that one `server { … }` block:
+    
+    - gzip at server level (gzip_vary on, comp_level 5, min_length 1024). The
+      `gzip_types` list deliberately omits `font/woff2`: woff2 is already
+      compressed, so gzipping it only burns CPU.
+    - `location ^~ /build/assets/` — Vite emits content-hashed filenames there,
+      so the content never changes under the same URL: a single
+      `Cache-Control: public, max-age=31536000, immutable` with `always`, and
+      NO `expires` (the two together emit two Cache-Control headers).
+    - `location ~* ^/(?:js|css|icons|fonts)/` — these paths are NOT hashed, so a
+      deploy can replace their content under the same URL: `expires 1d`, and no
+      `immutable`.
+    
+    Both static-asset locations REPEAT `X-Content-Type-Options` and
+    `X-Frame-Options`. `add_header` does not inherit: a location that declares
+    its own `add_header` drops every `add_header` of the enclosing server block,
+    so without the repetition the assets would ship with no security headers at
+    all — and the PHP SecurityHeaders middleware cannot cover them, because they
+    never pass through PHP.
+    
+    The guide now says, next to the config, that the change only takes effect
+    once the operator reloads nginx.
+    
+    `tests/Feature/InstallGuideNginxConfigTest.php` locks all of it against the
+    shipped text: gzip is on, the hashed location exists, `immutable` appears
+    nowhere else, `expires` is absent from the hashed location, and both security
+    headers are repeated inside each location that declares an `add_header`.
+
+ install-guid.md                               |  45 +++++
+ tests/Feature/InstallGuideNginxConfigTest.php | 236 ++++++++++++++++++++++++++
+ 2 files changed, 281 insertions(+)

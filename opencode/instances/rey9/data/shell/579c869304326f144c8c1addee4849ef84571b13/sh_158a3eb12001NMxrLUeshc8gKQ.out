@@ -1,0 +1,6 @@
+remote: Create a pull request for 'perf/nginx-compression-cache-headers' on GitHub by visiting:        
+remote:      https://github.com/Shabakebehdasht/h-dashboard/pull/new/perf/nginx-compression-cache-headers        
+remote: 
+To https://github.com/Shabakebehdasht/h-dashboard.git
+ * [new branch]        HEAD -> perf/nginx-compression-cache-headers
+* perf/nginx-compression-cache-headers 40f99e17 perf: gzip and cache headers in the install guide's nginx block (#1181)

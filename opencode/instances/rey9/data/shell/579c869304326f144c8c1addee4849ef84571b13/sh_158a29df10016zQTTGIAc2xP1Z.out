@@ -1,0 +1,18 @@
+--- recent subjects ---
+Merge pull request #1161 from asgarimehdi/docs/move-disease-map-spec-to-discussions
+docs: move disease map spec out of plans/ to Discussion #1160
+Merge pull request #1136 from Shabakebehdasht/perf/1019-constrain-zabbix-traffic-cache-key
+Merge pull request #1135 from Shabakebehdasht/improve/1040-livewire-computed-lists
+Merge pull request #1133 from Shabakebehdasht/perf/1020-chunk-the-excel-exports
+Merge pull request #1134 from haileen5/fix/1103-assert-query-count
+Merge pull request #1132 from haileen5/perf/1016-remove-last-user-activity
+perf: constrain Zabbix item-id inputs and single-flight the cache miss (#1019)
+#1040: Livewire public props no longer carry full model/id lists
+Fix vacuous assertQueryCount guard so it can actually fail (#1103)
+perf: switch the Excel exports to FromQuery so chunking actually engages
+perf: remove LastUserActivity — its online-presence cache key has no reader
+Merge pull request #1131 from haileen5/issue-1126-ncode-trgm
+Add a trigram index on persons.n_code so the four-branch search OR can bitmap
+Merge pull request #1127 from Shabakebehdasht/fix/1003-e2e-secure-cookie
+--- example body ---
+docs: move disease map spec out of plans/ to Discussion #1160
