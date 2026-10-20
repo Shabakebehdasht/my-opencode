@@ -1,0 +1,11 @@
+ M .env.testing
+A  app/Support/ImportPreviewStore.php
+ M composer.lock
+ M package-lock.json
+M  phpstan-baseline.neon
+M  resources/views/livewire/hardware/import-hardware/import-hardware.blade.php
+M  resources/views/livewire/kargozini/import-persons/import-persons.blade.php
+M  tests/Feature/HardwareImportLivewireTest.php
+M  tests/Feature/ImportLivewireComponentTest.php
+M  tests/Feature/ImportsLivewireTest.php
+M  tests/Feature/KargoziniImportLivewireTest.php

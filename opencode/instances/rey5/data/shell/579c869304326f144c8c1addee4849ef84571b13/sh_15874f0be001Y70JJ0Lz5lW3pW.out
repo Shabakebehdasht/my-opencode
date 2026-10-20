@@ -1,0 +1,2 @@
+resources/views/livewire/hardware/import-hardware/import-hardware.blade.php:9:return new class extends Component
+resources/views/livewire/kargozini/import-persons/import-persons.blade.php:9:return new class extends Component

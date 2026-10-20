@@ -1,0 +1,30 @@
+### PR 1161: docs: move disease map spec from plans/ to Discussion #1160
+این PR فقط یک جابه‌جایی است، بدون هیچ تغییر محتوایی:
+
+- اسپک «Disease Registration & Disease Map System» به‌طور کامل به Discussion منتقل شد: #1160 (دستهٔ Ideas) — طراحی کامل و پارک‌شده است و منتظر go-ahead می‌ماند، پس دیگر داخل درخت کد نگه داشته نمی‌شود.
+- فایل `plans/001-disease-map-system-spec.md` حذف می‌شود؛ با حذفش پوشهٔ `plans/` خالی می‌شود و از درخت حذف خواهد شد.
+- هیچ کد، تست یا سند دیگری د
+
+### PR 1136: perf: constrain Zabbix item-id inputs and single-flight the cache miss (#1019)
+Closes #1019
+
+## (a) Numeric-id evidence
+
+Zabbix item ids are constrained with `['required','string','max:32','regex:/^\d+$/']` (Traffic) and `['required','string','max:64','regex:/^\d+$/']` on `item_ids.*` (MultiLatest). Both controllers validate **before** any cache, lock, or upstream access — an arbitrary string can no longer mint a fresh cache key that forces an upstream call.
+
+Evidence for th
+
+### PR 1135: #1040: Livewire public properties no longer carry full model lists
+## Closes #1040
+
+**Closes #1040.**
+
+## What this PR is
+
+`units/index`, `users/index` and `tickets/⚡inbox` held the operator's whole
+option universe in **public Livewire properties**. Under the framework's
+dehydrate/hydrate contract —
+**Livewire 4 carries models/collections in the snapshot as just their identifier
+key plus meta, not the rows** — the snapshot itself does not stringify the list,
+but 
+
