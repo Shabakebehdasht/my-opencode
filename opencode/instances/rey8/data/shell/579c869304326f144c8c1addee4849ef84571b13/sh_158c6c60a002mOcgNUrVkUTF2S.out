@@ -1,6 +1,0 @@
-=== worktree status (should be empty) ===
-=== PR diff files ===
-.github/workflows/test.yml
-tests/TestCase.php
-=== issue #1185 state ===
-{"labels":["perf","P2","ready"],"state":"OPEN"}

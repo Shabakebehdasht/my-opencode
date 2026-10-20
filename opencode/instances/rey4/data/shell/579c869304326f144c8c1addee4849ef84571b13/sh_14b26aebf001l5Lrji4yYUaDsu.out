@@ -1,4 +1,0 @@
-=== PR 1090 merge state now ===
-{"base":"50a2bf34b26b430cf4f9ba78613796ef82e84638","head":"4d5bfce04cb4dcf1a186254b34feaf28b6a0ae04","mergeStateStatus":"BLOCKED","mergeable":"MERGEABLE"}
-=== workflow runs for head 4d5bfce0 (upstream) ===
-{"conclusion":"","event":"pull_request","id":39058842333,"name":"Tests","status":"queued"}

@@ -1,6 +1,0 @@
-Scanned 236 test files in tests/Unit and tests/Feature.
-OK — every test file declares at least one test PHPUnit will collect.
-dead-file-guard exit=0
-Scanned 6 tracked environment file(s) in /home/runner/.local/share/opencode/worktree/579c86/ci/1185-skip-vite-build.
-OK — no tracked env file carries a literal credential.
-key-leak-guard exit=0

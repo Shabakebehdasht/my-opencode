@@ -1,4 +1,0 @@
- * branch              beta       -> FETCH_HEAD
-0
-error: src refspec fix/1068-request-correlation-id does not match any
-error: failed to push some refs to 'https://github.com/Shabakebehdasht/h-dashboard.git'

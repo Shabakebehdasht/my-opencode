@@ -1,4 +1,0 @@
-extracted 76 lines -> /tmp/opencode/nginx-proof/block-dotfile.conf
-/build/assets/.env       -> HTTP 200
-/js/.env                 -> HTTP 403
-/.env                    -> HTTP 403

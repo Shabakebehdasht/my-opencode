@@ -1,8 +1,0 @@
-=== working tree (only pre-existing lockfile drift should remain) ===
- M composer.lock
- M package-lock.json
-=== branch state ===
-40f99e17 perf: gzip and cache headers in the install guide's nginx block (#1181)
-86720e90 Merge pull request #1161 from asgarimehdi/docs/move-disease-map-spec-to-discussions
-=== PR state ===
-{"base":"beta","head":"perf/nginx-compression-cache-headers","headOwner":"Shabakebehdasht","isDraft":false,"labels":[],"mergeable":"MERGEABLE","number":1197,"reviewers":[],"state":"OPEN","url":"https://github.com/asgarimehdi/h-dashboard/pull/1197"}

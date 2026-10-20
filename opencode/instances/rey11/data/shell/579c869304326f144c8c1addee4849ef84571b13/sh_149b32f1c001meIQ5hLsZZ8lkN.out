@@ -1,4 +1,0 @@
- * branch              beta       -> FETCH_HEAD
-0
- * [new branch]        fix/1068-request-correlation-id -> fix/1068-request-correlation-id
-branch 'fix/1068-request-correlation-id' set up to track 'origin/fix/1068-request-correlation-id'.

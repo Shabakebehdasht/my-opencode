@@ -1,2 +1,0 @@
-58:        $response = (new RequestId)->handle($request, function ($req) use (&$seen) {
-  [90mTests:[39m    [32;1m6 passed[39;22m[90m (13 assertions)[39m

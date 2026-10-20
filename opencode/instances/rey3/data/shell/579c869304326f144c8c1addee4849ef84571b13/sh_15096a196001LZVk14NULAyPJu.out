@@ -1,8 +1,0 @@
-63:        // `allUnits` / `allUnitsTree` computed properties below — they are
-122:    public function allUnits(): array
-138:    public function allUnitsTree(): array
-596:        // `$this->allUnits()` is the computed property, not public state — the
-598:        $selectedUnitNames = collect($this->allUnits())
-797:            'units' => $this->allUnitsTree,
-63:        // `allUnits` / `allUnitsTree` computed properties below — they are
-797:            'units' => $this->allUnitsTree,

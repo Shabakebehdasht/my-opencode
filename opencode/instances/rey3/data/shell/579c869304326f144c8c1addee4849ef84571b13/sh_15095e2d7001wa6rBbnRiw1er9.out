@@ -1,2 +1,0 @@
- phpstan-baseline.neon | 38 +-------------------------------------
- 1 file changed, 1 insertion(+), 37 deletions(-)

@@ -1,8 +1,0 @@
-canonical/beta = 580dea8e
-my base       = 580dea8e
-580dea8e Merge pull request #1118 from asgarimehdi/dependabot/github_actions/beta/actions/upload-artifact-7
-580dea8e Merge pull request #1118 from asgarimehdi/dependabot/github_actions/beta/actions/upload-artifact-7
-75682ed9 Merge pull request #1117 from asgarimehdi/dependabot/github_actions/beta/actions/download-artifact-8
-8f6cfbb6 Merge pull request #1119 from asgarimehdi/docs/agents-drift-fix
-abf1f750 docs: fix drift in docs/agents against current beta (audit 2026-10-18)
-051570de chore(deps): bump actions/upload-artifact from 4 to 7

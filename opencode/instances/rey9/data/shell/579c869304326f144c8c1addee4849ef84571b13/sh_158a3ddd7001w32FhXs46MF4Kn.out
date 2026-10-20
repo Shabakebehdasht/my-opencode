@@ -1,9 +1,0 @@
-40f99e17 perf: gzip and cache headers in the install guide's nginx block (#1181)
-86720e90 Merge pull request #1161 from asgarimehdi/docs/move-disease-map-spec-to-discussions
- M .env.testing
- M composer.lock
- M package-lock.json
---- confirm only 2 files in the commit ---
- install-guid.md                               |  45 +++++
- tests/Feature/InstallGuideNginxConfigTest.php | 236 ++++++++++++++++++++++++++
- 2 files changed, 281 insertions(+)

@@ -1,8 +1,0 @@
-{"checks":[],"head":"a48f77c41f395b33e649f1c4d214b5f5a2e46494"}
-=== recent runs ===
-2026-10-18T14:38:56Z pull_request in_progress/ fix/1010-queue-connection-pin acb34d13 fix(#1010): pin the long-running jobs to queue connections whose retry_after outlives them
-2026-10-18T14:38:43Z pull_request in_progress/ fix/1009-personnel-search-operator f28c6fb2 perf(#1009): build the personnel full-name search with || so the trigram indexes apply
-2026-10-18T14:38:24Z pull_request pending/ fix/1003-e2e-secure-cookie a48f77c4 fix(security): default session cookie to Secure (#1003)
-2026-10-18T14:33:40Z pull_request in_progress/ fix/1035-env-guard-cleanup 70f5227d fix(env): guard and clean literal credentials in tracked env templates (#1035)
-2026-10-18T14:31:20Z pull_request completed/cancelled fix/1009-personnel-search-operator 4bb17551 perf(#1009): build the personnel full-name search with || so the trigram indexes apply
-2026-10-18T14:26:58Z pull_request in_progress/ fix/1003-e2e-secure-cookie 680a7f53 fix(security): default session cookie to Secure (#1003)

@@ -1,4 +1,0 @@
-{"base":"beta","head":"ci/1185-skip-vite-build","isDraft":false,"owner":"Shabakebehdasht","state":"OPEN","title":"perf: skip the Vite build in the PHP test jobs (#1185)","url":"https://github.com/asgarimehdi/h-dashboard/pull/1195"}
---- files ---
-.github/workflows/test.yml
-tests/TestCase.php
