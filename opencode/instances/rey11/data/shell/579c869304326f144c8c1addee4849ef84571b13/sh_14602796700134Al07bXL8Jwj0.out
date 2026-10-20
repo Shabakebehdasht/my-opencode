@@ -1,0 +1,47 @@
+
+### expandAll
+  #704 [closed] چارت سازمانی قابلیت استفاده مجدد داشته باشد
+
+### LastUserActivity
+  #685 [closed] کدهای مرده و بلا استفاده رو شناسایی کن برای حذف
+  #93 [closed] P3: Batch user-activity cache writes
+  #336 [closed] [tests] No coverage: normalize:persian-text command, PersianNormalizer trait, LastUserActivity + SafeRoleOrPermission middleware
+
+### highcharts
+  #915 [closed] [improve] /reports/tickets filters the todos table on a status column that does not exist - selecting any status with report type todos 500s the whole report
+  #866 [closed] [improve] DailySeries::between() throws away the chosen range — every past window charts the wrong axis and silently drops its rows, and the green tests assert only length
+
+### coverage-report
+  #669 [closed] [Plan 012] Wrong covers() annotations in 12+ test files — coverage reports unreliable
+  #865 [closed] [improve] the --min=80 coverage gate measures only app/ — 7,772 executable lines of Livewire component logic (half of all app logic) sit outside the denominator
+  #666 [closed] [Plan 9] SecurityHeaders middleware has zero test coverage
+  #742 [closed] مسیر ‎/csp-report ثبت نشده — گزارش‌های نقض CSP به ۴۰۴ می‌خورد
+  #333 [closed] [tests] No coverage: Reports Volt pages (advanced/units/todos/persons/map-no-boundary)
+
+### retry_after
+
+### geojson
+  #702 [closed] در قسمت مدیریت واحدها گزینه ویرایش نقشه کار نمیکند همچنین گزینه حذف در روی نقشه کار نمیکند فقط در منوی پایین کار میکند
+  #817 [closed] Plan 41: org-scope checks for units.index / units.map writes — close the cross-unit re-parent escalation
+  #811 [closed] [improve] units.index / units.map writes have no org-scope check — cross-unit re-parent (escalates accessibleUnitIds), delete, edit and boundary overwrite
+  #685 [closed] کدهای مرده و بلا استفاده رو شناسایی کن برای حذف
+  #671 [closed] [Plan 14] Missing @property annotations on 21/24 models — root cause of ~350 PHPStan baseline errors
+
+### pagination reports
+
+### trigram
+  #984 [closed] [perf] Global layout ships ~1.06 MiB render-blocking JS for 3 pages; AccessService rebuilt per call (~18 Redis round-trips per dashboard render)
+  #871 [closed] [improve] جستجوی تیکت/کار روزانه با LIKE '%…%' روی ستون بدون ایندکس trgm — هر کلید یک Sequential Scan کامل روی tickets/todos
+
+### generate-daily
+  #829 [closed] [improve] reports:generate-daily and both /tools cleanup jobs are silent no-ops outside an HTTP request
+  #836 [closed] Plan 47: reports:generate-daily and the /tools cleanup jobs are silent no-ops outside an HTTP request (ex-#829)
+  #864 [closed] [improve] bootstrap/app.php never calls withSchedule() — App\Console\Kernel is never bound, so all 6 scheduled commands never run and a green test hides it
+  #866 [closed] [improve] DailySeries::between() throws away the chosen range — every past window charts the wrong axis and silently drops its rows, and the green tests assert only length
+  #954 [closed] [improve] tickets.priority accepts medium/high in the DB but no report reads them - maintenance:generate-due writes 'medium' nightly and those tickets fall outside every priority bucket
+
+### chunk export
+  #663 [closed] [Plan 6] Missing chunked reading in HardwareAuditsExport — add WithChunkReading
+
+### traffic cache
+  #864 [closed] [improve] bootstrap/app.php never calls withSchedule() — App\Console\Kernel is never bound, so all 6 scheduled commands never run and a green test hides it
