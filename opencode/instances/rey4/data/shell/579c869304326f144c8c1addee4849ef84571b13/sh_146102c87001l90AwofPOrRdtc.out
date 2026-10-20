@@ -1,0 +1,1 @@
+{"errors":[{"path":["mutation","updateDiscussionComment","discussionComment"],"extensions":{"code":"undefinedField","typeName":"UpdateDiscussionCommentPayload","fieldName":"discussionComment"},"locations":[{"line":1,"column":91}],"message":"Field 'discussionComment' doesn't exist on type 'UpdateDiscussionCommentPayload'"}]}

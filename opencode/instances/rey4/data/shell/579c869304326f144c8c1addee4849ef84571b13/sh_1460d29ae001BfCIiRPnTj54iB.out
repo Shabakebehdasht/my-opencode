@@ -1,0 +1,34 @@
+=== #957 body (first 30 lines) ===
+> ✅ **آمادهٔ اجرا (ready)** — مرجع اجرا کامنت «بررسی کارشناسی» در همین ایشو + کامنت «تأیید گیت» است. متن خام ایشو صرفاً سابقهٔ کشف است و ممکن است عدد یا جهت فیکس نادقیقی داشته باشد؛ در تعارض، کامنت کارشناسی حاکم است. PR پیاده‌سازی باید با `Closes #957` همین ایشو را ببندد.
+
+## Problem
+
+The application has essentially no accessibility **infrastructure** — the layer that announces changes, conveys sort state, and provides navigation — independent of the per-button naming issue tracked separately.
+
+Measured on the current tree:
+
+| Signal | Count across `resources/`, `app/`, MaryUI components |
+|---|---|
+| `aria-live` | **0** |
+| `aria-sort` | **0** |
+| `aria-current` | **0** |
+| `tabindex` | **0** |
+| skip link | **0** |
+| `<nav>` landmark | **0** in any MaryUI component |
+
+Consequences, each verified in the source:
+
+1. **Errors and confirmations are not announced.** MaryUI's error component (`vendor/robsontenorio/mary/src/View/Components/Errors.php`) carries no `role=` and no `aria-live`. It is used in three forms, including `resources/views/livewire/auth/login.blade.php:154`, `changepassword`, and `tickets/⚡create.blade.php`. So the most consequential UI message in the product — "رمز اشتباه است" — is purely visual.
+2. **Sortable tables do not convey state.** 12 files use `<x-table ... :sort-by="...">`, but no header carries `aria-sort`, and the clickable header has no `tabindex`, so ascending/descending is never announced.
+3. **No skip link and no landmarks.** MaryUI's `<main>` (`vendor/robsontenorio/mary/src/View/Components/Main.php:31`) has no `id` and no `tabindex="-1"`; there is no `<nav>` wrapping the sidebar.
+4. **Heading structure is unbalanced.** `<h1>` appears in only 2 of 88 Blade files (`auth/login`, `it/networks`); most pages open with `<h2>`/`<h3>` and no H1.
+
+## Mobile zoom is disabled
+
+Both layouts pin the viewport scale:
+
+```html
+<!-- resources/views/components/layouts/app.blade.php:6 -->
+
+=== #959 labels+title ===
+[improve] persons.n_code is writable but hardwares.n_code has no FK or cascade - one rename orphans every hardware row of that person, invisible to every unit and uneditable forever -> ready

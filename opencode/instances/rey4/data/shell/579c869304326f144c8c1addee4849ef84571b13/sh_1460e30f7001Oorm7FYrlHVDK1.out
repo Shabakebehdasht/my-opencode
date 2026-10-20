@@ -1,0 +1,37 @@
+=== all 17: number | labels | NNN placeholder left? | chars ===
+#1009  []  NNN=clean  chars=15378
+#1010  []  NNN=clean  chars=13631
+#1011  []  NNN=clean  chars=13528
+#1012  []  NNN=clean  chars=9352
+#1013  []  NNN=clean  chars=14545
+#1014  []  NNN=clean  chars=13220
+#1015  []  NNN=clean  chars=10231
+#1016  []  NNN=clean  chars=10912
+#1017  []  NNN=clean  chars=11818
+#1018  []  NNN=clean  chars=14811
+#1019  []  NNN=clean  chars=15354
+#1020  []  NNN=clean  chars=16272
+#1021  []  NNN=clean  chars=16758
+#1022  []  NNN=clean  chars=14878
+#1023  []  NNN=clean  chars=17731
+#1024  []  NNN=clean  chars=15540
+#1025  []  NNN=clean  chars=15144
+
+=== titles ===
+#1009 [perf] Personnel search calls CONCAT() where both fullname trigram indexes were built on the || operator - every keystroke sequential-scans persons
+#1010 [perf] Queue retry_after (90s) sits below three jobs' $timeout (300/600s), and the correctly-scoped connections nobody selects
+#1011 [perf] CI coverage-report job re-runs the entire suite (npm ci + vite build + migrate + pest) just to print a 96-line report
+#1012 [perf] CI mutation job spends a 30-minute budget on every PR for a run the workflow itself documents as never passing
+#1013 [perf] unit.tree expandAll() issues one query per unit while childrenOfMany() exists for exactly this and one caller was missed
+#1014 [perf] Users directory lazy-loads ~4 relations per row - ~80 queries per render at perPage=20
+#1015 [perf] hardware index() applies distinct() to a provably 1:1 join, forcing a full materialisation before LIMIT
+#1016 [perf] LastUserActivity middleware writes an online-presence cache key on every request that no reader ever consumes
+#1017 [perf] Dashboard and advanced reports ship 67.7 KB (25.3 KB gzip) of provably unused Highcharts modules on the landing page
+#1018 [perf] The CSS half of #984 was never done - leaflet.draw and leaflet-routing-machine still load on every page
+#1019 [perf] Zabbix traffic and multi-latest cache keys are built from unvalidated client input and the miss branch blocks on upstream
+#1020 [perf] Exports declare WithChunkReading (an import-side interface) so chunking never engages - the whole filtered set is materialised
+#1021 [perf] reports:generate-daily runs inline in the scheduler with five queries per unit and its queued wrapper is never dispatched
+#1022 [perf] OrgChartController::loadSubtree filters the whole collection per node (O(n^2)) while orgChart() 80 lines above already does it right
+#1023 [perf] Boundary::$appends['geojson'] fires one query per boundary row and round-trips the geometry three times
+#1024 [perf] reports/persons, reports/todos and reports/units render every in-scope row with no pagination
+#1025 [perf] The /todo calendar first paint is still unbounded - window seeds null, so every in-scope todo and task ticket ships as JSON
