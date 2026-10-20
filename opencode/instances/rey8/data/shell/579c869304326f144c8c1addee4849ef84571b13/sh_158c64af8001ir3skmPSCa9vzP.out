@@ -1,0 +1,39 @@
+  ✓ Set up job
+  ✓ Initialize containers
+  ✓ Checkout code
+  ✓ Setup PHP
+  ✓ Cache Composer packages
+  ✓ Install dependencies
+  ✓ Copy .env for testing
+  ✓ Generate application key
+  ✓ Run migrations
+  ✓ Clear cached config/routes before tests
+  ✓ Run tests (no coverage gate on a pre-release PHP)
+  ✓ Post Cache Composer packages
+  ✓ Post Checkout code
+  ✓ Stop containers
+  ✓ Complete job
+- Mutation Testing in 0s (ID 118561268749)
+✓ Coverage Report (Blade-aware, informational) in 11s (ID 118563930248)
+  ✓ Set up job
+  ✓ Checkout code
+  ✓ Setup PHP
+  ✓ Download coverage.xml from the test job
+  ✓ Report the real coverage picture (app/ + Blade)
+  ✓ Post Checkout code
+  ✓ Complete job
+
+ANNOTATIONS
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+Typecheck (Playwright specs, informational): .github#1
+
+WATCH_EXIT=0
+=== jobs ===
+Tests & Coverage	completed	success	2026-10-20T09:43:28Z	2026-10-20T09:50:04Z
+PHPStan Static Analysis	completed	success	2026-10-20T09:43:28Z	2026-10-20T09:43:58Z
+Code Style (Pint)	completed	success	2026-10-20T09:43:28Z	2026-10-20T09:45:51Z
+Typecheck (Playwright specs, informational)	completed	success	2026-10-20T09:43:28Z	2026-10-20T09:43:39Z
+E2E Tests (Playwright)	completed	success	2026-10-20T09:43:28Z	2026-10-20T10:05:44Z
+PHP 8.6 Preview (non-blocking)	completed	success	2026-10-20T09:43:28Z	2026-10-20T09:48:53Z
+Mutation Testing	completed	skipped	2026-10-20T09:43:26Z	2026-10-20T09:43:26Z
+Coverage Report (Blade-aware, informational)	completed	success	2026-10-20T09:50:06Z	2026-10-20T09:50:17Z

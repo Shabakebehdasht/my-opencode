@@ -1,0 +1,6 @@
+ M .github/workflows/test.yml
+ M tests/TestCase.php
+Note: Using configuration file /home/runner/.local/share/opencode/worktree/579c86/ci/1185-skip-vite-build/phpstan.neon.
+
+ [OK] No errors                                                                 
+

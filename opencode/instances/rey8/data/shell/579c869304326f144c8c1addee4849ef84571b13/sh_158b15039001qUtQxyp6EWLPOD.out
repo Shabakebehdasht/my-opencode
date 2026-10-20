@@ -1,0 +1,103 @@
+diff --git a/.github/workflows/test.yml b/.github/workflows/test.yml
+index 7734a5af..c2b1a772 100644
+--- a/.github/workflows/test.yml
++++ b/.github/workflows/test.yml
+@@ -115,17 +115,10 @@ jobs:
+           composer validate --strict --check-lock
+           git diff --exit-code -- composer.lock
+ 
+-      - name: Setup Node
+-        uses: actions/setup-node@v7
+-        with:
+-          node-version: '24'
+-          cache: 'npm'
+-
+-      - name: Build frontend assets
+-        run: |
+-          npm ci
+-          npm run build
+-
++      # Issue #1185: no Node, no Vite build. `Tests\TestCase::setUp()` calls
++      # `withoutVite()` for the whole suite and no test reads the Vite manifest
++      # or the built bundle — the build was never asserted on, only paid for.
++      # The `e2e` job still builds: it drives a real browser.
+       - name: Copy .env for testing
+         run: |
+           cp .env.example .env.testing
+@@ -456,8 +449,8 @@ jobs:
+   mutation:
+     name: Mutation Testing
+     # Manual-only (#1012): the job is green, but each run is expensive
+-    # (checkout, composer install, npm ci, a Vite build and migrations before
+-    # the single `pest --mutate` line below) and it used to spend ~23 minutes
++    # (checkout, composer install and migrations before the single
++    # `pest --mutate` line below) and it used to spend ~23 minutes
+     # on every PR for a signal that gates nothing (`continue-on-error: true`).
+     # Re-enable on PRs by dropping this `if:`. The manual "Run workflow"
+     # button appears only once this trigger is on the default branch.
+@@ -520,17 +513,10 @@ jobs:
+           composer validate --strict --check-lock
+           git diff --exit-code -- composer.lock
+ 
+-      - name: Setup Node
+-        uses: actions/setup-node@v7
+-        with:
+-          node-version: '24'
+-          cache: 'npm'
+-
+-      - name: Build frontend assets
+-        run: |
+-          npm ci
+-          npm run build
+-
++      # Issue #1185: no Node, no Vite build. `Tests\TestCase::setUp()` calls
++      # `withoutVite()` for the whole suite and no test reads the Vite manifest
++      # or the built bundle — the build was never asserted on, only paid for.
++      # The `e2e` job still builds: it drives a real browser.
+       - name: Copy .env for testing
+         run: |
+           cp .env.example .env.testing
+@@ -650,17 +636,10 @@ jobs:
+         # exists ONLY in this job; it carries production weight, not just tooling.
+         run: composer install --prefer-dist --no-interaction --no-progress --ignore-platform-req=php
+ 
+-      - name: Setup Node
+-        uses: actions/setup-node@v7
+-        with:
+-          node-version: '24'
+-          cache: 'npm'
+-
+-      - name: Build frontend assets
+-        run: |
+-          npm ci
+-          npm run build
+-
++      # Issue #1185: no Node, no Vite build. `Tests\TestCase::setUp()` calls
++      # `withoutVite()` for the whole suite and no test reads the Vite manifest
++      # or the built bundle — the build was never asserted on, only paid for.
++      # The `e2e` job still builds: it drives a real browser.
+       - name: Copy .env for testing
+         run: |
+           cp .env.example .env.testing
+diff --git a/tests/TestCase.php b/tests/TestCase.php
+index 643548cb..7c98c8b4 100644
+--- a/tests/TestCase.php
++++ b/tests/TestCase.php
+@@ -17,6 +17,17 @@ protected function setUp(): void
+     {
+         parent::setUp();
+ 
++        // #1185 (Plan 022): no test reads the Vite manifest or the built
++        // bundle, so the base TestCase opts the whole suite out of Vite.
++        // That is what lets the PHP test jobs drop the Node install and the
++        // Vite build — the build output was never asserted on, only paid for.
++        //
++        // The five per-file calls that already exist (SidebarActiveLink,
++        // PageScriptSplitting, SidebarPermissions, AccessibilityInfrastructure,
++        // LeafletCssScoping) stay: withoutVite() is idempotent, and they are a
++        // safety belt for a test file that is ever moved out of this base.
++        $this->withoutVite();
++
+         // #705: Postgres sequences are non-transactional, so RefreshDatabase
+         // restarts ids at 1 for every test. AccessService caches
+         // "accessible_units:v{version}:{user_id}:{session_unit_id}:{md5(ids)}",

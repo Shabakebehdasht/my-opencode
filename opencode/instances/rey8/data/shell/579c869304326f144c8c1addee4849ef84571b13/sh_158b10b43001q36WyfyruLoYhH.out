@@ -1,0 +1,4 @@
+ M .env.testing
+ M .github/workflows/test.yml
+ M tests/TestCase.php
+{"tool":"pint","result":"passed"}

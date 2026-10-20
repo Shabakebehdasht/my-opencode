@@ -1,0 +1,31 @@
+
+Only `typecheck` (`npm ci` only, no build) and `e2e` (build) remain.
+
+Local gates: `pint --dirty --format agent` → passed · `phpstan analyse --no-progress` → `[OK] No errors` · `scripts/find-dead-test-files.php` → OK · `scripts/check-app-key-leak.php` → OK.
+
+## Wall-clock — measured, and smaller than the plan assumed
+
+Job durations from this PR's own CI (run `39402764514`) against the last runs on `beta`:
+
+| job | before (`beta`) | after (this PR) |
+|---|---|---|
+| `Tests & Coverage` | 6m59s (run `39397815540`) | **6m36s** |
+| `PHP 8.6 Preview` | 4m17s (run `39397815540`) | 5m23s |
+
+**The honest number is ~10s per job, not minutes.** The removed steps were cheap because `setup-node` carries `cache: 'npm'`:
+
+| step (removed) | `beta` run `39397815540` | `beta` run `39395783950` |
+|---|---|---|
+| `Setup Node` | 5s | 2s |
+| `Build frontend assets` (`npm ci` + `npm run build`) | 6s | 2s |
+| **removed total** | **11s** | **4s** |
+
+The job total is dominated by the suite itself, and the suite duration swings run to run: the last four `Tests & Coverage` runs on `beta` took 6m59s / 4m29s / 4m18s / 5m28s. So the end-to-end delta (6m59s → 6m36s) is **inside the noise band** — the change cannot be credited with a wall-clock win of that size.
+
+What *is* exact is the proof that the suite is unaffected: the `Run tests with coverage` step took **5m44s before and 5m45s after** — identical work, minus the build phase.
+
+So the value of this PR is not a big time saving; it is that the PHP test jobs no longer install Node or run a Vite build at all, and the frontend build is no longer a prerequisite for running the PHP suite. The `mutation` job is manual-only (#1012), so it was skipped in this CI run; the same ~5–10s applies when it is dispatched by hand.
+
+CI on this PR: `Tests & Coverage` ✅ · `Code Style (Pint)` ✅ · `PHPStan` ✅ · `Typecheck` ✅ · `E2E` ✅ (keeps its build) · `PHP 8.6 Preview` ✅ · `Mutation Testing` skipped (manual-only) · `Coverage Report` ✅.
+
+Closes #1185
