@@ -1,0 +1,12 @@
+  ✓ posting to the mary upload uri is a 404 for an authenticated user    0.04s  
+  ✓ the maryUI upload route is not registered                            0.02s  
+
+   WARN  Tests\Feature\HardwareIndexLivewireTest
+  ✓ filter semat applies                                                 0.12s  
+  ✓ delete soft deletes                                                  0.12s  
+  ! bulk mark empty shows error → This test did not perform any asserti… 0.13s  
+  ✓ updated n code invalid                                               0.12s  
+  ✓ export dispatches                                                    0.11s  
+   PASS  Tests\Feature\HardwareTrashModalLivewireTest
+   PASS  Tests\Feature\MaryVendorUploadRouteTest
+   WARN  Tests\Feature\HardwareIndexLivewireTest
