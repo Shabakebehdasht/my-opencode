@@ -1,0 +1,26 @@
+=== discussion comment now ends with: ===
+{"errors":[{"message":"Expected one of SCHEMA, SCALAR, TYPE, ENUM, INPUT, UNION, INTERFACE, actual: RCURLY (\"}\") at [1, 136]","locations":[{"line":1,"column":136}]}]}gh: Expected one of SCHEMA, SCALAR, TYPE, ENUM, INPUT, UNION, INTERFACE, actual: RCURLY ("}") at [1, 136]
+
+=== issue titles (all 18) ===
+#1009 [perf][P1] Personnel search calls CONCAT() where both fullname trigram indexes wer
+#1010 [perf][P1] Queue retry_after (90s) sits below three jobs' $timeout (300/600s), and
+#1011 [perf][P1] CI coverage-report job re-runs the entire suite (npm ci + vite build + 
+#1012 [perf][P1] CI mutation job spends a 30-minute budget on every PR for a run the wor
+#1013 [perf][P1] unit.tree expandAll() issues one query per unit while childrenOfMany() 
+#1014 [perf][P1] Users directory lazy-loads ~4 relations per row - ~80 queries per rende
+#1015 [perf][P2] hardware index() applies distinct() to a provably 1:1 join, forcing a f
+#1016 [perf][P2] LastUserActivity middleware writes an online-presence cache key on ever
+#1017 [perf][P2] Dashboard and advanced reports ship 67.7 KB (25.3 KB gzip) of provably 
+#1018 [perf][P2] The CSS half of #984 was never done - leaflet.draw and leaflet-routing-
+#1019 [perf][P2] Zabbix traffic and multi-latest cache keys are built from unvalidated c
+#1020 [perf][P2] Exports declare WithChunkReading (an import-side interface) so chunking
+#1021 [perf][P2] reports:generate-daily runs inline in the scheduler with five queries p
+#1022 [perf][P2] OrgChartController::loadSubtree filters the whole collection per node (
+#1023 [perf][P3] Boundary::$appends['geojson'] fires one query per boundary row and roun
+#1024 [perf][P3] reports/persons, reports/todos and reports/units render every in-scope 
+#1025 [perf][P3] The /todo calendar first paint is still unbounded - window seeds null, 
+#1026 [improve] Web bulk hardware delete writes no audit row — bulk-deleted devices va
+#1027 [docs][P2] docs/agents/issue-tracker.md points at an empty .scratch/, and triage-l
+
+=== any leftover NNN placeholder? ===
+(none listed = all clean)

@@ -1,0 +1,12 @@
+PHPStan Static Analysis	pass	31s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39394643881/job/118534225656	
+Tests & Coverage	pass	7m3s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39394643881/job/118534225623	
+Typecheck (Playwright specs, informational)	pass	18s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39394643881/job/118534225678	
+Mutation Testing	skipping	0	https://github.com/asgarimehdi/h-dashboard/actions/runs/39394643881/job/118534227799	
+Code Style (Pint)	pass	1m53s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39394643881/job/118534225712	
+Coverage Report (Blade-aware, informational)	pass	12s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39394643881/job/118537096549	
+E2E Tests (Playwright)	pass	22m43s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39394643881/job/118534225600	
+PHP 8.6 Preview (non-blocking)	pass	5m17s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39394643881/job/118534225165	
+PHPStan Static Analysis	pass	31s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39394643881/job/118534225656	
+Tests & Coverage	pass	7m3s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39394643881/job/118534225623	
+Typecheck (Playwright specs, informational)	pass	18s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39394643881/job/118534225678	
+Mutation Testing	skipping	0	https://github.com/asgarimehdi/h-dashboard/actions/runs/39394643881/job/118534227799	

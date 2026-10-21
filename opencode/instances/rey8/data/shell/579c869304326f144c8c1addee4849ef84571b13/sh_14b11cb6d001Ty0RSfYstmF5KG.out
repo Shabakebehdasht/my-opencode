@@ -1,0 +1,206 @@
+=== c8f99232 (1107) blade diff ===
+commit c8f992324c82ef1600f51d164bd0b9b088ada2f9
+Author: Shabakebehdasht <Shabakebehdasht@users.noreply.github.com>
+Date:   Sat Oct 17 11:16:41 2026 +0000
+
+    fix(users): revoke the target's Sanctum tokens on an admin password reset
+    
+    `updateUser()` wrote the password but left every existing token valid, while
+    the self-service path (`auth/changepassword`) already calls `tokens()->delete()`
+    (#678). The admin reset now revokes **all** of the target's tokens too, guarded
+    on an actually-changed password so a plain profile/role edit keeps devices
+    logged in. All tokens die (including `map-dashboard`), matching the self-service
+    path — see the expert comment's option الف-۱.
+    
+    Scope note: the raw issue's "add POST /api/logout" step is intentionally NOT
+    here — that is issue #1071 verbatim.
+    
+    docs/agents/api-auth.md: the "revoked on password change (#678)" contract now
+    names both paths, the all-tokens decision, and the no-password guard.
+    
+    Product impact: the target's Flutter session ends and must re-login.
+    
+    Closes #1030
+
+diff --git a/resources/views/livewire/users/index.blade.php b/resources/views/livewire/users/index.blade.php
+index 32106567..1e31235b 100644
+--- a/resources/views/livewire/users/index.blade.php
++++ b/resources/views/livewire/users/index.blade.php
+@@ -357,18 +357,34 @@ public function updateUser(): void
+ 
+             $data = ['n_code' => $this->n_code];
+ 
++            $passwordChanged = (bool) $this->password;
++
+             if ($this->password) {
+                 $data['password'] = bcrypt($this->password);
+             }
+ 
+             $user->update($data);
++
++            // Issue #1030: an admin password reset must revoke the target's
++            // Sanctum tokens, exactly like the self-service path
++            // (`auth/changepassword`) already does. Guarded on an
++            // actually-changed password: a plain profile/role edit must not log
++            // the user's devices out. Every token dies (including
++            // `map-dashboard`) so both password-change paths stay in lockstep —
++            // see `docs/agents/api-auth.md`.
++            if ($passwordChanged) {
++                $user->tokens()->delete();
++            }
++
+             $user->roles()->sync($this->role_ids ?? []);
+             $user->syncPermissions($this->user_permissions ?? []);
+             $user->units()->sync($this->unit_ids ?? []);
+             app(AccessService::class)->clearCache($user);
+ 
+             $this->resetForm();
+-            $this->success('کاربر با موفقیت ویرایش شد.');
++            $this->success($passwordChanged
++                ? 'کاربر با موفقیت ویرایش شد. با تغییر رمز، نشست‌های فعال کاربر بسته شد.'
++                : 'کاربر با موفقیت ویرایش شد.');
+         } catch (ValidationException $e) {
+             foreach ($e->validator->errors()->all() as $error) {
+                 $this->error($error, position: 'toast-bottom');
+
+=== c8f99232 (1107) test diff ===
+commit c8f992324c82ef1600f51d164bd0b9b088ada2f9
+Author: Shabakebehdasht <Shabakebehdasht@users.noreply.github.com>
+Date:   Sat Oct 17 11:16:41 2026 +0000
+
+    fix(users): revoke the target's Sanctum tokens on an admin password reset
+    
+    `updateUser()` wrote the password but left every existing token valid, while
+    the self-service path (`auth/changepassword`) already calls `tokens()->delete()`
+    (#678). The admin reset now revokes **all** of the target's tokens too, guarded
+    on an actually-changed password so a plain profile/role edit keeps devices
+    logged in. All tokens die (including `map-dashboard`), matching the self-service
+    path — see the expert comment's option الف-۱.
+    
+    Scope note: the raw issue's "add POST /api/logout" step is intentionally NOT
+    here — that is issue #1071 verbatim.
+    
+    docs/agents/api-auth.md: the "revoked on password change (#678)" contract now
+    names both paths, the all-tokens decision, and the no-password guard.
+    
+    Product impact: the target's Flutter session ends and must re-login.
+    
+    Closes #1030
+
+diff --git a/tests/Feature/UsersManagementTest.php b/tests/Feature/UsersManagementTest.php
+index c513926e..dd773e7d 100644
+--- a/tests/Feature/UsersManagementTest.php
++++ b/tests/Feature/UsersManagementTest.php
+@@ -343,6 +343,26 @@ function users849Fixtures(array $attackerPermissions = ['manage_users']): array
+     return ['unitA' => $unitA, 'unitB' => $unitB, 'attacker' => $attacker, 'victim' => $victim];
+ }
+ 
++/**
++ * Issue #1030: a target account in the acting admin's unit scope, ready to be
++ * edited through users.index. Mirrors the #849 fixtures' person+user+unit shape.
++ */
++function users1030Target(Unit $unit, string $nCode): User
++{
++    Person::create([
++        'n_code' => $nCode,
++        'f_name' => 'هدف',
++        'l_name' => 'تست',
++        'u_id' => $unit->id,
++        's_id' => 1, 't_id' => 1, 'e_id' => 1, 'r_id' => 1,
++    ]);
++
++    $user = User::create(['n_code' => $nCode, 'password' => bcrypt('password')]);
++    $user->units()->attach($unit->id, ['role' => 'staff', 'is_primary' => true]);
++
++    return $user;
++}
++
+ test('#849: user table, unit picker and person search are unit-scoped', function () {
+     $f = users849Fixtures();
+ 
+@@ -555,3 +575,93 @@ function users849Fixtures(array $attackerPermissions = ['manage_users']): array
+     $component->call('delete', $colleague->id);
+     expect($colleague->fresh()->trashed())->toBeTrue();
+ });
++
++// ──────────────────────────────────────────────
++// Issue #1030 — admin password reset revokes the target's tokens
++// ──────────────────────────────────────────────
++
++test('#1030: admin password reset revokes the target user\'s tokens', function () {
++    $role = Role::create(['name' => 'operator', 'label' => 'اپراتور']);
++    $target = users1030Target($this->unit, '9070000001');
++    $tokenId = $target->createToken('flutter-app')->accessToken->id;
++
++    expect($target->tokens()->count())->toBe(1);
++
++    Livewire::actingAs($this->admin)->test('users.index')
++        ->call('edit', $target->id)
++        ->set('role_ids', [$role->id])
++        ->set('password', 'new-secret-123')
++        ->call('updateUser')
++        ->assertHasNoErrors();
++
++    expect(Hash::check('new-secret-123', $target->fresh()->password))->toBeTrue();
++    $this->assertDatabaseMissing('personal_access_tokens', ['id' => $tokenId]);
++    expect($target->tokens()->count())->toBe(0);
++});
++
++test('#1030: editing a user without a password keeps their tokens alive', function () {
++    $role = Role::create(['name' => 'operator', 'label' => 'اپراتور']);
++    $target = users1030Target($this->unit, '9070000002');
++    $tokenId = $target->createToken('flutter-app')->accessToken->id;
++
++    Livewire::actingAs($this->admin)->test('users.index')
++        ->call('edit', $target->id)
++        ->set('role_ids', [$role->id])
++        ->call('updateUser')
++        ->assertHasNoErrors();
++
++    // A plain profile/role edit must NOT log the user's devices out — the
++    // revocation is guarded on an actually-changed password, not the method.
++    $this->assertDatabaseHas('personal_access_tokens', ['id' => $tokenId]);
++    expect($target->tokens()->count())->toBe(1);
++});
++
++test('#1030: admin password reset revokes every token, including map-dashboard', function () {
++    $role = Role::create(['name' => 'operator', 'label' => 'اپراتور']);
++    $target = users1030Target($this->unit, '9070000003');
++    $flutterId = $target->createToken('flutter-app')->accessToken->id;
++    $mapId = $target->createToken('map-dashboard')->accessToken->id;
++
++    Livewire::actingAs($this->admin)->test('users.index')
++        ->call('edit', $target->id)
++        ->set('role_ids', [$role->id])
++        ->set('password', 'new-secret-123')
++        ->call('updateUser')
++        ->assertHasNoErrors();
++
++    // Option الف-۱ from the expert comment: revoke ALL tokens, exactly like the
++    // self-service path — so `map-dashboard` dies too. This test pins that as a
++    // deliberate decision, not an accident.
++    $this->assertDatabaseMissing('personal_access_tokens', ['id' => $flutterId]);
++    $this->assertDatabaseMissing('personal_access_tokens', ['id' => $mapId]);
++    expect($target->tokens()->count())->toBe(0);
++});
++
++test('#1030: both password-change paths revoke all of an account\'s tokens', function () {
++    $role = Role::create(['name' => 'operator', 'label' => 'اپراتور']);
++
++    // Path A — admin reset through users.index/updateUser().
++    $targetA = users1030Target($this->unit, '9070000004');
++    $targetA->createToken('flutter-app');
++
++    Livewire::actingAs($this->admin)->test('users.index')
++        ->call('edit', $targetA->id)
++        ->set('role_ids', [$role->id])
++        ->set('password', 'new-secret-123')
++        ->call('updateUser')
++        ->assertHasNoErrors();
++
++    expect($targetA->tokens()->count())->toBe(0);
++
++    // Path B — the user's own change-password form. Same contract: zero tokens.
++    $targetB = users1030Target($this->unit, '9070000005');
++    $targetB->createToken('flutter-app');
++

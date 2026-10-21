@@ -1,0 +1,3 @@
+#1027 body: ok
+discussion: {"errors":[{"path":["mutation","updateDiscussionComment","input","commentId"],"extensions":{"code":"missingRequiredInputObjectAttribute","argumentName":"commentId","argumentType":"ID!","inputObjectTyp
+body chars: 7287 -> 10766

@@ -1,0 +1,7 @@
+ M .env.testing
+ M resources/views/livewire/users/index.blade.php
+ M tests/Feature/UsersManagementTest.php
+ .env.testing                                   |  2 +-
+ resources/views/livewire/users/index.blade.php |  7 +++++--
+ tests/Feature/UsersManagementTest.php          | 28 ++++++++++++++++++++++++++
+ 3 files changed, 34 insertions(+), 3 deletions(-)

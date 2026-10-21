@@ -1,0 +1,29 @@
+  ✓ Typecheck tests/e2e + playwright.config.ts (never gates)
+  ✓ Post Setup Node
+  ✓ Post Checkout code
+  ✓ Complete job
+✓ Coverage Report (Blade-aware, informational) in 10s (ID 117707088894)
+  ✓ Set up job
+  ✓ Checkout code
+  ✓ Setup PHP
+  ✓ Download coverage.xml from the test job
+  ✓ Report the real coverage picture (app/ + Blade)
+  ✓ Post Checkout code
+  ✓ Complete job
+
+ANNOTATIONS
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+Typecheck (Playwright specs, informational): .github#1
+
+- "The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748"
+Coverage Report (Blade-aware, informational): .github#1
+
+WATCH_EXIT=0
+Code Style (Pint)	pass	1m48s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39137780132/job/117705959466	
+Coverage Report (Blade-aware, informational)	pass	10s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39137780132/job/117707088894	
+E2E Tests (Playwright)	pass	23m18s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39137780132/job/117705959451	
+Mutation Testing	pass	19m56s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39137780132/job/117705959246	
+PHP 8.6 Preview (non-blocking)	pass	4m53s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39137780132/job/117705959514	
+PHPStan Static Analysis	pass	24s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39137780132/job/117705959432	
+Tests & Coverage	pass	5m14s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39137780132/job/117705959437	
+Typecheck (Playwright specs, informational)	pass	10s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39137780132/job/117705959528	

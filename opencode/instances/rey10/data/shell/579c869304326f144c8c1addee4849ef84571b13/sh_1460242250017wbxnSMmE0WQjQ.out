@@ -1,0 +1,10 @@
+=== #982 (looks like my finding #17) ===
+#982 [CLOSED] closedAt=2026-10-15T07:34:14Z labels=[]
+[correctness] Dead calendar guard in /todo loads all todos and open tickets unbounded
+
+=== is #982 actually fixed in code? ===
+41:    private ?string $calendarStart = null;
+58:        $this->calendarStart = $start;
+71:        $cacheKey = 'calendar:events:'.$user->id.':'.$calendarVersion.':'.md5(implode(',', $accessibleIds)).':'.($this->calendarStart ?? 'all').':'.($this->calendarEnd ?? 'all');
+100:            if ($this->calendarStart) {
+101:                $todoQuery->where('start_at', '>=', $this->calendarStart);

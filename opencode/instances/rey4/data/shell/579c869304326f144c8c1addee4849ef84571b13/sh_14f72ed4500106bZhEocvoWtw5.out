@@ -1,0 +1,6 @@
+[fix/1003-e2e-secure-cookie a48f77c4] fix(security): ship Secure session cookies in the example env files (#1003)
+ 4 files changed, 16 insertions(+), 12 deletions(-)
+a48f77c4 fix(security): ship Secure session cookies in the example env files (#1003)
+680a7f53 fix(security): default session cookie to Secure (#1003)
+ M composer.lock
+ M package-lock.json

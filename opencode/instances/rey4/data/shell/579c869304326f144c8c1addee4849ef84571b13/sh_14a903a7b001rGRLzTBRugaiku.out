@@ -1,0 +1,50 @@
+
+── PHPStan (static analysis)
+Note: Using configuration file /tmp/opencode/pr1090/phpstan.neon.
+
+ [OK] No errors                                                                 
+
+
+── Tests (tests/Feature/UsersManagementTest.php)
+Generated a per-clone APP_KEY in .env.testing (value not shown).
+
+   INFO  Configuration cache cleared successfully.  
+
+
+   INFO  Route cache cleared successfully.  
+
+
+  [30;42;1m PASS [39;49;22m[39m Tests\Feature\UsersManagementTest[39m
+  [32;1m✓[39;22m[90m [39m[90musers search folds arabic alef in stored person name[39m[90m                [39m [90m1.56s[39m  
+  [32;1m✓[39;22m[90m [39m[90m#849: an empty scope renders nobody, not everybody[39m[90m                  [39m [90m0.81s[39m  
+  [32;1m✓[39;22m[90m [39m[90m#849: delete and restore are refused for a foreign user[39m[90m             [39m [90m0.72s[39m  
+  [32;1m✓[39;22m[90m [39m[90m#1028: an empty scope refuses even an in-scope person n_code[39m[90m        [39m [90m1.08s[39m  
+  [32;1m✓[39;22m[90m [39m[90mmanage_users holder cannot delete themselves[39m[90m                        [39m [90m0.20s[39m  
+  [32;1m✓[39;22m[90m [39m[90m#849: createUser requires at least one role, like updateUser[39m[90m        [39m [90m0.97s[39m  
+  [32;1m✓[39;22m[90m [39m[90m#1028: updateUser cannot re-bind an in-scope user to an out-of-scop[39m[90m…[39m [90m1.21s[39m  
+  [32;1m✓[39;22m[90m [39m[90musers search folds zwj in stored person name[39m[90m                        [39m [90m0.25s[39m  
+  [32;1m✓[39;22m[90m [39m[90m#849: the direct editing_user_id path cannot take over a foreign us[39m[90m…[39m [90m1.22s[39m  
+  [32;1m✓[39;22m[90m [39m[90m#849: createUser refuses units outside the actor scope[39m[90m              [39m [90m1.01s[39m  
+  [32;1m✓[39;22m[90m [39m[90mroles and permissions pages render and allow modifications[39m[90m          [39m [90m0.26s[39m  
+  [32;1m✓[39;22m[90m [39m[90m#849: user table, unit picker and person search are unit-scoped[39m[90m     [39m [90m1.10s[39m  
+  [32;1m✓[39;22m[90m [39m[90mnon-admin with manage_users cannot edit admin user[39m[90m                  [39m [90m0.53s[39m  
+  [32;1m✓[39;22m[90m [39m[90musers management pages are protected by RBAC[39m[90m                        [39m [90m0.13s[39m  
+  [32;1m✓[39;22m[90m [39m[90m#849: selectPerson refuses an out-of-scope person[39m[90m                   [39m [90m0.76s[39m  
+  [32;1m✓[39;22m[90m [39m[90m#849: in-scope users can still be edited, assigned and deleted[39m[90m      [39m [90m1.19s[39m  
+  [32;1m✓[39;22m[90m [39m[90mnon-admin with manage_users cannot assign roles without manage_role[39m[90m…[39m [90m0.60s[39m  
+  [32;1m✓[39;22m[90m [39m[90musers index renders and filters results[39m[90m                             [39m [90m0.33s[39m  
+  [32;1m✓[39;22m[90m [39m[90m#1028: createUser refuses a person with no unit (u_id null)[39m[90m         [39m [90m1.05s[39m  
+  [32;1m✓[39;22m[90m [39m[90mchange password updates password correctly[39m[90m                          [39m [90m1.08s[39m  
+  [32;1m✓[39;22m[90m [39m[90m#849: edit() refuses a foreign user[39m[90m                                 [39m [90m0.65s[39m  
+  [32;1m✓[39;22m[90m [39m[90m#1028: the n_code exists rule itself constrains u_id to the accessi[39m[90m…[39m [90m0.64s[39m  
+  [32;1m✓[39;22m[90m [39m[90m#1028: createUser refuses a foreign unit person with no account yet[39m[90m [39m [90m1.05s[39m  
+  [32;1m✓[39;22m[90m [39m[90madmin can still create update delete normally[39m[90m                       [39m [90m1.46s[39m  
+  [32;1m✓[39;22m[90m [39m[90mcreate user persists data and assigns roles[39m[90m                         [39m [90m0.76s[39m  
+  [32;1m✓[39;22m[90m [39m[90musers search folds persian digits in stored person name[39m[90m             [39m [90m0.25s[39m  
+
+  [90mTests:[39m    [32;1m26 passed[39;22m[90m (78 assertions)[39m
+  [90mDuration:[39m [39m20.96s[39m
+  [90mRandom Order Seed:[39m [39m1792252356[39m
+
+
+✅ verify passed — this matches CI's test job. Coverage is still CI-only.

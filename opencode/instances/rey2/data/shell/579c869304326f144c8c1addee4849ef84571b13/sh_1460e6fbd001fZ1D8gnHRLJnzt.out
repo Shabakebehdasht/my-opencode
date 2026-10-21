@@ -1,0 +1,16 @@
+> ✅ **آمادهٔ اجرا (ready)** — پلن اجرایی کامل و self-contained داخل همین ایشو.
+> PR پیاده‌سازی باید با `Closes #1020` همین ایشو را ببندد.
+
+یافتهٔ **ممیزی کارایی ۲۰۲۶-۱۰-۱۶** — مرجع کشف: [Discussion #998](https://github.com/asgarimehdi/h-dashboard/discussions/998).
+دامنهٔ آن اجرا فقط دستهٔ performance بود؛ امنیت، درستی، پوشش تست و داکسمنت ممیزی نشده‌اند.
+
+- مبنا: commit `096cb5a8`
+- اولویت **P2** · تلاش **M** · ریسک **MED**
+
+**سابقه:** Corrects #663: that issue asked for WithChunkReading on HardwareAuditsExport and adding that interface is exactly what makes the protection inert. The library only consults it in Reader.php (import); exports need WithCustomChunkSize.
+
+---
+
+# Plan 013: Make the Excel exports actually chunk instead of only appearing to
+
+> **Executor instructions**: Follow this plan step by step. Run every

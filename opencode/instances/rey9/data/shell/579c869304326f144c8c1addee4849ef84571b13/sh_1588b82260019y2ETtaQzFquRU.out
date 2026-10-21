@@ -1,0 +1,4 @@
+670:    public function test_bulk_mark_empty_shows_error(): void
+678:            ->call('bulkMark', true);
+682:    public function test_bulk_mark_updates_selected(): void
+694:            ->call('bulkMark', true);

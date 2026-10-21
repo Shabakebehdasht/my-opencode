@@ -1,0 +1,7 @@
+  [32;1m✓[39;22m[90m [39m[90mweb responses carry a generated request id header[39m[90m                   [39m [90m0.71s[39m  
+  [32;1m✓[39;22m[90m [39m[90mrequest id travels on the queue payload[39m[90m                             [39m [90m0.03s[39m  
+  [32;1m✓[39;22m[90m [39m[90meach request gets a fresh id[39m[90m                                        [39m [90m0.06s[39m  
+  [32;1m✓[39;22m[90m [39m[90mrequest id ignores a client supplied header[39m[90m                         [39m [90m0.04s[39m  
+  [32;1m✓[39;22m[90m [39m[90mmiddleware puts the id in the log context[39m[90m                           [39m [90m0.02s[39m  
+  [32;1m✓[39;22m[90m [39m[90mapi responses carry the header too[39m[90m                                  [39m [90m0.49s[39m  
+  [90mTests:[39m    [32;1m6 passed[39;22m[90m (13 assertions)[39m

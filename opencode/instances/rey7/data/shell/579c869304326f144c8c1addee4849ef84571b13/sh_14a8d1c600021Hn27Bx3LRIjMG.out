@@ -1,0 +1,53 @@
+author:	Shabakebehdasht
+association:	contributor
+edited:	false
+status:	none
+--
+@sonia-shab برای ریویو لطفاً.
+--
+author:	kimya30
+association:	collaborator
+edited:	false
+status:	changes requested
+--
+ریویو گیت روی PR #1090 (ایشوی #1028) — هستهٔ امنیتی تأیید است ✅، یک تست جاافتاده و یک اصلاح factual در کامنت کد مانده.
+
+**آنچه وریفای شد:**
+- هر دو مسیر `createUser` و `updateUser` از هلپر واحد `personNCodeExistsRule()` رول scope‌دار می‌گیرند — عین الگوی `hardware/index.blade.php:324` و عین تجویز کارشناس — و ترتیب `authorize → assert*InScope → validate` و بدنهٔ assertها دست‌نخورده‌اند؛ رد شدن یعنی خطای validation روی `n_code` قبل از هر نوشتن، نه ساخت بی‌صدا.
+- هر چهار تست تازه واقعی‌اند: رد شخص واحد بیگانه در create (بدون ساخته‌شدن حساب)، رد re-bind در update (با ثابت‌ماندن `n_code` و واحد شخص مقصد)، fail-closed روی scope خالیِ mock‌شده حتی برای شخص داخل‌دامنه، و تست Unit روی خود رول با Reflection. فایل تست کاملاً افزایشی است (+135/−0) و تست موجودی تضعیف نشده؛ CI روی head سبز است (Tests & Coverage + Pint + PHPStan).
+
+**موارد لازم قبل از مرج** (برنچ این PR روی fork است و دسترسی پوش ندارم، وگرنه مثل بقیهٔ موارد این موج خودم اعمالشان می‌کردم — هر دو آمادهٔ اعمال‌اند):
+
+۱. **تست «شخص بدون واحد» از بخش ۴ کارشناس جا افتاده** و دلیل حذفش نادرست بود: `persons.u_id` روی beta ‏nullable است (مایگریشن `2026_09_03_002219` آن را `nullable()->change()` کرده و FK ‏`persons_u_id_foreign_units` هم `onDelete('set null')` است). رفتار فعلی درست و fail-closed است — ‏NULL در SQL در هیچ `IN`ای match نمی‌شود — ولی باید قفل شود. تست آماده (در `tests/Feature/UsersManagementTest.php` کنار بقیهٔ تست‌های #1028):
+
+```php
+test('#1028: createUser refuses a person with no unit (u_id null)', function () {
+    $f = users849Fixtures(['manage_users', 'manage_roles']);
+    $role = Role::create(['name' => 'operator', 'label' => 'اپراتور']);
+
+    Person::create([
+        'n_code' => '9055555555',
+        'f_name' => 'بدون',
+        'l_name' => 'واحد',
+        'u_id' => null,
+        's_id' => 1, 't_id' => 1, 'e_id' => 1, 'r_id' => 1,
+    ]);
+
+    Livewire::actingAs($f['attacker'])
+        ->test('users.index')
+        ->call('openFormForCreate')
+        ->set('n_code', '9055555555')
+        ->set('password', 'password123')
+        ->set('role_ids', [$role->id])
+        ->set('unit_ids', [])
+        ->call('createUser')
+        ->assertHasErrors(['n_code']);
+
+    expect(User::where('n_code', '9055555555')->exists())->toBeFalse();
+});
+```
+
+۲. **کامنت هلپر** در `users/index.blade.php` اصلاح شود — جملهٔ «`persons.u_id` is NOT NULL, so there is no null-unit escape hatch» از نظر factual غلط است؛ جایگزین درست: ستون از مایگریشن `2026_09_03_002219` ‏nullable است و تضمین fail-closed از معنای `IN` روی NULL می‌آید.
+
+موارد انجام‌شده از طرف من: reviewer ‏(`sonia-shab`) ست شد و دو جملهٔ factual اشتباه در بادی PR را هم خودم اصلاح کردم. به‌جز دو مورد بالا، اسکوپ دقیقاً دو فایل طرح است (+159/−4)، baseline دست‌نخورده و مورد خارج از اسکوپ (`Api/HardwareController.php:31`) شفاف در بادی برای پیگیری نشان شده است.
+--

@@ -1,0 +1,10 @@
+{"conclusion":"","event":"pull_request","id":39058842333,"name":"Tests","status":"in_progress"}
+--- PR checks ---
+Code Style (Pint)	pass	3m13s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39058842333/job/117472391509	
+Coverage Report (Blade-aware, informational)	pass	6m28s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39058842333/job/117472391676	
+PHPStan Static Analysis	pass	24s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39058842333/job/117472391675	
+Tests & Coverage	pass	6m36s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39058842333/job/117472391630	
+Typecheck (Playwright specs, informational)	pass	11s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39058842333/job/117472391749	
+E2E Tests (Playwright)	pending	0	https://github.com/asgarimehdi/h-dashboard/actions/runs/39058842333/job/117472391694	
+Mutation Testing	pending	0	https://github.com/asgarimehdi/h-dashboard/actions/runs/39058842333/job/117472391716	
+PHP 8.6 Preview (non-blocking)	pass	4m13s	https://github.com/asgarimehdi/h-dashboard/actions/runs/39058842333/job/117472391647	

@@ -1,0 +1,12 @@
+beta tip: 50a2bf34b26b430cf4f9ba78613796ef82e84638
+--- 2251342e ---
+commit
+2251342e Merge pull request #1101 from Shabakebehdasht/fix/1063-drop-axios-geocoding-fetch (2026-10-17 20:12:40 +0330)
+2251342e IS ancestor of canonical/beta
+--- merges in beta (top 6) ---
+50a2bf34 Merge pull request #1113 from Shabakebehdasht/fix/1056-ticket-search-persian-folding
+17780fbb Merge pull request #1112 from Shabakebehdasht/fix/1032-maps-unit-region-scope
+f270a8ea Merge pull request #1111 from Shabakebehdasht/fix/1018-scope-leaflet-css
+2e318f4e Merge pull request #1084 from haileen5/fix/1055-inbox-shared-filter-trait
+5c45df65 Merge pull request #1091 from Shabakebehdasht/fix/1024-paginate-report-pages
+2251342e Merge pull request #1101 from Shabakebehdasht/fix/1063-drop-axios-geocoding-fetch

@@ -1,0 +1,8 @@
+[perf/dashboard-auto-refresh 55ff0951] perf: make the dashboard auto-refresh actually refresh (#1164)
+ 2 files changed, 83 insertions(+), 1 deletion(-)
+55ff0951 perf: make the dashboard auto-refresh actually refresh (#1164)
+86720e90 Merge pull request #1161 from asgarimehdi/docs/move-disease-map-spec-to-discussions
+
+ resources/views/livewire/dashboard.blade.php | 36 ++++++++++++++++++++-
+ tests/Feature/DashboardPageTest.php          | 48 ++++++++++++++++++++++++++++
+ 2 files changed, 83 insertions(+), 1 deletion(-)

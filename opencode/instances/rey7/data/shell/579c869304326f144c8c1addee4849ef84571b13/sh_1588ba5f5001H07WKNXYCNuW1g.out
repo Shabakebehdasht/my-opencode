@@ -1,0 +1,37 @@
+        $this->assertDatabaseMissing('hardwares', ['id' => $hw->id]);
+    }
+
+    // ==================== S7: Bulk Operations ====================
+
+    public function test_bulk_mark_empty_shows_error(): void
+    {
+        $data = $this->createUserWithUnit(['manage_hardware']);
+        $this->actingAs($data['user']);
+        Session::put('current_unit_id', $data['unit']->id);
+
+        Livewire::test('hardware.index')
+            ->set('selected', [])
+            ->call('bulkMark', true);
+        // Should not throw, just show toast error
+    }
+
+    public function test_bulk_mark_updates_selected(): void
+    {
+        $data = $this->createUserWithUnit(['manage_hardware']);
+        $this->actingAs($data['user']);
+        Session::put('current_unit_id', $data['unit']->id);
+
+        $hw = $this->createHardwareForUser($data['user'], $data['unit'], [
+            'pc_name' => 'BulkMark-PC',
+        ]);
+
+        Livewire::test('hardware.index')
+            ->set('selected', [$hw->id])
+            ->call('bulkMark', true);
+
+        $this->assertDatabaseHas('hardwares', ['id' => $hw->id, 'mark' => true]);
+    }
+
+    public function test_bulk_delete_scoped(): void
+    {
+6348b5e2 test(#1047): witness cross-unit hardware leaks on render/DB, not state

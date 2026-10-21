@@ -1,0 +1,26 @@
+== 096cb5a8 exists? ==
+yes
+== drift since plan base ==
+ tests/Feature/ToolsPageTest.php                    |   9 +-
+ tests/Feature/UnitModelTest.php                    |  12 +-
+ tests/Feature/UnitTreeLivewireTest.php             | 135 ++++++++
+ tests/Feature/UnitTreePickerPartialTest.php        |   8 +-
+ tests/Feature/UnitsManagementTest.php              |   9 +-
+ tests/Feature/UnitsMapLivewireTest.php             |  18 +-
+ tests/Feature/UserModelTest.php                    |   8 +-
+ tests/Feature/UsersDirectoryLivewireTest.php       | 253 ++++++++++++++
+ tests/Feature/UsersManagementTest.php              | 282 ++++++++++++++-
+ tests/Feature/UsersPageTest.php                    |   8 +-
+ tests/Feature/ValidateUnitContextTest.php          |   9 +-
+ tests/Unit/ExampleTest.php                         |   5 -
+ tests/Unit/HardwareImportNormalizationTest.php     |  58 ++++
+ tests/Unit/JalaliDateRangeTest.php                 | 110 ++++++
+ tests/e2e/auth/password-change.spec.ts             |   3 +-
+ tests/e2e/maps/route2-geocoding.spec.ts            | 114 +++++++
+ tests/e2e/rbac/roles.spec.ts                       |  11 +-
+ tests/e2e/reports/single-request.spec.ts           |  61 ++++
+ tests/e2e/settings/settings.spec.ts                |   2 +-
+ 92 files changed, 5175 insertions(+), 396 deletions(-)
+== cookie asserts in tests ==
+== SecurityHeadersMiddlewareTest ==
+-rw-r--r-- 1 runner runner  3909 Oct 18 09:53 SecurityHeadersMiddlewareTest.php

@@ -1,0 +1,15 @@
+24:            'n_code' => fake()->unique()->numerify('##########'),
+=== createUserWithUnit person ===
+67-    {
+68-        $unit = Unit::factory()->create();
+69:        $person = Person::factory()->create(['u_id' => $unit->id]);
+70-        $user = User::factory()->create(['n_code' => $person->n_code]);
+71-
+72-        if ($role) {
+73-            $user->assignRole($role);
+=== git log for PersonsExportTest flake ===
+b04c9ad0 test(kargozini): pin unit names in #940 export search tests
+3774dfc0 docs(kargozini): record the #940 term-list contract; tighten its tests
+6f7655e6 fix(kargozini): build the export search term list from one source — closes #940
+24c52464 fix(export): persons export — full unit breadcrumb + birth date column (#755)
+e43842c1 feat(persons): Excel export for the personnel list with active filters (#729)

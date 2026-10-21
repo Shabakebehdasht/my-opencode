@@ -1,0 +1,13 @@
+payload bytes: 10833
+OK: {
+  "addDiscussionComment": {
+    "comment": {
+      "id": "DC_kwDOOLHV784BIZ6C",
+      "url": "https://github.com/asgarimehdi/h-dashboard/discussions/998#discussioncomment-18980482",
+      "createdAt": "2026-10-16T18:26:55Z",
+      "author": {
+        "login": "Shabakebehdasht"
+      }
+    }
+  }
+}

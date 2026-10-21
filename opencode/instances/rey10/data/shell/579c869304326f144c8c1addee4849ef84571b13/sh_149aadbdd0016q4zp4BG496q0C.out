@@ -1,0 +1,8 @@
+Rebasing (1/1)Successfully rebased and updated refs/heads/fix/1068-request-correlation-id.
+fc600e93 feat(logging): add a per-request correlation id to the log context
+096cb5a8 Merge pull request #997 from nashenas6/fix/996-sidebar-route-match
+=== files vs beta ===
+ app/Http/Middleware/RequestId.php         |  37 +++++++++++
+ bootstrap/app.php                         |  10 +++
+ tests/Feature/RequestIdMiddlewareTest.php | 106 ++++++++++++++++++++++++++++++
+ 3 files changed, 153 insertions(+)

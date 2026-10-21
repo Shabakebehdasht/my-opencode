@@ -1,0 +1,6 @@
+[fix/1003-e2e-secure-cookie 411d2122] chore(ci): retrigger the suite after a pre-existing PersonsExportTest flake
+411d2122 chore(ci): retrigger the suite after a pre-existing PersonsExportTest flake
+a48f77c4 fix(security): ship Secure session cookies in the example env files (#1003)
+680a7f53 fix(security): default session cookie to Secure (#1003)
+To https://github.com/Shabakebehdasht/h-dashboard.git
+   a48f77c4..411d2122  fix/1003-e2e-secure-cookie -> fix/1003-e2e-secure-cookie
