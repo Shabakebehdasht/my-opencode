@@ -1,3 +1,0 @@
-tests/e2e/auth/login.spec.ts
-tests/e2e/auth/password-change.spec.ts
-tests/Feature/TicketsMonitoringLivewireTest.php

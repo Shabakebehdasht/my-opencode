@@ -1,5 +1,0 @@
-fix/1071-api-logout
-109499d5 feat(logging): add a per-request correlation id to the log context
-f40105eb feat(api): add POST /api/logout that revokes the caller's current token
-096cb5a8 Merge pull request #997 from nashenas6/fix/996-sidebar-route-match
-f40105eb feat(api): add POST /api/logout that revokes the caller's current token

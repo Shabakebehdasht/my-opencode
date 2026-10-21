@@ -1,1 +1,0 @@
-Script @php -r "file_exists('.env') || exit(1);" handling the verify event returned with error code 1

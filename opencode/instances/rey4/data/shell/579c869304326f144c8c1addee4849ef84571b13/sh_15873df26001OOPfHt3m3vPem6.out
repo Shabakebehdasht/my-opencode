@@ -1,5 +1,0 @@
----branch---
-Switched to a new branch 'perf/dashboard-auto-refresh'
- resources/views/livewire/dashboard.blade.php | 36 ++++++++++++++++++++-
- tests/Feature/DashboardPageTest.php          | 48 ++++++++++++++++++++++++++++
- 2 files changed, 83 insertions(+), 1 deletion(-)

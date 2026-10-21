@@ -1,5 +1,0 @@
-1502 /tmp/opencode/ci-test-job2.log
-914:  FAILED  Tests\Feature\PersonsExportTest > export applies the unit filter     
-915: Failed asserting that two arrays are identical.
-938: Tests:    2469 deprecated, 1 failed, 2 risky, 11 passed (7709 assertions)
-992: echo "Error: The following required dependencies are missing:$missing_deps"

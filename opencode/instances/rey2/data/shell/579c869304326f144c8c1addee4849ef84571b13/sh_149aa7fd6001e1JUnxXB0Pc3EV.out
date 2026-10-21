@@ -1,4 +1,0 @@
-HEAD is now at f40105eb feat(api): add POST /api/logout that revokes the caller's current token
-f40105eb feat(api): add POST /api/logout that revokes the caller's current token
-  fix/1068-request-correlation-id             109499d5 feat(logging): add a per-request correlation id to the log context
-* fix/1071-api-logout                         f40105eb [origin/fix/1071-api-logout] feat(api): add POST /api/logout that revokes the caller's current token

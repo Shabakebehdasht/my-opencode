@@ -1,9 +1,0 @@
-ls: cannot access '.git/index': Not a directory
-HEAD
-ORIG_HEAD
-commondir
-gitdir
-index
-logs
-probe
-refs

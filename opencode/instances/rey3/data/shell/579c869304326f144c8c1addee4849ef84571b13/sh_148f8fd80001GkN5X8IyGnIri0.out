@@ -1,8 +1,0 @@
-.env.testing
-3:APP_KEY=
----
- M app/Models/User.php
- M routes/api.php
- M tests/Feature/ApiAbilityTest.php
- M tests/Feature/ApiLoginTest.php
-?? .superpowers/

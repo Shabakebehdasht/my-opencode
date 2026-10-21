@@ -1,4 +1,0 @@
-#1105 [OPEN] fix/1002-notification-write-ability -> beta | closes: | fix(#1002): gate notification mutations behind notifications:write
-#1107 [OPEN] fix/1030-admin-password-reset-revoke-tokens -> beta | closes: | fix(#1030): admin password reset revokes the target user's Sanctum tokens
-#1108 [OPEN] fix/1071-api-logout -> beta | closes: | feat(#1071): add POST /api/logout so the app can end its own session
-#1109 [OPEN] fix/1068-request-correlation-id -> beta | closes: | feat(#1068): add a request-correlation id to the log context

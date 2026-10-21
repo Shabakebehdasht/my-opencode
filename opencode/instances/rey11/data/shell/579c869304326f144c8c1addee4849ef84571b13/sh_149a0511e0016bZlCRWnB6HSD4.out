@@ -1,9 +1,0 @@
-ArchiveActivityLogsJob.php
-CleanNotificationsJob.php
-GenerateDailyReportsJob.php
-SendNotificationJob.php
-SyncZabbixJob.php
-=== constructors ===
-app/Jobs/ArchiveActivityLogsJob.php:32:    public function __construct(int $days = 90, array $unitIds = [])
-app/Jobs/CleanNotificationsJob.php:32:    public function __construct(int $days = 7, array $unitIds = [])
-app/Jobs/SendNotificationJob.php:24:    public function __construct(

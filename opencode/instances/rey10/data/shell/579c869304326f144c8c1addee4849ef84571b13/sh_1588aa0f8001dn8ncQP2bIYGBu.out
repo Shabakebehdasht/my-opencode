@@ -1,1 +1,0 @@
-334:        $this->assertTrue(true, 'out-of-scope shows error bug is pre-existing; in-scope works');

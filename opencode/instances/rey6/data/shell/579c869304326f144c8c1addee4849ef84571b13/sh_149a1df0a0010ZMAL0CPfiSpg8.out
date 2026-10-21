@@ -1,4 +1,0 @@
-{"tool":"pint","result":"fixed","files":[{"path":"tests\/Feature\/RequestIdMiddlewareTest.php","fixers":["new_with_parentheses"]}]}=== phpstan ===
-
- [OK] No errors                                                                 
-

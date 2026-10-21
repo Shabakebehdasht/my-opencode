@@ -1,4 +1,0 @@
-9:use Illuminate\Contracts\Queue\ShouldQueue;
-15:class CleanNotificationsJob implements ShouldQueue
-17:    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
-=== web.php job? ===
