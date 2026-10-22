@@ -1,0 +1,9 @@
+[detached HEAD ddee1b4a] fix(users): scope-bind the account-to-person n_code to the actor's units
+ 2 files changed, 159 insertions(+), 4 deletions(-)
+Rebasing (2/2)Successfully rebased and updated refs/heads/fix/1028-scope-bind-n-code.
+=== status ===
+=== log ===
+4d5bfce0 test(users): pin the null-unit person case and fix the rule comment
+ddee1b4a fix(users): scope-bind the account-to-person n_code to the actor's units
+50a2bf34 Merge pull request #1113 from Shabakebehdasht/fix/1056-ticket-search-persian-folding
+17780fbb Merge pull request #1112 from Shabakebehdasht/fix/1032-maps-unit-region-scope

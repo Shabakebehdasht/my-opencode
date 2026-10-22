@@ -1,0 +1,2 @@
+=== discussion comment: does it still say 'not published'? ===
+{"errors":[{"message":"Expected one of SCHEMA, SCALAR, TYPE, ENUM, INPUT, UNION, INTERFACE, actual: RCURLY (\"}\") at [1, 144]","locations":[{"line":1,"column":144}]}]}gh: Expected one of SCHEMA, SCALAR, TYPE, ENUM, INPUT, UNION, INTERFACE, actual: RCURLY ("}") at [1, 144]

@@ -1,0 +1,5 @@
+Generated a per-clone APP_KEY in .env.testing (value not shown).
+45:            "Tests\\": "tests/"
+71:        "test": [
+73:            "php scripts/ensure-test-app-key.php && php artisan config:clear && php artisan route:clear && XDEBUG_MODE=off php artisan test"
+84:        "pint:test": "pint --test",
