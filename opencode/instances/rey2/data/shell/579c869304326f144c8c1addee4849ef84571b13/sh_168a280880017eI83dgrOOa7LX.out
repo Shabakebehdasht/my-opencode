@@ -1,0 +1,14 @@
+node_modules/daisyui/theme/light.css:2:color-scheme: light;
+node_modules/daisyui/theme/light.css:3:--color-base-100: oklch(100% 0 0);
+node_modules/daisyui/theme/dark.css:2:color-scheme: dark;
+node_modules/daisyui/theme/dark.css:3:--color-base-100: oklch(25.33% 0.016 252.42);
+node_modules/daisyui/theme/synthwave.css:2:color-scheme: dark;
+node_modules/daisyui/theme/synthwave.css:3:--color-base-100: oklch(15% 0.09 281.288);
+node_modules/daisyui/theme/coffee.css:2:color-scheme: dark;
+node_modules/daisyui/theme/coffee.css:3:--color-base-100: oklch(24% 0.023 329.708);
+node_modules/daisyui/theme/cupcake.css:2:color-scheme: light;
+node_modules/daisyui/theme/cupcake.css:3:--color-base-100: oklch(97.788% 0.004 56.375);
+node_modules/daisyui/theme/fantasy.css:2:color-scheme: light;
+node_modules/daisyui/theme/fantasy.css:3:--color-base-100: oklch(100% 0 0);
+node_modules/daisyui/theme/luxury.css:2:color-scheme: dark;
+node_modules/daisyui/theme/luxury.css:3:--color-base-100: oklch(14.076% 0.004 285.822);

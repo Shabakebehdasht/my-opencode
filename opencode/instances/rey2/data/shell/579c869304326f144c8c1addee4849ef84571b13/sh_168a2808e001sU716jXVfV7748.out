@@ -1,0 +1,5 @@
+23: * @property array<string, mixed> $settings
+48:        'settings',
+51:    protected function casts(): array
+56:            'settings' => 'array',
+125:        'settings', 'remember_token'];

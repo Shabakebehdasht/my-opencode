@@ -1,0 +1,15 @@
+18:    /** Days covered by the ticket trend chart — one definition shared with /api/reports (#736). */
+268:        return Cache::remember("dashboard:ticket_chart:v{$v}:{$scopeKey}", 300, function () {
+274:            // missing from the chart entirely.
+330:     * The traffic charts can only be showing fresh numbers when the LAST
+480:                <x-icon name="o-chart-bar" class="w-5 h-5 text-info" />
+489:                <x-icon name="o-chart-pie" class="w-5 h-5 text-warning" />
+602:            <x-icon name="o-chart-bar" class="w-5 h-5 text-primary" />
+666:    <script src="{{ asset('js/chart/highcharts.js') }}"></script>
+667:    <script src="{{ asset('js/chart/accessibility.js') }}"></script>
+675:        function waitForHighcharts(callback, attempts = 0) {
+676:            if (typeof window.Highcharts !== 'undefined') {
+681:                console.error('Highcharts failed to load');
+684:            setTimeout(() => waitForHighcharts(callback, attempts + 1), 50);
+688:            if (!container || typeof Highcharts === 'undefined') {
+691:            const existing = Highcharts.charts?.find(c => c && c.renderTo === container);

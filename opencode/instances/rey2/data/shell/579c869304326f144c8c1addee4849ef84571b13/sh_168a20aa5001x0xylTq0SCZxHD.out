@@ -1,0 +1,44 @@
+resources/views/livewire/permissions/index.blade.php:163:            <x-theme-selector/>
+resources/views/livewire/users/index.blade.php:617:            <x-theme-selector/>
+resources/views/livewire/kargozini/estekhdam.blade.php:155:            <x-theme-selector/>
+resources/views/livewire/kargozini/radif.blade.php:155:            <x-theme-selector/>
+resources/views/livewire/kargozini/semat.blade.php:155:            <x-theme-selector/>
+resources/views/livewire/kargozini/person.blade.php:436:            <x-theme-selector/>
+resources/views/livewire/kargozini/tahsil.blade.php:155:            <x-theme-selector/>
+resources/views/livewire/tools/tools.blade.php:145:            <x-theme-selector />
+resources/views/livewire/maps/route2.blade.php:36:            <x-theme-selector/>
+resources/views/livewire/maps/county.blade.php:85:            <x-theme-selector/>
+resources/views/livewire/maps/route.blade.php:24:            <x-theme-selector/>
+resources/views/livewire/maps/unit.blade.php:260:            <x-theme-selector/>
+resources/views/livewire/maps/point.blade.php:85:            <x-theme-selector/>
+resources/views/livewire/reports/advanced.blade.php:326:            <x-theme-selector/>
+resources/views/livewire/reports/todos.blade.php:174:            <x-theme-selector/>
+resources/views/livewire/reports/map-no-boundary.blade.php:79:            <x-theme-selector/>
+resources/views/livewire/reports/units.blade.php:142:            <x-theme-selector/>
+resources/views/livewire/reports/persons.blade.php:174:            <x-theme-selector/>
+resources/views/livewire/hardware/_toolbar.blade.php:4:            <x-theme-selector/>
+resources/views/livewire/settings/index.blade.php:92:                <x-theme-selector/>
+resources/views/livewire/profile/index.blade.php:90:            <x-theme-selector />
+resources/views/livewire/auth/login.blade.php:244:                <x-theme-selector />
+resources/views/livewire/auth/changepassword.blade.php:60:            <x-theme-selector/>
+resources/views/livewire/hr/dashboard.blade.php:121:            <x-theme-selector />
+resources/views/livewire/hr/dashboard.blade.php:173:    // Palettes keyed by data-theme (see x-theme-selector: fantasy light / dark).
+resources/views/livewire/hr/dashboard.blade.php:265:    // maryUI x-theme-toggle dispatches this bubbling CustomEvent on switch.
+resources/views/livewire/hr/org-chart.blade.php:119:            <x-theme-selector />
+resources/views/livewire/todo/todo.blade.php:493:            <x-theme-selector />
+resources/views/livewire/dashboard.blade.php:390:            <x-theme-selector/>
+resources/views/livewire/search/index.blade.php:197:            <x-theme-selector/>
+resources/views/livewire/activity-log/index.blade.php:157:            <x-theme-selector />
+resources/views/livewire/roles/index.blade.php:151:            <x-theme-selector/>
+resources/views/livewire/maintenance/index.blade.php:348:            <x-theme-selector/>
+resources/views/livewire/tickets/⚡create.blade.php:259:                <x-theme-selector />
+resources/views/livewire/tickets/⚡monitoring.blade.php:258:            <x-theme-selector />
+resources/views/livewire/tickets/⚡inbox.blade.php:442:            <x-theme-selector />
+resources/views/livewire/units/index.blade.php:674:            <x-theme-selector/>
+resources/views/livewire/units/chart.blade.php:133:            <x-theme-selector/>
+resources/views/livewire/units/map.blade.php:160:            <x-theme-selector/>
+resources/views/livewire/it/zabbix-devices.blade.php:417:            <x-theme-selector/>
+resources/views/livewire/it/networks.blade.php:62:            <x-theme-selector/>
+resources/views/livewire/it/wireless.blade.php:83:            <x-theme-selector/>
+tests/Feature/Accessibility/IconButtonAccessibleNameTest.php:24: * وگرنه کدِ کامنت‌شدهٔ `theme-selector` به‌عنوان سایت زنده شمرده می‌شود.
+tests/Feature/AccessibilityInfrastructureTest.php:495:        // `.theme-controller` کنترلر داخلی DaisyUI برای `<x-theme-toggle>` است.

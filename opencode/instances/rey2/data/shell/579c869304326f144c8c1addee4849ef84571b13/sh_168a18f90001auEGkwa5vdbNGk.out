@@ -1,0 +1,23 @@
+  main
+* rey2
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/beta
+  remotes/origin/main
+  remotes/origin/sevda
+51821dbc Merge pull request #1223 from haileen5/fix/1220-neutral-active-menu
+b7f49b8c fix(#1220): use daisyUI neutral pair for the active sidebar item
+commit b7f49b8c4155338ab2b58b40120893aa70052472
+Author: haileen5 <haileen5@users.noreply.github.com>
+Date:   Fri Oct 23 11:18:51 2026 +0000
+
+    fix(#1220): use daisyUI neutral pair for the active sidebar item
+    
+    daisyUI paints [aria-current=page] with --menu-active-fg (--color-neutral-content), while MaryUI paints the background with bg-base-300. The two token families collide in light (1.09:1), cupcake and fantasy (1.01:1); fantasy is the default theme.
+    
+    Owner decision (issue #1220) is option C: keep the pair inside daisyUI's own neutral family. Passing active-bg-color="bg-neutral text-neutral-content" to x-menu does that in all seven themes and also cascades to the open submenu header (the gate accepts either header pair; both stay readable). aria-current, mary-active-menu, MaryUI itself, the glass block and inactive hover are untouched.
+    
+    Measured active contrast: light 15.71, dark 15.71, synthwave 5.58, coffee 11.54, cupcake 11.90, fantasy 9.46, luxury 13.54. The new e2e spec pins the computed pair and the >=4.5 ratio for every theme.
+
+ resources/views/components/layouts/app.blade.php |  11 +-
+ tests/e2e/theme/sidebar-active-contrast.spec.ts  | 228 +++++++++++++++++++++++
+ 2 files changed, 238 insertions(+), 1 deletion(-)
