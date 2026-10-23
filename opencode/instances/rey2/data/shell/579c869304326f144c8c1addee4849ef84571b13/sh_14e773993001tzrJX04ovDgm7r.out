@@ -1,3 +1,0 @@
-{"fork":false,"full_name":"asgarimehdi/h-dashboard","permissions":{"admin":false,"maintain":false,"pull":true,"push":false,"triage":false},"private":false}
----
-{"fork":true,"full_name":"Shabakebehdasht/h-dashboard","parent":"asgarimehdi/h-dashboard","permissions":{"admin":true,"maintain":true,"pull":true,"push":true,"triage":true}}

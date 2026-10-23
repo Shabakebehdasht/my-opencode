@@ -1,8 +1,0 @@
-origin	https://github.com/Shabakebehdasht/h-dashboard.git (fetch)
-origin	https://github.com/Shabakebehdasht/h-dashboard.git (push)
-rey2
-51821dbc Merge pull request #1223 from haileen5/fix/1220-neutral-active-menu
-b7f49b8c fix(#1220): use daisyUI neutral pair for the active sidebar item
-621009a4 Merge pull request #1222 from hailyn3/fix/1221-map-host-wire-key
-346268d6 fix(#1221): give every maps.map host a stable wire:key
-0ba28f5c Merge pull request #1219 from nashenas6/sink

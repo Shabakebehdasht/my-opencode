@@ -1,9 +1,0 @@
- M .env.testing
- M app/Traits/TicketsInboxFlow.php
- M composer.lock
- M package-lock.json
- M phpstan-baseline.neon
- M resources/views/livewire/tickets/ticket-comments.blade.php
- M "resources/views/livewire/tickets/\342\232\241monitoring.blade.php"
-?? .superpowers/
-TRACKED-CANDIDATE

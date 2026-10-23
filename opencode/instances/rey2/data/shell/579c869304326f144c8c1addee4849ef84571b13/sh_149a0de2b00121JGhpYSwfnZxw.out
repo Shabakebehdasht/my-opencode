@@ -1,9 +1,0 @@
-  [31;1m⨯[39;22m[90m [39m[90mmiddleware puts the id in the log context[39m[90m                           [39m [90m0.69s[39m  
-  [31;1m⨯[39;22m[90m [39m[90meach request gets a fresh id[39m[90m                                        [39m [90m0.08s[39m  
-  [31;1m⨯[39;22m[90m [39m[90mweb responses carry a generated request id header[39m[90m                   [39m [90m0.04s[39m  
-  [31;1m⨯[39;22m[90m [39m[90mrequest id ignores a client supplied header[39m[90m                         [39m [90m0.04s[39m  
-  [31;1m⨯[39;22m[90m [39m[90mapi responses carry the header too[39m[90m                                  [39m [90m0.03s[39m  
-  [32;1m✓[39;22m[90m [39m[90mrequest id travels on the queue payload[39m[90m                             [39m [90m0.03s[39m  
-  [41;1m FAILED [49;22m [1mTests\Feature\RequestIdMiddlewareTest[22m [90m>[39m middleware puts th… [41;1m Error [49;22m  
-[39;1m  Class "App\Http\Middleware\RequestId" not found[39;22m
-  [90mTests:[39m    [31;1m5 failed[39;22m[90m,[39m[39m [39m[32;1m1 passed[39;22m[90m (8 assertions)[39m

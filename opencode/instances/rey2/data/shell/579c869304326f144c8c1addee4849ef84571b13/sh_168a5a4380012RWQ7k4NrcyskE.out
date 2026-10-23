@@ -1,3 +1,0 @@
-resources/views/livewire/hr/dashboard.blade.php
-resources/views/livewire/dashboard.blade.php:397:        <div class="alert alert-info mb-6" role="alert">
-resources/views/livewire/dashboard.blade.php:405:        <div class="mb-6 alert {{ ['ok' => 'alert-success', 'stale' => 'alert-warning', 'failing' => 'alert-error'][$zabbixSync['state']] }} shadow-sm" role="alert">
