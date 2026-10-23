@@ -1,0 +1,60 @@
+
+  ✘  1 [chromium] › tests/e2e/theme/badge-verify.spec.ts:13:3 › badge solid verify › badge solid across themes (2ms)
+  ✘  2 [chromium] › tests/e2e/theme/badge-verify.spec.ts:13:3 › badge solid verify › badge solid across themes (retry #1) (2ms)
+  ✘  3 [chromium] › tests/e2e/theme/badge-verify.spec.ts:13:3 › badge solid verify › badge solid across themes (retry #2) (2ms)
+
+
+  1) [chromium] › tests/e2e/theme/badge-verify.spec.ts:13:3 › badge solid verify › badge solid across themes 
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1248/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/theme-badge-verify-badge-s-a83f0-y-badge-solid-across-themes-chromium/error-context.md
+
+    Retry #1 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1248/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/theme-badge-verify-badge-s-a83f0-y-badge-solid-across-themes-chromium-retry1/error-context.md
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/theme-badge-verify-badge-s-a83f0-y-badge-solid-across-themes-chromium-retry1/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/theme-badge-verify-badge-s-a83f0-y-badge-solid-across-themes-chromium-retry1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Retry #2 ───────────────────────────────────────────────────────────────────────────────────────
+
+    Error: browserType.launch: Executable doesn't exist at /home/runner/.cache/ms-playwright/chromium_headless_shell-1248/chrome-headless-shell-linux64/chrome-headless-shell
+    ╔════════════════════════════════════════════════════════════╗
+    ║ Looks like Playwright was just installed or updated.       ║
+    ║ Please run the following command to download new browsers: ║
+    ║                                                            ║
+    ║     npx playwright install                                 ║
+    ║                                                            ║
+    ║ <3 Playwright Team                                         ║
+    ╚════════════════════════════════════════════════════════════╝
+
+    Error Context: test-results/theme-badge-verify-badge-s-a83f0-y-badge-solid-across-themes-chromium-retry2/error-context.md
+
+  1 failed
+    [chromium] › tests/e2e/theme/badge-verify.spec.ts:13:3 › badge solid verify › badge solid across themes 
+[e2e] Server stopped
+[e2e] .env restored
