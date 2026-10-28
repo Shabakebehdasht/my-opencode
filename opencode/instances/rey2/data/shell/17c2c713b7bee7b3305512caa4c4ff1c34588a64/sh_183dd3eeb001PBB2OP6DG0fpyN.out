@@ -1,0 +1,5 @@
+packages/experimental/liveshare-protocol/tests/viewer-carrier.client.spec.ts:253:    const unauthorized = await readStream([{ status: 401, body: { error: 'authentication required' } }])
+packages/host/frontend-static/tests/frontend-static.spec.ts:128:      body: 'dsh web authentication required; reopen the URL printed by dsh web.\n',
+packages/client/connection/src/browser-auth.ts:392:      : 'dsh web authentication required; reopen the URL printed by dsh web.\n')
+packages/client/connection/tests/browser-auth.host.spec.ts:106:      body: 'dsh web authentication required; reopen the URL printed by dsh web.\n',
+packages/client/connection/tests/browser-auth.host.spec.ts:286:        : 'dsh web authentication required; reopen the URL printed by dsh web.\n')

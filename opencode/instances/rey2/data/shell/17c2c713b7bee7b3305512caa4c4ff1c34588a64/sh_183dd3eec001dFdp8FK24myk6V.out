@@ -1,0 +1,13 @@
+re-exchange -> 303
+HTTP/1.1 303 See Other
+cache-control: no-store
+location: ./
+referrer-policy: no-referrer
+set-cookie: dsh-auth-8YxVmW_PF8GKYpwoMPfQ4tQh_RbWptvjcTzJ9GPkIlA=v1.eyJ2ZXJzaW9uIjoxLCJhdXRob3JpdHkiOiJyZXkyOjk2OTYiLCJpc3N1ZWRBdCI6MTc5MzIxMzY3NzMwNSwiZXhwaXJlc0F0IjoxNzk1ODA1Njc3MzA1fQ.AhpxKbBxKLDv_1s7pz1usyQSA0ZvLViyBvj_GTRxxl0; Max-Age=2592000; Path=/; Expires=Fri, 27 Nov 2026 18:54:37 GMT; HttpOnly; SameSite=Strict
+Date: Wed, 28 Oct 2026 18:54:37 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+plain / -> 401
+authentication required; reopen the URL printed by dsh web.

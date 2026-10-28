@@ -1,0 +1,15 @@
+README.i18n.yaml
+README.md
+README.zh.md
+composition.md
+config
+package.json
+reference
+src
+tests
+tsconfig.json
+cli
+desktop
+desktop-host
+plugin-market-generator
+web

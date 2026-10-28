@@ -1,0 +1,16 @@
+packages/bundle/web-app/src/index.ts:5: * the built frontend dist (workspace knowledge of this bundle, never user
+packages/bundle/web-app/src/index.ts:121: * ships its own page and carries no dist) boots without one.
+packages/bundle/web-app/src/index.ts:126:    return join(dirname(require.resolve('@deepseek-ai/dsh-web-frontend/package.json')), 'dist', 'index.html')
+packages/bundle/web-app/src/index.ts:174:/** Test hooks for the built dist and native browser handoff; production never mutates them. */
+packages/bundle/web-app/src/index.ts:181: * Mount the Web runtime: dist serving, the bash runtime variable, the URL
+packages/bundle/web-app/src/index.ts:206:  ctx.plugin(FrontendStatic, { distIndex: internals.resolveDistIndex() })
+AGENTS.md
+README.i18n.yaml
+README.md
+README.zh.md
+connection
+file-upload
+hmr
+locale
+modules
+product-analytics

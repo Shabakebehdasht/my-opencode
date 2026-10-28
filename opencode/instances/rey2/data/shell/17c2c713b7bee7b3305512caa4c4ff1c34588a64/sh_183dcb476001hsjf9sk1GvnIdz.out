@@ -1,0 +1,4 @@
+GET / via rey2 -> 401
+GET / via IP -> 401
+GET /api/host/ping no token via rey2 -> 401
+LISTEN 0      511                            100.110.197.96:9696       0.0.0.0:*    users:(("MainThread",pid=33772,fd=832))    

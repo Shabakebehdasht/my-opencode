@@ -1,0 +1,15 @@
+build:web = pnpm --filter @deepseek-ai/dsh-web-frontend run build
+test:web = npm run build && npm run test:web:built
+test:web:refresh = npm run build && DSH_SNAPSHOT=refresh vitest run --config vitest.web.config.ts
+test:web:built = vitest run --config vitest.web.config.ts
+test:web:ci = tsx scripts/run-web-snapshots.ts
+test:web:perf = npm run build && npm run test:web:perf:built
+test:web:perf:built = DSH_SNAPSHOT=replay vitest run --config vitest.web.perf.config.ts
+test:web:stress = npm run build && vitest run --config vitest.web-stress.config.ts
+verify-dsh-package-licenses = tsx scripts/verify-dsh-package-licenses.ts
+website:dev = pnpm run docs:dev
+website:build = pnpm run docs:build
+release:dsh = tsx scripts/release/bump.ts --family dsh
+dsh = node --import tsx/esm apps/cli/src/bin.ts
+start:web = node --import tsx/esm apps/cli/src/bin.ts web
+dev:web = tsx scripts/dev-web.ts --poll
