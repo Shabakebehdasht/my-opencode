@@ -1,6 +1,0 @@
-tokenized GET -> 303 bytes=0
-location: ./
-set-cookie: dsh-auth-8YxVmW_PF8GKYpwoMPfQ4tQh_RbWptvjcTzJ9GPkIlA=v1.eyJ2ZXJzaW9uIjoxLCJhdXRob3JpdHkiOiJyZXkyOjk2OTYiLCJpc3N1ZWRBdCI6MTc5MzIxMzY0NDg2MiwiZXhwaXJlc0F0IjoxNzk1ODA1NjQ0ODYyfQ.U0f8P-XnXNb5wm7N8yQuml_VAJbByZCrw7-pnLP1mmg; Max-Age=2592000; Path=/; Expires=Fri, 27 Nov 2026 18:54:04 GMT; HttpOnly; SameSite=Strict
---- follow-up with cookie jar ---
-exchange -> 303
-GET / with cookie -> 200
