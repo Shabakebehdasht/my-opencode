@@ -1,0 +1,3 @@
+65:    public $withoutOverlapping = false;
+184:    public function withoutOverlapping($expiresAt = 1440, $releaseOnTerminationSignals = true)
+186:        $this->withoutOverlapping = true;

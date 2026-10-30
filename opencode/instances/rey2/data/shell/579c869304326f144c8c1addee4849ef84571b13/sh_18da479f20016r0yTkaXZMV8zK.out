@@ -1,0 +1,89 @@
+vendor/laravel/framework/src/Illuminate/Console/Scheduling/PendingEventAttributes.php:61:     * @param  int  $expiresAt
+vendor/laravel/framework/src/Illuminate/Console/Scheduling/PendingEventAttributes.php:65:    public function withoutOverlapping($expiresAt = 1440, $releaseOnTerminationSignals = true)
+vendor/laravel/framework/src/Illuminate/Console/Scheduling/PendingEventAttributes.php:69:        $this->expiresAt = $expiresAt;
+vendor/laravel/framework/src/Illuminate/Console/Scheduling/PendingEventAttributes.php:113:            $event->withoutOverlapping($this->expiresAt, $this->releaseOnTerminationSignals);
+vendor/laravel/framework/src/Illuminate/Console/Scheduling/ManagesAttributes.php:86:    public $expiresAt = 1440;
+vendor/laravel/framework/src/Illuminate/Console/Scheduling/ManagesAttributes.php:180:     * @param  int  $expiresAt
+vendor/laravel/framework/src/Illuminate/Console/Scheduling/ManagesAttributes.php:184:    public function withoutOverlapping($expiresAt = 1440, $releaseOnTerminationSignals = true)
+vendor/laravel/framework/src/Illuminate/Console/Scheduling/ManagesAttributes.php:188:        $this->expiresAt = $expiresAt;
+vendor/laravel/framework/src/Illuminate/Console/Scheduling/CallbackEvent.php:135:     * @param  int  $expiresAt
+vendor/laravel/framework/src/Illuminate/Console/Scheduling/CallbackEvent.php:141:    public function withoutOverlapping($expiresAt = 1440, $releaseOnTerminationSignals = true)
+---
+     */
+    public function create(Event $event)
+    {
+        if ($this->shouldUseLocks($this->cache->store($this->store)->getStore())) {
+            return $this->cache->store($this->store)->getStore()
+                ->lock($event->mutexName(), $event->expiresAt * 60)
+                ->acquire();
+        }
+
+        return $this->cache->store($this->store)->add(
+            $event->mutexName(), true, $event->expiresAt * 60
+        );
+    }
+
+    /**
+     * Determine if an event mutex exists for the given event.
+     *
+     * @param  \Illuminate\Console\Scheduling\Event  $event
+     * @return bool
+     */
+    public function exists(Event $event)
+    {
+        if ($this->shouldUseLocks($this->cache->store($this->store)->getStore())) {
+            $lock = $this->cache->store($this->store)->getStore()
+                ->lock($event->mutexName(), $event->expiresAt * 60);
+
+            return method_exists($lock, 'isLocked')
+                ? $lock->isLocked()
+                : ! $lock->get(fn () => true);
+        }
+
+        return $this->cache->store($this->store)->has($event->mutexName());
+    }
+
+    /**
+     * Clear the event mutex for the given event.
+     *
+     * @param  \Illuminate\Console\Scheduling\Event  $event
+     * @return void
+     */
+    public function forget(Event $event)
+---
+            pcntl_signal($signal, function () {
+                $this->removeMutex();
+
+                exit(1);
+            });
+        }
+    }
+
+    /**
+     * Delete the mutex for the event.
+     *
+     * @return void
+     */
+    protected function removeMutex()
+    {
+        if ($this->withoutOverlapping) {
+            $this->mutex->forget($this);
+        }
+    }
+
+    /**
+     * Format the given command string with a normalized PHP binary path.
+     *
+     * @param  string  $command
+     * @return string
+     */
+    public static function normalizeCommand($command)
+    {
+        return str_replace([
+            Application::phpBinary(),
+            Application::artisanBinary(),
+        ], [
+            'php',
+            preg_replace("#['\"]#", '', Application::artisanBinary()),
+        ], $command);
+    }

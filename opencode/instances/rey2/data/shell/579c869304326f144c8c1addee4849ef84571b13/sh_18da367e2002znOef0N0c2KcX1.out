@@ -1,0 +1,28 @@
+app/Http/Controllers/Api/TodoController.php:77:        $todo = Todo::create([
+app/Http/Controllers/Api/TodoController.php:88:            'data' => new TodoResource($todo->load('unit')),
+app/Http/Controllers/Api/TodoController.php:100:            'data' => new TodoResource($todo->load('unit')),
+app/Http/Controllers/Api/TodoController.php:121:            'data' => new TodoResource($todo->load('unit')),
+app/Http/Controllers/Api/TodoController.php:149:            'data' => new TodoResource($todo->load('unit')),
+app/Providers/AppServiceProvider.php:137:        Todo::created(fn () => $invalidate($todoNamespaces));
+app/Console/Commands/GenerateRecurringTodos.php:42:            Todo::create([
+database/seeders/TodoSeeder.php:103:            Todo::create([
+tests/Feature/TicketsInboxLivewireTest.php:402:        $secretTodo = Todo::create([
+tests/Feature/TicketsInboxLivewireTest.php:432:        $todo = Todo::create([
+tests/Feature/TicketsInboxLivewireTest.php:462:        $creatorTodo = Todo::create([
+tests/Feature/TicketsInboxLivewireTest.php:1451:        $todo = Todo::create([
+tests/Feature/ReportsEmptyScopeTest.php:71:        Todo::create([
+tests/Feature/GenerateDailyReportsCommandTest.php:92:        return Todo::create([
+tests/Feature/GenerateDailyReportsCommandTest.php:110:        Todo::create([
+tests/Feature/GenerateDailyReportsCommandTest.php:252:        Todo::create([
+tests/Feature/DashboardTodoNotificationTest.php:56:    $todo = Todo::create([
+tests/Feature/SearchTest.php:155:    Todo::create([
+tests/Feature/ReportsDailyWindowTest.php:134:        Todo::create([
+tests/Feature/TicketsCreateLivewireTest.php:95:        $openTodo = Todo::create([
+---
+NotificationResource.php
+TicketDetailResource.php
+TicketResource.php
+TodoResource.php
+---
+app/Http/Controllers/Api/ReportController.php
+app/Http/Controllers/Api/TodoController.php

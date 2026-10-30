@@ -1,0 +1,66 @@
+grep: ./.codegraph/codegraph.db: binary file matches
+./app/Models/MaintenanceSchedule.php:16: * @property Carbon|null $last_generated_at
+./app/Models/MaintenanceSchedule.php:31:        'last_generated_at',
+./app/Models/MaintenanceSchedule.php:37:        'last_generated_at' => 'datetime',
+./app/Models/Todo.php:26: * @property Carbon|null $last_generated_at
+./app/Models/Todo.php:48:        'last_generated_at',
+./app/Models/Todo.php:56:        'last_generated_at' => 'datetime',
+./app/Models/Todo.php:115:        $base = $this->last_generated_at ?? $this->start_at ?? now();
+./app/Console/Commands/GenerateRecurringTodos.php:23:                $q->whereNull('last_generated_at')
+./app/Console/Commands/GenerateRecurringTodos.php:24:                    ->orWhere('last_generated_at', '<=', $now);
+./app/Console/Commands/GenerateRecurringTodos.php:52:            $template->update(['last_generated_at' => $next]);
+./app/Console/Commands/GenerateDueMaintenance.php:141:            'last_generated_at' => now(),
+./database/migrations/2026_08_29_000003_create_maintenance_schedules_table.php:18:            $table->timestamp('last_generated_at')->nullable();
+./database/migrations/2026_08_29_000002_add_recurrence_fields_to_todos_table.php:15:            $table->timestamp('last_generated_at')->nullable()->after('recurrence_interval');
+./database/migrations/2026_08_29_000002_add_recurrence_fields_to_todos_table.php:22:            $table->dropColumn(['recurrence_rule', 'recurrence_interval', 'last_generated_at']);
+./tests/Feature/GenerateDueMaintenanceCommandTest.php:47:        $this->assertNotNull($schedule->last_generated_at);
+./tests/Feature/GenerateDueMaintenanceCommandTest.php:107:        $schedule->update(['next_due_at' => now()->subDay(), 'last_generated_at' => now()->subDay()]);
+./tests/Feature/GenerateDueMaintenanceCommandTest.php:146:                'last_generated_at' => now()->subDay(),
+./tests/Feature/GenerateDueMaintenanceCommandTest.php:186:        $this->assertNotNull($valid->last_generated_at);
+./tests/Feature/GenerateDueMaintenanceCommandTest.php:191:        $this->assertNull($unitLess->last_generated_at);
+./tests/Feature/GenerateDueMaintenanceCommandTest.php:230:        $this->assertNotNull($kept->last_generated_at);
+---
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Todo;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+/**
+ * @extends Factory<Todo>
+ */
+class TodoFactory extends Factory
+{
+    public function definition(): array
+    {
+        $startAt = fake()->dateTimeBetween('-1 month', '+2 weeks');
+        $endAt = fake()->optional(0.7)->dateTimeBetween($startAt, '+1 month');
+
+        return [
+            'title' => fake('fa_IR')->sentence(5),
+            'start_at' => $startAt,
+            'end_at' => $endAt,
+            'is_completed' => false,
+            'unit_id' => null,
+        ];
+    }
+
+    public function completed(): static
+    {
+        return $this->state(fn (array $attributes) => ['is_completed' => true]);
+    }
+
+    public function pending(): static
+    {
+        return $this->state(fn (array $attributes) => ['is_completed' => false]);
+    }
+
+    public function overdue(): static
+    {
+        return $this->state(fn (array $attributes) => [
+            'start_at' => now()->subDays(10),
+            'end_at' => now()->subDays(2),
+        ]);
+    }
+}
