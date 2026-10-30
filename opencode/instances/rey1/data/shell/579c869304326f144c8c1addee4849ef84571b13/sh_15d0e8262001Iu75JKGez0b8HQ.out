@@ -1,4 +1,0 @@
-59672c4a fix: close the PHPStan gate on the computed tickets without baseline growth
-ac9a2320 perf: keep the comment thread's ticket out of public state
-1b0a19e6 perf: convert the monitoring detail ticket to a scoped computed load
-d5b8d733 perf: keep the inbox detail ticket out of public state and cap its history

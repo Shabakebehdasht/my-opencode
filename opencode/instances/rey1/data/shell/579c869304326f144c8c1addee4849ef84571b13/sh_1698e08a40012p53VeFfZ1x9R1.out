@@ -1,4 +1,0 @@
-APP_LOCALE=fa
-APP_KEY=base64:6loCHGnd7iW+2CE0j2jPoQucDK+3JXYjj1+9qzSLQ0s=
-DB_PASSWORD=<same-as-dev>
-REDIS_PASSWORD=<same-as-dev>

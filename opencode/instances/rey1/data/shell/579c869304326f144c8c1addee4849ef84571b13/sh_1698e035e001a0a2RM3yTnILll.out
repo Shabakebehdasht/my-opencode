@@ -1,7 +1,0 @@
-./vendor/ta-tikoma/phpunit-architecture-test/docker/docker-compose.yml
-./docker-compose-pgsql-mysql.yml
-./docker-compose-pgsql-.yml
-#REDIS_CLIENT=phpredis
-REDIS_HOST=127.0.0.1
-REDIS_PORT=6379
-REDIS_PASSWORD=<same-as-dev>

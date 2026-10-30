@@ -1,13 +1,0 @@
-Rebasing (1/2)Auto-merging resources/views/livewire/users/index.blade.php
-Auto-merging tests/Feature/UsersManagementTest.php
-CONFLICT (content): Merge conflict in tests/Feature/UsersManagementTest.php
-error: could not apply 64d1534a... fix(users): scope-bind the account-to-person n_code to the actor's units
-hint: Resolve all conflicts manually, mark them as resolved with
-hint: "git add/rm <conflicted_files>", then run "git rebase --continue".
-hint: You can instead skip this commit: run "git rebase --skip".
-hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
-hint: Disable this message with "git config set advice.mergeConflict false"
-Could not apply 64d1534a... # fix(users): scope-bind the account-to-person n_code to the actor's units
-=== status ===
-M  resources/views/livewire/users/index.blade.php
-UU tests/Feature/UsersManagementTest.php

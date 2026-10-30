@@ -1,5 +1,0 @@
-710:                                    <span class="badge badge-primary">{{ $unitName }}</span>
-736:                <x-badge
-738:                    :class="$user->trashed() ? 'badge-error' : 'badge-success'"
-745:                    <x-badge :value="$role->label ?? $role->name" class="badge-primary" rounded />
-786:                                <x-badge :value="$perm->label ?? $perm->name" class="badge-info" rounded/>

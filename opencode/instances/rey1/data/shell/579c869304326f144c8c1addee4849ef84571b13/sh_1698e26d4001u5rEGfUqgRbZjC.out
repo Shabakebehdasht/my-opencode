@@ -1,3 +1,0 @@
-28:DB_USERNAME=<same as dev>
-29:DB_PASSWORD='<same-as-dev>'
-32:REDIS_PASSWORD='<same-as-dev>'

@@ -1,5 +1,0 @@
-POSTGRES_DB=h_dashboard
-POSTGRES_USER=h_dashboard
-POSTGRES_PASSWORD=<same-as-dev>
----redis---
-REDIS_VERSION=8.10.2

@@ -1,8 +1,0 @@
-[sec-fg] light fg=var(--color-base-content): 4.83:1
-[sec-fg] light fg=var(--color-neutral-content): 2.89:1
-[sec-fg] light fg=oklch(100% 0 0): 3.67:1
-[sec-fg] light fg=oklch(0% 0 0): 5.72:1
-[sec-fg] fantasy fg=var(--color-base-content): 3.02:1
-[sec-fg] fantasy fg=var(--color-neutral-content): 3.13:1
-[sec-fg] fantasy fg=oklch(100% 0 0): 4.86:1
-[sec-fg] fantasy fg=oklch(0% 0 0): 4.32:1
