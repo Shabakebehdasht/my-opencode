@@ -1,5 +1,0 @@
-Description:
-  Delete the cached mutex files created by scheduler
-
-Usage:
-  schedule:clear-cache
